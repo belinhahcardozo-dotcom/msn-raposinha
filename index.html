@@ -1713,6 +1713,92 @@ body::after{
 }
 </style>
 
+
+<style id="msn-layout-fix">
+/* A página não rola: somente a área da conversa pode rolar. */
+html, body {
+  height: 100% !important;
+  overflow: hidden !important;
+}
+body {
+  margin: 0 !important;
+}
+#app, .app, .msn-app, .msn-window, .window {
+  max-height: 100vh !important;
+}
+.chat-area, .chat-messages, #chatMessages, .messages, .conversation {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Moldura/área de fotos no estilo MSN clássico. */
+.profile-avatar,
+.contact-avatar,
+.avatar,
+.contact-photo,
+.profile-photo,
+.user-avatar {
+  border: 1px solid #8a8a8a !important;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.92),
+    0 1px 4px rgba(0,0,0,.35) !important;
+  background: linear-gradient(#f8fbfd,#d8e5ed) !important;
+  object-fit: cover !important;
+}
+
+/* Destaca as fotos dos dois lados, sem alterar a origem das imagens. */
+.contact-avatar,
+.contact-photo,
+.user-avatar {
+  padding: 2px !important;
+}
+
+/* Área superior da conversa com foto grande, quando existir. */
+.chat-header img,
+.conversation-header img {
+  width: 58px !important;
+  height: 58px !important;
+  padding: 3px !important;
+  border: 1px solid #777 !important;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 1px 5px rgba(0,0,0,.35) !important;
+  object-fit: cover !important;
+}
+
+/* Evita que a barra de ferramentas fique presa à rolagem. */
+.chat-header,
+.conversation-header,
+.toolbar,
+.chat-toolbar {
+  flex-shrink: 0 !important;
+}
+</style>
+
+
+<style id="msn-flex-layout-fix">
+#app, .app, .msn-app, .msn-window {
+  height: 100vh !important;
+  min-height: 0 !important;
+}
+.msn-window, .msn-app, .app {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.main, .content, .msn-content, .workspace, .chat-layout {
+  min-height: 0 !important;
+}
+.chat, .chat-window, .conversation, .chat-panel {
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.chat-area, .chat-messages, #chatMessages, .messages, .conversation {
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
+}
+</style>
+
 </head>
 
 <body>
