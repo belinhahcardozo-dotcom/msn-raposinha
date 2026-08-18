@@ -101,6 +101,14 @@
       font-size: 35px;
       margin-right: 12px;
       box-shadow: inset 0 0 5px rgba(0,0,0,.2);
+      overflow: hidden;
+    }
+
+    .avatar img,
+    .contact-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .name {
@@ -155,6 +163,7 @@
       justify-content: center;
       font-size: 22px;
       margin-right: 8px;
+      overflow: hidden;
     }
 
     .contact-name {
@@ -288,6 +297,20 @@
       }
     }
   </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = "https://ojoecmioovwmirdvedzr.supabase.co";
+
+    const SUPABASE_KEY = "sb_publishable_1_QzlhlMc2HS_aNkzbJqRg_SgtJzfS3";
+
+    const supabase = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+  </script>
+
 </head>
 
 <body>
@@ -297,6 +320,7 @@
     <div class="titlebar">
       <div class="msn-logo"></div>
       MSN Messenger
+
       <div class="window-buttons">
         <div class="window-button">−</div>
         <div class="window-button">□</div>
@@ -305,28 +329,49 @@
     </div>
 
     <div class="profile">
-      <div class="avatar">👩🏻</div>
+
+      <div class="avatar" id="myAvatar">
+        👩🏻
+      </div>
 
       <div>
-        <div class="name">Isabella</div>
-        <div class="status">● Online</div>
-        <div class="personal-message">
+        <div class="name" id="myName">☾ Bruxinha</div>
+
+        <div class="status" id="myStatus">
+          ● Online
+        </div>
+
+        <div class="personal-message" id="myMessage">
           "Esperando minha raposinha..."
         </div>
       </div>
+
     </div>
 
     <div class="contact-area">
-      <div class="contact-title">ONLINE — 1</div>
+
+      <div class="contact-title">
+        ONLINE — 1
+      </div>
 
       <div class="contact">
-        <div class="contact-avatar">🦊</div>
+
+        <div class="contact-avatar" id="contactAvatar">
+          🦊
+        </div>
 
         <div>
-          <div class="contact-name">Raposinha</div>
-          <div class="online">● Online</div>
+          <div class="contact-name" id="contactName">
+            Raposinha
+          </div>
+
+          <div class="online" id="contactStatus">
+            ● Online
+          </div>
         </div>
+
       </div>
+
     </div>
 
     <div class="chat" id="chat">
@@ -337,7 +382,7 @@
       </div>
 
       <div class="message mine">
-        <div class="sender">Isabella</div>
+        <div class="sender">☾ Bruxinha</div>
         <div class="text">Oi, raposinha! 🥺</div>
       </div>
 
@@ -348,14 +393,20 @@
     </div>
 
     <div class="toolbar">
+
       <button onclick="addEmoji('😊')">😊</button>
       <button onclick="addEmoji('😂')">😂</button>
       <button onclick="addEmoji('🥺')">🥺</button>
       <button onclick="addEmoji('❤️')">❤️</button>
-      <button class="nudge" onclick="nudge()">📳 Nudge</button>
+
+      <button class="nudge" onclick="nudge()">
+        📳 Nudge
+      </button>
+
     </div>
 
     <div class="input-area">
+
       <input
         id="messageInput"
         type="text"
@@ -363,11 +414,14 @@
         onkeydown="if(event.key === 'Enter') sendMessage()"
       >
 
-      <button onclick="sendMessage()">Enviar</button>
+      <button onclick="sendMessage()">
+        Enviar
+      </button>
+
     </div>
 
     <div class="footer">
-      MSN Messenger • Isabella & Raposinha
+      MSN Messenger • ☾ Bruxinha & Raposinha
     </div>
 
   </div>
@@ -385,21 +439,25 @@
       if (!text) return;
 
       const message = document.createElement("div");
+
       message.className = "message mine";
 
       message.innerHTML = `
-        <div class="sender">Isabella</div>
+        <div class="sender">☾ Bruxinha</div>
         <div class="text">${escapeHTML(text)}</div>
       `;
 
       chat.appendChild(message);
 
       input.value = "";
+
       chat.scrollTop = chat.scrollHeight;
     }
 
     function addEmoji(emoji) {
+
       input.value += emoji;
+
       input.focus();
     }
 
@@ -412,7 +470,9 @@
       messenger.classList.add("shake");
 
       setTimeout(() => {
+
         messenger.classList.remove("shake");
+
       }, 1000);
     }
 
