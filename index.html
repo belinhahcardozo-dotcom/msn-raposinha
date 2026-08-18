@@ -51,6 +51,7 @@
       left: 7px;
       background: #f7f7f7;
       border: 1px solid #d8d8d8;
+      z-index: 3;
     }
 
     .msn-logo .wing-left,
@@ -60,7 +61,8 @@
       height: 8px;
       top: 8px;
       background: #8fd14f;
-      border: 1px solid rgba(0,0,0,.15);
+      border: 1px solid #6e9f3d;
+      z-index: 1;
     }
 
     .msn-logo .wing-left {
@@ -83,11 +85,14 @@
       top: 7px;
       border-radius: 4px;
       background: #777;
+      z-index: 2;
     }
 
+    /* Logo grande da tela de login */
+
     .big-msn-logo {
-      width: 70px;
-      height: 70px;
+      width: 74px;
+      height: 74px;
       margin: 0 auto 13px;
       position: relative;
     }
@@ -98,19 +103,21 @@
       height: 22px;
       border-radius: 50%;
       top: 2px;
-      left: 24px;
+      left: 26px;
       background: #fff;
       border: 2px solid #b9b9b9;
+      z-index: 3;
     }
 
     .big-msn-logo .wing-left,
     .big-msn-logo .wing-right {
       position: absolute;
-      width: 32px;
-      height: 25px;
+      width: 34px;
+      height: 27px;
       top: 23px;
       background: #8fd14f;
       border: 2px solid #6e9f3d;
+      z-index: 1;
     }
 
     .big-msn-logo .wing-left {
@@ -128,22 +135,89 @@
     .big-msn-logo .body {
       position: absolute;
       width: 9px;
-      height: 31px;
-      left: 30px;
+      height: 32px;
+      left: 32px;
       top: 20px;
       border-radius: 8px;
       background: #777;
       border: 1px solid #555;
+      z-index: 2;
     }
 
     .big-msn-logo .tail {
       position: absolute;
-      width: 23px;
+      width: 25px;
       height: 12px;
-      left: 24px;
+      left: 25px;
       bottom: 7px;
       border-bottom: 4px solid #777;
       border-radius: 50%;
+      z-index: 2;
+    }
+
+    /* Avatar MSN usado para a Bruxinha */
+
+    .msn-avatar {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .msn-avatar .head {
+      position: absolute;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      top: 4px;
+      left: 19px;
+      background: #fff;
+      border: 2px solid #aaa;
+      z-index: 3;
+    }
+
+    .msn-avatar .wing-left,
+    .msn-avatar .wing-right {
+      position: absolute;
+      width: 27px;
+      height: 22px;
+      top: 24px;
+      background: #8fd14f;
+      border: 2px solid #6e9f3d;
+      z-index: 1;
+    }
+
+    .msn-avatar .wing-left {
+      left: 1px;
+      border-radius: 18px 4px 18px 4px;
+      transform: rotate(-18deg);
+    }
+
+    .msn-avatar .wing-right {
+      right: 1px;
+      border-radius: 4px 18px 4px 18px;
+      transform: rotate(18deg);
+    }
+
+    .msn-avatar .body {
+      position: absolute;
+      width: 8px;
+      height: 28px;
+      left: 25px;
+      top: 20px;
+      border-radius: 7px;
+      background: #777;
+      z-index: 2;
+    }
+
+    .msn-avatar .tail {
+      position: absolute;
+      width: 22px;
+      height: 10px;
+      left: 18px;
+      bottom: 6px;
+      border-bottom: 3px solid #777;
+      border-radius: 50%;
+      z-index: 2;
     }
 
     /* =====================================================
@@ -516,13 +590,10 @@
 
 <body>
 
-  <!-- =====================================================
-       LOGIN
-       ===================================================== -->
-
   <div id="loginScreen">
 
     <div class="login-title">
+
       <div class="msn-logo">
         <div class="head"></div>
         <div class="wing-left"></div>
@@ -531,6 +602,7 @@
       </div>
 
       MSN Messenger
+
     </div>
 
     <div class="login-content">
@@ -584,10 +656,6 @@
   </div>
 
 
-  <!-- =====================================================
-       MSN
-       ===================================================== -->
-
   <div id="messenger">
 
     <div class="titlebar">
@@ -619,7 +687,13 @@
     <div class="profile">
 
       <div class="avatar" id="myAvatar">
-        ☾
+        <div class="msn-avatar">
+          <div class="head"></div>
+          <div class="wing-left"></div>
+          <div class="wing-right"></div>
+          <div class="body"></div>
+          <div class="tail"></div>
+        </div>
       </div>
 
       <div>
@@ -819,7 +893,10 @@
 
       } catch (error) {
 
-        console.error(error);
+        console.error(
+          "Erro no login:",
+          error
+        );
 
         showLoginError(
           getFriendlyAuthError(error)
@@ -981,9 +1058,42 @@
       messenger.style.display =
         "block";
 
-      await loadMyProfile();
-      await loadContactProfile();
-      await loadMessages();
+      /*
+       Carregamos cada parte separadamente.
+       Se profiles der erro, o MSN continua abrindo.
+      */
+
+      try {
+        await loadMyProfile();
+      } catch (error) {
+        console.error(
+          "Erro no meu perfil:",
+          error
+        );
+        updateFallbackMyProfile();
+      }
+
+      try {
+        await loadContactProfile();
+      } catch (error) {
+        console.error(
+          "Erro no perfil do contato:",
+          error
+        );
+        showFallbackContact();
+      }
+
+      try {
+        await loadMessages();
+      } catch (error) {
+        console.error(
+          "Erro nas mensagens:",
+          error
+        );
+        addSystemMessage(
+          "Não foi possível carregar as mensagens."
+        );
+      }
 
       subscribeToMessages();
 
@@ -1013,15 +1123,7 @@
           .maybeSingle();
 
       if (error) {
-
-        console.error(
-          "Erro ao carregar meu perfil:",
-          error
-        );
-
-        updateFallbackMyProfile();
-
-        return;
+        throw error;
       }
 
       currentProfile =
@@ -1060,15 +1162,8 @@
             "myAvatar"
           ),
           data.avatar_url,
-          getFallbackAvatar()
+          "msn"
         );
-
-      } else {
-
-        document.getElementById(
-          "myAvatar"
-        ).textContent =
-          getFallbackAvatar();
 
       }
     }
@@ -1088,9 +1183,13 @@
         .textContent =
           '"Esperando meu amor..."';
 
-      document.getElementById("myAvatar")
-        .textContent =
-          getFallbackAvatar();
+      const avatar =
+        document.getElementById(
+          "myAvatar"
+        );
+
+      avatar.innerHTML =
+        createMSNAvatarHTML();
     }
 
 
@@ -1111,23 +1210,6 @@
     }
 
 
-    function getFallbackAvatar() {
-
-      const email =
-        currentUser?.email
-          ?.toLowerCase();
-
-      if (
-        email ===
-        "andressa.verissimo.g@icloud.com"
-      ) {
-        return "🦊";
-      }
-
-      return "☾";
-    }
-
-
     /* =====================================================
        PERFIL DO AMOR
        ===================================================== */
@@ -1143,11 +1225,6 @@
         "belinhahcardozoalm@gmail.com"
           ? "Raposinha"
           : "Bruxinha";
-
-      const fallbackAvatar =
-        contactUsername === "Raposinha"
-          ? "🦊"
-          : "☾";
 
       const {
         data,
@@ -1165,18 +1242,7 @@
           .maybeSingle();
 
       if (error) {
-
-        console.error(
-          "Erro ao carregar perfil do contato:",
-          error
-        );
-
-        showFallbackContact(
-          contactUsername,
-          fallbackAvatar
-        );
-
-        return;
+        throw error;
       }
 
       contactProfile =
@@ -1185,8 +1251,7 @@
       if (!data) {
 
         showFallbackContact(
-          contactUsername,
-          fallbackAvatar
+          contactUsername
         );
 
         return;
@@ -1214,38 +1279,63 @@
             "contactAvatar"
           ),
           data.avatar_url,
-          fallbackAvatar
+          contactUsername === "Raposinha"
+            ? "🦊"
+            : "msn"
         );
 
       } else {
 
-        document.getElementById(
-          "contactAvatar"
-        ).textContent =
-          fallbackAvatar;
+        showFallbackContact(
+          contactUsername
+        );
+
       }
     }
 
 
     function showFallbackContact(
-      username,
-      avatar
+      forcedName
     ) {
+
+      const myEmail =
+        currentUser?.email
+          ?.toLowerCase();
+
+      const name =
+        forcedName ||
+        (
+          myEmail ===
+          "belinhahcardozoalm@gmail.com"
+            ? "Raposinha"
+            : "Bruxinha"
+        );
 
       document.getElementById(
         "contactName"
       ).textContent =
-        username;
+        name;
 
       document.getElementById(
         "contactStatus"
       ).textContent =
         "● Online";
 
-      document.getElementById(
-        "contactAvatar"
-      ).textContent =
-        avatar;
+      const avatar =
+        document.getElementById(
+          "contactAvatar"
+        );
+
+      if (name === "Raposinha") {
+
+        avatar.innerHTML =
+          "🦊";
+
+      } else {
+
+        avatar.innerHTML =
+          createMSNAvatarHTML();
+      }
     }
 
 
@@ -1277,15 +1367,28 @@
         () => {
 
           element.innerHTML =
-            "";
-
-          element.textContent =
-            fallback;
+            fallback === "msn"
+              ? createMSNAvatarHTML()
+              : fallback;
         };
 
       element.appendChild(
         img
       );
+    }
+
+
+    function createMSNAvatarHTML() {
+
+      return `
+        <div class="msn-avatar">
+          <div class="head"></div>
+          <div class="wing-left"></div>
+          <div class="wing-right"></div>
+          <div class="body"></div>
+          <div class="tail"></div>
+        </div>
+      `;
     }
 
 
@@ -1315,17 +1418,7 @@
           );
 
       if (error) {
-
-        console.error(
-          "Erro ao carregar mensagens:",
-          error
-        );
-
-        addSystemMessage(
-          "Não foi possível carregar as mensagens."
-        );
-
-        return;
+        throw error;
       }
 
       if (
@@ -1341,28 +1434,16 @@
       }
 
       data.forEach(
-        row => renderMessage(
-          row,
-          false
-        )
+        row => renderMessage(row)
       );
 
       scrollChat();
     }
 
 
-    function renderMessage(
-      row,
-      isRealtime
-    ) {
+    function renderMessage(row) {
 
       if (!row) return;
-
-      /*
-       Evita duplicação caso a mensagem
-       tenha acabado de ser enviada por nós
-       e também chegue pelo Realtime.
-      */
 
       if (
         document.querySelector(
@@ -1408,7 +1489,9 @@
         </div>
 
         <div class="text">
-          ${escapeHTML(row.message || "")}
+          ${escapeHTML(
+            row.message || ""
+          )}
         </div>
       `;
 
@@ -1435,14 +1518,14 @@
         normalized ===
         "belinhahcardozoalm@gmail.com"
       ) {
-        return "☾ Bruxinha";
+        return "Bruxinha";
       }
 
       if (
         normalized ===
         "andressa.verissimo.g@icloud.com"
       ) {
-        return "🦊 Raposinha";
+        return "Raposinha";
       }
 
       return email;
@@ -1498,7 +1581,7 @@
 
 
     /* =====================================================
-       ENVIAR
+       ENVIAR MENSAGEM
        ===================================================== */
 
     async function sendMessage() {
@@ -1543,15 +1626,8 @@
           throw error;
         }
 
-        /*
-          Em algumas configurações o Realtime
-          pode não devolver imediatamente para
-          o próprio cliente. Renderizamos aqui.
-        */
-
         renderMessage(
-          data,
-          false
+          data
         );
 
         input.value =
@@ -1590,7 +1666,6 @@
           .removeChannel(
             realtimeChannel
           );
-
       }
 
       realtimeChannel =
@@ -1612,8 +1687,7 @@
               ) {
 
                 renderMessage(
-                  payload.new,
-                  true
+                  payload.new
                 );
               }
             }
