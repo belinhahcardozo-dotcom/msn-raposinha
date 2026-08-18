@@ -1,4 +1,3 @@
-```
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -19,17 +18,6 @@
 
 *{
   box-sizing:border-box;
-}
-
-:root{
-  --msn-accent:#07569b;
-  --msn-accent-light:#69b7ee;
-  --msn-accent-mid:#3d91d0;
-  --msn-accent-dark:#075394;
-  --msn-border:#003c74;
-  --msn-soft:#e8f2f8;
-  --msn-chat:#f8fbfd;
-  --msn-window-glow:rgba(105,183,238,.55);
 }
 
 html,
@@ -89,10 +77,10 @@ button:disabled{
   width:100%;
   max-width:1000px;
   background:#ece9d8;
-  border:1px solid var(--msn-border);
+  border:1px solid #003c74;
   border-radius:7px 7px 3px 3px;
   box-shadow:
-    0 0 0 1px var(--msn-accent-mid),
+    0 0 0 1px #7ca8cc,
     0 0 0 2px #d8e8f5,
     0 12px 35px rgba(0,0,0,.38);
   overflow:hidden;
@@ -120,12 +108,12 @@ button:disabled{
   background:
     linear-gradient(
       to bottom,
-      var(--msn-accent-light) 0%,
-      var(--msn-accent-mid) 22%,
+      #69b7ee 0%,
+      #3d91d0 22%,
       #1266a8 52%,
-      var(--msn-accent-dark) 100%
+      #075394 100%
     );
-  border-bottom:1px solid var(--msn-border);
+  border-bottom:1px solid #003c73;
 }
 
 .titlebar{
@@ -241,7 +229,6 @@ button:disabled{
   background:
     linear-gradient(#a8d8f5,#3288c5);
 }
-
 
 /* =========================================================
    LOGIN
@@ -1348,150 +1335,6 @@ button:disabled{
 }
 
 /* =========================================================
-   MSN 2008 — ACABAMENTO / TEMA PERSONALIZÁVEL
-========================================================= */
-
-#messenger{
-  box-shadow:
-    0 0 0 1px var(--msn-accent-mid),
-    0 0 0 2px #d8e8f5,
-    0 0 18px var(--msn-window-glow),
-    0 12px 35px rgba(0,0,0,.38);
-}
-
-.titlebar{
-  background:
-    linear-gradient(
-      to bottom,
-      var(--msn-accent-light) 0%,
-      var(--msn-accent-mid) 22%,
-      var(--msn-accent) 58%,
-      var(--msn-accent-dark) 100%
-    );
-}
-
-.chat-titlebar{
-  background:
-    linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--msn-accent-light) 90%, white),
-      var(--msn-accent-mid) 35%,
-      var(--msn-accent-dark) 100%
-    );
-}
-
-/* brilho característico das janelas do MSN 2008 */
-.titlebar::after,
-.chat-titlebar::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  height:1px;
-  pointer-events:none;
-  background:rgba(255,255,255,.65);
-}
-
-.titlebar,
-.chat-titlebar{
-  position:relative;
-}
-
-.message .sender{
-  display:inline-flex;
-  align-items:center;
-  gap:4px;
-  font-weight:bold;
-  text-shadow:0 1px 0 rgba(255,255,255,.75);
-}
-
-.message .sender .nickname{
-  display:inline-block;
-  font-weight:bold;
-}
-
-.message .sender.nickname-bruxinha{
-  color:#6d3bb1;
-}
-
-.message .sender.nickname-raposinha{
-  color:#d13d79;
-}
-
-.message.mine .sender.nickname-bruxinha{
-  color:#6d3bb1;
-}
-
-.message.mine .sender.nickname-raposinha{
-  color:#d13d79;
-}
-
-/* imagem/GIF nunca herda efeitos do texto */
-.message .gif-message{
-  display:block;
-  margin-top:4px;
-  max-width:min(360px,80vw);
-  max-height:280px;
-  border:1px solid #9db2c0;
-  background:#fff;
-  box-shadow:1px 1px 2px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.8);
-}
-
-.message .gif-error{
-  display:inline-block;
-  margin-top:4px;
-  padding:5px 7px;
-  color:#7a4b00;
-  background:#fff8dc;
-  border:1px solid #d7b85b;
-  font-size:9px;
-}
-
-.theme-preview{
-  width:62px;
-  height:30px;
-  border:1px solid #7894a7;
-  border-radius:2px;
-  box-shadow:inset 0 1px rgba(255,255,255,.7);
-}
-
-.theme-controls{
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
-
-.theme-controls input[type=color]{
-  width:38px;
-  height:28px;
-  padding:1px;
-  border:1px solid #8a9ba7;
-  background:#fff;
-}
-
-.theme-presets{
-  display:flex;
-  gap:4px;
-  flex-wrap:wrap;
-  margin-top:5px;
-}
-
-.theme-preset{
-  width:21px;
-  height:21px;
-  padding:0;
-  border:1px solid #777;
-  border-radius:2px;
-  box-shadow:inset 0 1px rgba(255,255,255,.7);
-}
-
-.theme-preset.active{
-  outline:2px solid #333;
-  outline-offset:1px;
-}
-
-/* =========================================================
    MOBILE
 ========================================================= */
 
@@ -1607,243 +1450,352 @@ button:disabled{
   }
 }
 
-/* MSN 2008 reference skin — visual only */
+/* =========================================================
+   MSN 2008 — VISUAL DA BASE FUNCIONAL
+   Somente aparência; não altera Supabase/envio.
+========================================================= */
 :root{
-  --msn-border-custom:#07569b;
-  --msn-border-glow:rgba(7,86,155,.55);
+  --msn-window:#18aee8;
+  --msn-window-light:#a9ecff;
+  --msn-window-mid:#32c6ee;
+  --msn-window-dark:#0075ad;
+  --msn-border:#0072a8;
+  --msn-glow:rgba(24,174,232,.45);
 }
+
 body{
-  padding:22px 28px;
+  padding:14px;
   background:
-    radial-gradient(circle at 50% -12%,rgba(255,255,255,.98) 0 9%,transparent 34%),
-    linear-gradient(180deg,#c8f5ff 0,#88d8ee 34%,#dceff6 100%);
+    radial-gradient(circle at 50% 0%,rgba(255,255,255,.98),transparent 31%),
+    linear-gradient(180deg,#b9e8f7 0%,#8fd0e9 44%,#b7d9e9 100%);
 }
-#messenger{
-  max-width:1250px;
-  border:2px solid var(--msn-border-custom);
-  border-radius:9px 9px 4px 4px;
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.22;
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.35) 0 1px,transparent 1px 4px);
+}
+
+#messenger,
+#loginScreen{
+  border-color:var(--msn-border);
   box-shadow:
-    0 0 0 1px #fff,
-    0 0 0 3px var(--msn-border-glow),
-    0 0 20px var(--msn-border-glow),
-    0 14px 38px rgba(0,49,83,.32);
+    0 0 0 1px rgba(255,255,255,.85),
+    0 0 0 2px var(--msn-border),
+    0 0 18px var(--msn-glow),
+    0 14px 38px rgba(0,0,0,.35);
 }
-.titlebar,.chat-titlebar,.login-title,.editor-title,.settings-title{
-  position:relative;
-  overflow:hidden;
+
+.titlebar,
+.login-title,
+.editor-title,
+.settings-title,
+.chat-titlebar{
   background:
     linear-gradient(180deg,
-      #f3fdff 0%,#bdeef8 7%,#5bd8ed 19%,
-      #16a9d5 42%,#0879bd 67%,#00599b 100%);
-  border-bottom:1px solid var(--msn-border-custom);
-  box-shadow:inset 0 1px rgba(255,255,255,.95),inset 0 -1px rgba(0,45,80,.45);
+      var(--msn-window-light) 0%,
+      var(--msn-window-mid) 22%,
+      var(--msn-window) 47%,
+      var(--msn-window-dark) 100%);
+  border-bottom-color:var(--msn-border);
 }
-.titlebar::before,.chat-titlebar::before{
-  content:"";position:absolute;left:0;right:0;top:0;height:10px;
-  pointer-events:none;
-  background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(255,255,255,0));
+
+.titlebar{
+  height:34px;
+  border-radius:6px 6px 0 0;
 }
-.titlebar{min-height:34px;padding-left:10px}
-.window-button,.chat-action{
-  border:1px solid rgba(255,255,255,.82)!important;
-  background:linear-gradient(#dffaff,#55cfe9 48%,#0875b4)!important;
-  box-shadow:inset 0 1px rgba(255,255,255,.9),0 1px 2px rgba(0,0,0,.2)!important;
-  text-shadow:0 1px #fff!important;
+
+.msn-2008-menu{
+  height:27px;
+  display:flex;
+  align-items:center;
+  gap:2px;
+  padding:0 8px;
+  background:linear-gradient(#f7fcff,#dbeaf1);
+  border-bottom:1px solid #a5bdc9;
+  box-shadow:inset 0 1px #fff;
 }
-.app-body{background:#fff}
+
+.msn-2008-menu button{
+  border:0;
+  background:transparent;
+  color:#245b73;
+  font:11px Tahoma,Verdana,sans-serif;
+  padding:3px 9px;
+  height:24px;
+}
+
+.msn-2008-menu button:hover{
+  color:#fff;
+  border:1px solid #62b7d9;
+  border-radius:3px;
+  background:linear-gradient(#65cfee,#159ac9);
+  box-shadow:inset 0 1px rgba(255,255,255,.7);
+}
+
+.app-body{
+  min-height:650px;
+}
+
 .sidebar{
-  background:linear-gradient(90deg,#fff 0,#f2f9fc 55%,#dceef5 100%);
-  border-right:2px solid var(--msn-border-custom);
-  box-shadow:inset -1px 0 #fff,inset -3px 0 rgba(255,255,255,.65);
+  background:linear-gradient(90deg,#fbfeff 0%,#e7f1f6 100%);
+  border-right:1px solid var(--msn-border);
 }
+
 .profile{
-  background:linear-gradient(180deg,#fff 0,#f6fbfd 55%,#dceef5 100%);
-  border-bottom:1px solid #a6c6d7;
+  background:linear-gradient(180deg,#fff,#dff3fa);
 }
-.avatar,.contact-avatar,.chat-title-avatar{
-  border-color:var(--msn-border-custom)!important;
-  box-shadow:inset 1px 1px #fff,inset -1px -1px rgba(0,0,0,.18),
-             0 0 0 1px rgba(255,255,255,.8),0 2px 5px rgba(0,0,0,.2)!important;
+
+.avatar,
+.contact-avatar{
+  border-color:#91aab7;
 }
-.avatar{
-  border:2px solid #45d329!important;
-  box-shadow:0 0 0 2px #fff,0 0 7px rgba(51,210,31,.8),
-             inset 1px 1px #fff,inset -1px -1px #8acb84!important;
+
+.profile .avatar{
+  border:2px solid #79d84f;
+  box-shadow:
+    0 0 0 2px #c7f4b6,
+    0 0 10px rgba(63,205,51,.6),
+    inset 1px 1px #fff,
+    1px 1px 3px rgba(0,0,0,.2);
 }
-.contact{border-bottom:1px solid #c1d6e0;background:linear-gradient(90deg,#fff,#eef8fc)}
-.contact:hover{background:linear-gradient(90deg,#f5fdff,#d8f3fa)}
-.chat-titlebar{min-height:61px;padding:8px 12px}
-.chat-title-avatar{width:48px;height:48px;background:#f4f4f4}
-.chat{background:linear-gradient(180deg,#fff 0,#fff 78%,#f7fbfd 100%);padding:15px 18px 20px}
-.message{margin-bottom:15px}
-.message .sender{color:var(--msn-border-custom);font-weight:bold;text-shadow:0 1px #fff}
+
+.name,
+.contact-name{
+  color:#12649a;
+}
+
+.main-chat{
+  background:#fff;
+}
+
+.chat-titlebar{
+  min-height:62px;
+}
+
+.chat{
+  padding:18px 22px;
+  background:
+    linear-gradient(180deg,#fff 0%,#fff 82%,#f5fbfd 100%);
+}
+
+.message .sender{
+  color:#7a3eb0;
+  font-weight:bold;
+}
+
+.message.mine .sender{
+  color:#5b2ca0;
+}
+
 .message .text{
-  border:1px solid #c8d9e3;border-radius:2px;background:#fff;
-  box-shadow:inset 1px 1px rgba(255,255,255,.9),0 1px 2px rgba(0,0,0,.08);
+  border-radius:2px;
+  border-color:#d8c8e3;
+  background:linear-gradient(180deg,#fff,#faf6fc);
 }
-.format-panel,.effect-panel,.toolbar,.input-area{
-  background:linear-gradient(180deg,#fff 0,#f1f1f1 48%,#d8d8d8 100%);
-  border-color:#a9a9a9;
-  box-shadow:inset 0 1px #fff,inset 0 -1px rgba(0,0,0,.12);
+
+.message.mine .text{
+  border-color:#d5c5e2;
+  background:linear-gradient(180deg,#fff,#fbf7fd);
 }
-.format-panel button,.effect-panel button,.toolbar button{
-  border:1px solid #aaa!important;border-radius:2px!important;
-  background:linear-gradient(#fff,#f2f2f2 45%,#d7d7d7)!important;
-  box-shadow:inset 0 1px #fff,0 1px 1px rgba(0,0,0,.12)!important;
+
+.toolbar{
+  background:linear-gradient(#fafafa,#e4e4e4);
+  border-top:1px solid #9eaeb7;
 }
-.format-panel button:hover,.effect-panel button:hover,.toolbar button:hover{
-  background:linear-gradient(#fff,#e8f9ff 45%,#bdebf5)!important;
-  border-color:#5ba5c3!important;
+
+.input-area{
+  background:linear-gradient(#f3f3f3,#e2e2e2);
+  border-top:1px solid #b6c0c5;
 }
-#messageInput{
-  border:1px solid #9aa8ae!important;border-radius:2px!important;
-  background:#fff!important;box-shadow:inset 1px 1px 3px rgba(0,0,0,.14),0 1px #fff!important;
-}
+
 .send-button{
-  border:1px solid #4281a1!important;border-radius:3px!important;
-  background:linear-gradient(180deg,#f6ffff 0,#bdebf7 45%,#63c5e2 72%,#1685b9 100%)!important;
-  color:#064c78!important;text-shadow:0 1px #fff!important;
-  box-shadow:inset 0 1px rgba(255,255,255,.95),0 1px 2px rgba(0,0,0,.22)!important;
+  border-color:var(--msn-border);
+  background:linear-gradient(#f8fdff,#c5ebf8 50%,#8bd2e8);
 }
-.contacts-heading{color:#426879;background:linear-gradient(#fdfefe,#dcecf2);border-bottom:1px solid #b8ced8}
-.sidebar-bottom{color:#66808c;background:linear-gradient(#edf7fa,#d4e7ee);border-top:1px solid #b7cfd9}
-.theme-controls input[type="color"]{
-  width:44px;height:32px;padding:2px;cursor:pointer;border:1px solid #7e9cac;border-radius:2px;background:#fff
+
+.send-button:hover{
+  background:linear-gradient(#fff,#d8f4fb 50%,#a5dfef);
+}
+
+.window-button,
+.chat-action{
+  border-color:rgba(255,255,255,.85);
+  background:linear-gradient(var(--msn-window-light),var(--msn-window-dark));
+}
+
+.window-button:hover,
+.chat-action:hover{
+  background:linear-gradient(#e0fbff,#32bfe9);
+}
+
+.settings-content{
+  max-height:72vh;
+  overflow:auto;
+}
+
+.visual-theme-row input[type="color"]{
+  width:48px;
+  height:30px;
+  padding:2px;
+  border:1px solid #8aa5b5;
+  border-radius:3px;
+  background:#fff;
+  cursor:pointer;
+}
+
+.theme-presets{
+  margin:10px 0 2px;
+  padding:8px 10px;
+  border:1px solid #c4d4dc;
+  background:linear-gradient(#f8fcfe,#e9f2f6);
+}
+
+.theme-preset-list{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:7px;
+}
+
+.theme-preset{
+  width:28px;
+  height:28px;
+  padding:0;
+  border-radius:50%;
+  border:2px solid #fff;
+  box-shadow:0 0 0 1px #7993a2;
+  cursor:pointer;
+}
+
+.theme-preset:hover{
+  transform:scale(1.08);
+}
+
+.theme-preset.active{
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 3px var(--msn-border);
+}
+
+@media(max-width:700px){
+  body{padding:0;}
+  #messenger,#loginScreen{
+    border-radius:0;
+    min-height:100vh;
+  }
+  .msn-2008-menu{
+    overflow-x:auto;
+    white-space:nowrap;
+  }
 }
 
 </style>
 
-<style id="msn2008-final-skin">
-/* ===== MSN Messenger 2008 — visual layer only ===== */
-:root{
-  --msn-accent:#07569b;
-  --msn-accent-light:#8fd5f4;
-  --msn-accent-mid:#3d91d0;
-  --msn-accent-dark:#075394;
-  --msn-border:#174f7b;
-  --msn-window-glow:rgba(105,183,238,.55);
+<style id="msn-color-click-fix">
+#formatPanel .color-dot{
+  cursor:pointer !important;
+  pointer-events:auto !important;
+  user-select:none;
+}
+#formatPanel .color-dot:hover{
+  outline:2px solid rgba(60,130,190,.35);
+  outline-offset:1px;
+  transform:scale(1.06);
+}
+#formatPanel .color-dot.active{
+  outline:2px solid #fff;
+  box-shadow:0 0 0 3px #4b86ae,inset 0 1px rgba(255,255,255,.55) !important;
+}
+</style>
+
+
+<style id="msn-layout-fix">
+/* A página não rola: somente a área da conversa pode rolar. */
+html, body {
+  height: 100% !important;
+  overflow: hidden !important;
+}
+body {
+  margin: 0 !important;
+}
+#app, .app, .msn-app, .msn-window, .window {
+  max-height: 100vh !important;
+}
+.chat-area, .chat-messages, #chatMessages, .messages, .conversation {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
 }
 
-#loginScreen,#messenger{
-  border:1px solid var(--msn-border)!important;
-  border-radius:7px 7px 3px 3px!important;
+/* Moldura/área de fotos no estilo MSN clássico. */
+.profile-avatar,
+.contact-avatar,
+.avatar,
+.contact-photo,
+.profile-photo,
+.user-avatar {
+  border: 1px solid #8a8a8a !important;
   box-shadow:
-    0 0 0 1px var(--msn-accent-mid),
     0 0 0 2px rgba(255,255,255,.92),
-    0 0 18px var(--msn-window-glow),
-    0 12px 35px rgba(0,0,0,.38)!important;
+    0 1px 4px rgba(0,0,0,.35) !important;
+  background: linear-gradient(#f8fbfd,#d8e5ed) !important;
+  object-fit: cover !important;
 }
 
-.titlebar,.login-title,.editor-title,.settings-title,.chat-titlebar{
-  background:
-    linear-gradient(to bottom,
-      var(--msn-accent-light) 0%,
-      var(--msn-accent-mid) 25%,
-      var(--msn-accent) 62%,
-      var(--msn-accent-dark) 100%)!important;
-  border-bottom-color:var(--msn-border)!important;
+/* Destaca as fotos dos dois lados, sem alterar a origem das imagens. */
+.contact-avatar,
+.contact-photo,
+.user-avatar {
+  padding: 2px !important;
+}
+
+/* Área superior da conversa com foto grande, quando existir. */
+.chat-header img,
+.conversation-header img {
+  width: 58px !important;
+  height: 58px !important;
+  padding: 3px !important;
+  border: 1px solid #777 !important;
   box-shadow:
-    inset 0 1px rgba(255,255,255,.72),
-    inset 0 -1px rgba(0,0,0,.18)!important;
+    0 0 0 2px #fff,
+    0 1px 5px rgba(0,0,0,.35) !important;
+  object-fit: cover !important;
 }
 
-.window-button,.chat-action{
-  background:linear-gradient(#9ed9f5,var(--msn-accent))!important;
-  border-color:rgba(255,255,255,.75)!important;
+/* Evita que a barra de ferramentas fique presa à rolagem. */
+.chat-header,
+.conversation-header,
+.toolbar,
+.chat-toolbar {
+  flex-shrink: 0 !important;
 }
-.window-button:hover,.chat-action:hover{
-  background:linear-gradient(#fff,var(--msn-accent-mid))!important;
-}
+</style>
 
-.sidebar{
-  background:linear-gradient(90deg,#fbfdff,#e7f0f5 78%,#d8e7ef)!important;
-  border-right:2px solid #9cb5c5!important;
-}
 
-.profile,.contact{
-  background:linear-gradient(#fff,#edf5f9)!important;
+<style id="msn-flex-layout-fix">
+#app, .app, .msn-app, .msn-window {
+  height: 100vh !important;
+  min-height: 0 !important;
 }
-.contact:hover{
-  background:linear-gradient(#fff,#d9edf9)!important;
+.msn-window, .msn-app, .app {
+  display: flex !important;
+  flex-direction: column !important;
 }
-.contact:active{
-  background:#c6e2f4!important;
+.main, .content, .msn-content, .workspace, .chat-layout {
+  min-height: 0 !important;
 }
-
-.contacts-heading{
-  background:linear-gradient(#fafcfd,#dfeaf0)!important;
-  color:#4b6270!important;
+.chat, .chat-window, .conversation, .chat-panel {
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
-
-.main-chat{background:#fff!important}
-.chat{
-  background:
-    linear-gradient(rgba(255,255,255,.97),rgba(246,251,254,.98))!important;
-}
-
-.message .sender.nickname-bruxinha{
-  color:#7b3fa1!important;
-}
-.message .sender.nickname-raposinha{
-  color:#c62c55!important;
-}
-.message .sender .nickname{
-  font-weight:bold;
-  text-shadow:0 1px rgba(255,255,255,.7);
-}
-
-.format-panel,.toolbar,.effect-panel{
-  background:linear-gradient(#fff,#eef2f4 50%,#d2dadd)!important;
-  border-top-color:#fff!important;
-  border-bottom-color:#9daab1!important;
-}
-
-.format-panel button,.toolbar button,.effect-panel button{
-  background:linear-gradient(#fff,#f3f3f3 46%,#d1d1d1)!important;
-  border-color:#8999a3!important;
-  box-shadow:inset 0 1px #fff,0 1px 1px rgba(0,0,0,.12)!important;
-}
-.format-panel button:hover,.toolbar button:hover,.effect-panel button:hover{
-  background:linear-gradient(#fff,#eaf8ff 46%,#c3e2f2)!important;
-  border-color:var(--msn-border)!important;
-}
-
-#messageInput{
-  background:#fff!important;
-  border-color:#9aadb9!important;
-  box-shadow:inset 1px 1px 2px rgba(0,0,0,.12),inset 0 1px #fff!important;
-}
-
-.send-button,.login-button,.save-button{
-  background:linear-gradient(#fff,#e4f4fc 48%,#a8d5ec)!important;
-  border-color:#39729b!important;
-  color:#174f72!important;
-}
-.send-button:hover,.login-button:hover,.save-button:hover{
-  background:linear-gradient(#fff,#eefaff 48%,#b8e0f2)!important;
-}
-
-.theme-preset{
-  cursor:pointer!important;
-  position:relative;
-  width:24px!important;
-  height:22px!important;
-  border:1px solid #718996!important;
-  border-radius:2px!important;
-  box-shadow:inset 0 1px rgba(255,255,255,.75)!important;
-}
-.theme-preset:hover{transform:translateY(-1px)}
-.theme-preset.active{
-  outline:2px solid #fff!important;
-  outline-offset:1px!important;
-  box-shadow:0 0 0 2px #315d78,inset 0 1px rgba(255,255,255,.75)!important;
-}
-
-@media(max-width:700px){
-  #loginScreen,#messenger{
-    border-radius:0!important;
-    box-shadow:none!important;
-  }
+.chat-area, .chat-messages, #chatMessages, .messages, .conversation {
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
 }
 </style>
 
@@ -1954,6 +1906,16 @@ body{
 
     </div>
 
+  </div>
+
+  <div class="msn-2008-menu" aria-label="Menu MSN">
+    <button type="button">Fotos</button>
+    <button type="button">Arquivos</button>
+    <button type="button">Vídeo</button>
+    <button type="button">Chamadas</button>
+    <button type="button">Jogos</button>
+    <button type="button">Atividades</button>
+    <button type="button">»</button>
   </div>
 
   <div
@@ -2124,15 +2086,15 @@ body{
         id="formatPanel"
       >
 
-        <button type="button" onclick="toggleFormat('bold')">
+        <button onclick="toggleFormat('bold')">
           <b>B</b>
         </button>
 
-        <button type="button" onclick="toggleFormat('italic')">
+        <button onclick="toggleFormat('italic')">
           <i>I</i>
         </button>
 
-        <button type="button" onclick="toggleFormat('underline')">
+        <button onclick="toggleFormat('underline')">
           <u>U</u>
         </button>
 
@@ -2545,46 +2507,55 @@ body{
 
         </div>
 
-        <div class="setting-row">
+        <div class="setting-row visual-theme-row">
 
           <div class="setting-info">
-
             <div class="setting-title">
-              🎨 Cor da janela
+              🪟 Cor da janela
             </div>
-
             <div class="setting-description">
-              Personalize a cor principal do MSN 2008. A alteração fica salva neste aparelho.
+              Escolha a cor principal da moldura e barra do MSN.
             </div>
-
-            <div class="theme-presets" id="themePresets">
-              <button class="theme-preset" title="Azul clássico" style="background:#07569b" onclick="setWindowTheme('#07569b')"></button>
-              <button class="theme-preset" title="Roxo" style="background:#6845a8" onclick="setWindowTheme('#6845a8')"></button>
-              <button class="theme-preset" title="Rosa" style="background:#b33f70" onclick="setWindowTheme('#b33f70')"></button>
-              <button class="theme-preset" title="Verde" style="background:#39854a" onclick="setWindowTheme('#39854a')"></button>
-              <button class="theme-preset" title="Dourado" style="background:#9a6a16" onclick="setWindowTheme('#9a6a16')"></button>
-              <button class="theme-preset" title="Ciano" style="background:#187d91" onclick="setWindowTheme('#187d91')"></button>
-            </div>
-
           </div>
 
-          <div class="theme-controls">
-            <input id="windowColor" type="color" value="#07569b" onchange="setWindowTheme(this.value)">
-          </div>
+          <input
+            id="windowColor"
+            type="color"
+            value="#18aee8"
+            title="Cor da janela"
+          >
 
         </div>
 
-        <div class="setting-row">
+        <div class="setting-row visual-theme-row">
+
           <div class="setting-info">
             <div class="setting-title">
-              🖼️ Cor das bordas
+              🖌️ Cor das bordas
             </div>
             <div class="setting-description">
-              Personalize a cor das bordas e contornos da janela.
+              Personalize a linha externa da janela e os detalhes.
             </div>
           </div>
-          <div class="theme-controls">
-            <input id="borderColor" type="color" value="#07569b" onchange="setBorderTheme(this.value)">
+
+          <input
+            id="borderColor"
+            type="color"
+            value="#0072a8"
+            title="Cor das bordas"
+          >
+
+        </div>
+
+        <div class="theme-presets">
+          <span class="setting-title">Cores rápidas</span>
+          <div class="theme-preset-list">
+            <button type="button" class="theme-preset" data-window="#18aee8" data-border="#0072a8" style="background:#18aee8" title="Azul MSN"></button>
+            <button type="button" class="theme-preset" data-window="#38a8d8" data-border="#176c9a" style="background:#38a8d8" title="Azul claro"></button>
+            <button type="button" class="theme-preset" data-window="#7b5bb5" data-border="#4d337f" style="background:#7b5bb5" title="Roxo"></button>
+            <button type="button" class="theme-preset" data-window="#d35a87" data-border="#8e3158" style="background:#d35a87" title="Rosa"></button>
+            <button type="button" class="theme-preset" data-window="#4e9b65" data-border="#28603a" style="background:#4e9b65" title="Verde"></button>
+            <button type="button" class="theme-preset" data-window="#d18a27" data-border="#8b5813" style="background:#d18a27" title="Dourado"></button>
           </div>
         </div>
 
@@ -2624,20 +2595,6 @@ const SUPABASE_KEY =
   "sb_publishable_1_QzlhlMc2HS_aNkzbJqRg_SgtJzfS3";
 
 const AVATAR_BUCKET = "avatars";
-
-// Identidades fixas do casal no Supabase. O chat usa estes UUIDs para
-// descobrir o destinatário; o nome "Raposinha" nunca é usado como chave.
-const USER_UUIDS = {
-  raposinha: "0fcac17c-d3e4-41aa-94a6-1f4fd296571e",
-  bruxinha: "09bf95ed-21f0-4a71-8020-6b3dc6559070"
-};
-
-const USER_EMAILS = {
-  raposinha: "andressa.verissimo.g@icloud.com",
-  bruxinha: "belinhahcardozoalm@gmail.com"
-};
-
-const DEFAULT_WINDOW_THEME = "#07569b";
 
 const supabaseClient =
   window.supabase.createClient(
@@ -3477,16 +3434,27 @@ async function saveProfile(){
 
 async function loadContactProfile(){
 
-  const myId =
-    String(currentUser?.id || "");
+  /*
+    DESTINATÁRIO FIXO POR UUID
+    O nickname é apenas visual.
+  */
+  const myId = String(currentUser?.id || "");
+  const myEmail = String(currentUser?.email || "").toLowerCase();
+
+  const RAPOSINHA_UUID =
+    "0fcac17c-d3e4-41aa-94a6-1f4fd296571e";
+
+  const BRUXINHA_UUID =
+    "09bf95ed-21f0-4a71-8020-6b3dc6559070";
 
   const isBruxinha =
-    myId === USER_UUIDS.bruxinha;
+    myId === BRUXINHA_UUID ||
+    myEmail === "belinhahcardozoalm@gmail.com";
 
   const contactId =
     isBruxinha
-      ? USER_UUIDS.raposinha
-      : USER_UUIDS.bruxinha;
+      ? RAPOSINHA_UUID
+      : BRUXINHA_UUID;
 
   const contactUsername =
     isBruxinha
@@ -3498,8 +3466,20 @@ async function loadContactProfile(){
       ? "🦊"
       : "☾";
 
-  // A identificação do contato é feita pelo UUID real do Supabase.
-  // Isso evita depender de username, que pode mudar e pode ser bloqueado por RLS.
+  /*
+    IMPORTANTE:
+    já definimos o destinatário pelo UUID antes da consulta
+    ao perfil. Assim, RLS de profiles não pode deixar
+    contactProfile.id vazio e impedir o envio.
+  */
+  contactProfile = {
+    id: contactId,
+    username: contactUsername,
+    status: "Online",
+    personal_message: "",
+    avatar_url: null
+  };
+
   const {data,error} =
     await supabaseClient
       .from("profiles")
@@ -3513,9 +3493,8 @@ async function loadContactProfile(){
       .maybeSingle();
 
   if(error){
-
     console.error(
-      "Erro ao localizar contato pelo UUID:",
+      "Não foi possível carregar o perfil pelo UUID:",
       error
     );
 
@@ -3527,29 +3506,24 @@ async function loadContactProfile(){
     return;
   }
 
-  if(!data){
+  if(data){
+    contactProfile = {
+      ...data,
+      id: contactId
+    };
 
-    console.error(
-      "Perfil do contato não retornou para o UUID:",
-      contactId
-    );
-
-    showFallbackContact(
-      contactUsername,
-      fallbackAvatar
+    updateContactUI(
+      contactProfile
     );
 
     return;
   }
 
-  contactProfile = {
-    ...data,
-    id: contactId
-  };
-
-  updateContactUI(contactProfile);
+  showFallbackContact(
+    contactUsername,
+    fallbackAvatar
+  );
 }
-
 
 function updateContactUI(data){
 
@@ -4038,20 +4012,10 @@ function renderMessage(
   }
 
   const mine =
-    String(row.sender || "").toLowerCase() ===
-    String(currentUser?.email || "").toLowerCase();
-
-  const senderName =
-    getNameFromEmail(row.sender);
-
-  const senderRole =
-    String(row.sender || "").toLowerCase() ===
-      USER_EMAILS.raposinha
-      ? "raposinha"
-      : String(row.sender || "").toLowerCase() ===
-          USER_EMAILS.bruxinha
-        ? "bruxinha"
-        : "generic";
+    String(row.sender || "")
+      .toLowerCase() ===
+    String(currentUser?.email || "")
+      .toLowerCase();
 
   const message =
     document.createElement("div");
@@ -4064,41 +4028,36 @@ function renderMessage(
   message.dataset.messageId =
     row.id;
 
-  const time =
-    formatTime(row.created_at);
-
-  const isGif =
-    row.formatting?.type === "gif" &&
-    /^https?:\/\//i.test(
-      String(row.formatting?.gif_url || "")
+  const senderName =
+    getNameFromEmail(
+      row.sender
     );
 
-  let contentHTML = "";
+  const time =
+    formatTime(
+      row.created_at
+    );
 
-  if(isGif){
+  let text =
+    renderFormattedText(
+      row.message || "",
+      row.formatting || {}
+    );
 
-    const gifUrl =
-      escapeAttributeURL(row.formatting.gif_url);
+  if(
+    row.formatting?.type === "gif" &&
+    row.formatting?.gif_url
+  ){
 
-    contentHTML = `
+    text += `
       <img
-        class="gif-message"
-        src="${gifUrl}"
-        alt="GIF enviado"
+        class="chat-gif"
+        src="${escapeAttributeURL(row.formatting.gif_url)}"
+        alt="GIF"
         loading="lazy"
-        referrerpolicy="no-referrer"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'"
+        onerror="this.style.display='none'"
       >
-      <span class="gif-error" style="display:none">GIF indisponível ou endereço não é uma imagem direta.</span>
     `;
-
-  }else{
-
-    contentHTML =
-      renderFormattedText(
-        row.message || "",
-        row.formatting || {}
-      );
   }
 
   const state =
@@ -4111,8 +4070,8 @@ function renderMessage(
       : "";
 
   message.innerHTML = `
-    <div class="sender nickname-${senderRole}">
-      <span class="nickname">${escapeHTML(senderName)}</span>
+    <div class="sender">
+      ${escapeHTML(senderName)}
       <span class="message-time">
         ${escapeHTML(time)}
       </span>
@@ -4124,18 +4083,32 @@ function renderMessage(
     </div>
 
     <div class="text">
-      ${contentHTML}
+      ${text}
     </div>
   `;
 
-  chat.appendChild(message);
+  chat.appendChild(
+    message
+  );
 
-  if(isRealtime && !mine){
-    registerIncomingMessage(row);
+  if(
+    isRealtime &&
+    !mine
+  ){
+
+    registerIncomingMessage(
+      row
+    );
   }
 
-  if(!mine && conversationOpen){
-    markMessageAsRead(row);
+  if(
+    !mine &&
+    conversationOpen
+  ){
+
+    markMessageAsRead(
+      row
+    );
   }
 
   scrollChat();
@@ -4386,6 +4359,26 @@ function setTextColor(
   messageFormatting.color =
     color;
 
+  document
+    .querySelectorAll("#formatPanel .color-dot")
+    .forEach(function(button){
+
+      const bg =
+        (button.style.backgroundColor || "")
+          .replace(/\\s/g,"")
+          .toLowerCase();
+
+      const target =
+        String(color)
+          .replace(/\\s/g,"")
+          .toLowerCase();
+
+      button.classList.toggle(
+        "active",
+        bg === target
+      );
+    });
+
   input.focus();
 }
 
@@ -4469,8 +4462,26 @@ function renderFormattedText(
   formatting
 ){
 
-  const value = String(text || "");
-  const f = formatting || {};
+  const safe =
+    escapeHTML(text);
+
+  let output =
+    safe;
+
+  if(formatting.bold){
+    output =
+      `<strong>${output}</strong>`;
+  }
+
+  if(formatting.italic){
+    output =
+      `<em>${output}</em>`;
+  }
+
+  if(formatting.underline){
+    output =
+      `<u>${output}</u>`;
+  }
 
   const allowedColors = [
     "#111",
@@ -4481,110 +4492,34 @@ function renderFormattedText(
     "#e08a00"
   ];
 
-  const baseStyle = [];
+  if(
+    allowedColors.includes(
+      formatting.color
+    )
+  ){
 
-  if(f.bold) baseStyle.push("font-weight:bold");
-  if(f.italic) baseStyle.push("font-style:italic");
-  if(f.underline) baseStyle.push("text-decoration:underline");
-
-  const color =
-    allowedColors.includes(f.color)
-      ? f.color
-      : null;
-
-  const baseClass =
-    f.effect
-      ? `effect-${safeEffect(f.effect)}`
-      : "";
-
-  const ranges = Array.isArray(f.ranges)
-    ? f.ranges
-        .filter(range =>
-          Number.isInteger(range.start) &&
-          Number.isInteger(range.end) &&
-          range.start >= 0 &&
-          range.end > range.start &&
-          range.end <= value.length &&
-          allowedEffects().includes(range.effect)
-        )
-        .sort((a,b)=>a.start-b.start)
-    : [];
-
-  // Sem ranges, preservamos exatamente a formatação global.
-  if(!ranges.length){
-    let output = escapeHTML(value);
-
-    if(baseStyle.length || color){
-      output = `<span${color ? ` style="color:${color};${baseStyle.join(";")}"` : ` style="${baseStyle.join(";")}"`}>${output}</span>`;
-    }
-
-    if(baseClass){
-      output = `<span class="${baseClass}">${output}</span>`;
-    }
-
-    return output;
+    output =
+      `<span style="color:${formatting.color}">${output}</span>`;
   }
 
-  // Com ranges, aplicamos a formatação global por trecho e o efeito local
-  // apenas no intervalo selecionado. Assim B/I/U/cor não desaparecem.
-  let output = "";
-  let cursor = 0;
+  if(formatting.effect){
 
-  ranges.forEach(range => {
-
-    if(range.start < cursor) return;
-
-    const before = value.substring(cursor, range.start);
-    const selected = value.substring(range.start, range.end);
-
-    output += formatBaseSegment(before, baseStyle, color, baseClass);
-
-    output += `<span class="effect-${safeEffect(range.effect)}">${escapeHTML(selected)}</span>`;
-
-    cursor = range.end;
-  });
-
-  output += formatBaseSegment(
-    value.substring(cursor),
-    baseStyle,
-    color,
-    baseClass
-  );
-
-  return output;
-}
-
-
-function allowedEffects(){
-  return [
-    "glow",
-    "sparkle",
-    "rainbow",
-    "pulse",
-    "heart",
-    "magic",
-    "shake"
-  ];
-}
-
-
-function formatBaseSegment(
-  value,
-  baseStyle,
-  color,
-  baseClass
-){
-
-  if(!value) return "";
-
-  let output = escapeHTML(value);
-
-  if(baseStyle.length || color){
-    output = `<span${color ? ` style="color:${color};${baseStyle.join(";")}"` : ` style="${baseStyle.join(";")}"`}>${output}</span>`;
+    output =
+      `<span class="effect-${safeEffect(formatting.effect)}">${output}</span>`;
   }
 
-  if(baseClass){
-    output = `<span class="${baseClass}">${output}</span>`;
+  if(
+    Array.isArray(
+      formatting.ranges
+    ) &&
+    formatting.ranges.length
+  ){
+
+    output =
+      renderEffectRanges(
+        text,
+        formatting
+      );
   }
 
   return output;
@@ -4661,7 +4596,19 @@ function safeEffect(
   effect
 ){
 
-  return allowedEffects().includes(effect)
+  const allowed = [
+    "glow",
+    "sparkle",
+    "rainbow",
+    "pulse",
+    "heart",
+    "magic",
+    "shake"
+  ];
+
+  return allowed.includes(
+    effect
+  )
     ? effect
     : "glow";
 }
@@ -4688,14 +4635,39 @@ async function sendMessage(){
     return;
   }
 
-  if(!contactProfile?.id){
+  /*
+    O destinatário é resolvido por UUID, independentemente
+    do nickname/perfil carregado na interface.
+  */
+  const RAPOSINHA_UUID =
+    "0fcac17c-d3e4-41aa-94a6-1f4fd296571e";
 
+  const BRUXINHA_UUID =
+    "09bf95ed-21f0-4a71-8020-6b3dc6559070";
+
+  const currentId =
+    String(currentUser?.id || "");
+
+  const recipientUUID =
+    currentId === BRUXINHA_UUID
+      ? RAPOSINHA_UUID
+      : BRUXINHA_UUID;
+
+  if(!currentId){
     alert(
-      "Não consegui localizar o contato pelo UUID do Supabase."
+      "Você precisa estar conectada."
     );
-
     return;
   }
+
+  if(!contactProfile){
+    contactProfile = {
+      id: recipientUUID
+    };
+  }
+
+  contactProfile.id =
+    recipientUUID;
 
   input.disabled =
     true;
@@ -4739,7 +4711,7 @@ async function sendMessage(){
             currentUser.email,
 
           recipient:
-            contactProfile.id,
+            recipientUUID,
 
           message:
             text,
@@ -5766,17 +5738,6 @@ function openSettings(){
   ).value =
     settings.notification_style;
 
-  const savedTheme =
-    localStorage.getItem("msn_window_theme") ||
-    DEFAULT_WINDOW_THEME;
-
-  const colorInput =
-    document.getElementById("windowColor");
-
-  if(colorInput){
-    colorInput.value = savedTheme;
-  }
-
   document.getElementById(
     "settingsModal"
   ).style.display =
@@ -6092,155 +6053,131 @@ document.getElementById(
    INIT
 ========================================================= */
 
-loadWindowTheme();
 checkSession();
 
-</script>
 
+/* =========================================================
+   TEMA VISUAL MSN 2008 — LOCAL, SEM TOCAR NO BANCO
+========================================================= */
+const MSN_VISUAL_DEFAULT = {
+  window:"#18aee8",
+  border:"#0072a8"
+};
 
-<script>
-window.addEventListener("error", function (e) {
-  console.error("MSN erro JavaScript:", e.error || e.message);
-});
-window.addEventListener("unhandledrejection", function (e) {
-  console.error("MSN Promise rejeitada:", e.reason);
-});
-</script>
+function hexToRgbLocal(hex){
+  const m = /^#([0-9a-f]{6})$/i.exec(String(hex||""));
+  if(!m) return null;
+  return {
+    r:parseInt(m[1].slice(0,2),16),
+    g:parseInt(m[1].slice(2,4),16),
+    b:parseInt(m[1].slice(4,6),16)
+  };
+}
 
+function mixHexLocal(a,b,amount){
+  const x=hexToRgbLocal(a), y=hexToRgbLocal(b);
+  if(!x||!y) return a;
+  const t=Math.max(0,Math.min(1,amount));
+  const n=v=>Math.round(v).toString(16).padStart(2,"0");
+  return "#"+n(x.r+(y.r-x.r)*t)+n(x.g+(y.g-x.g)*t)+n(x.b+(y.b-x.b)*t);
+}
 
-<script id="msn2008-theme-runtime">
-(function(){
-  const DEFAULT="#07569b";
+function applyMSNVisualTheme(windowHex,borderHex,save=true){
+  const w=/^#[0-9a-f]{6}$/i.test(windowHex||"")
+    ? windowHex.toLowerCase()
+    : MSN_VISUAL_DEFAULT.window;
+  const b=/^#[0-9a-f]{6}$/i.test(borderHex||"")
+    ? borderHex.toLowerCase()
+    : MSN_VISUAL_DEFAULT.border;
 
-  function rgb(hex){
-    const s=String(hex||"").replace("#","");
-    if(!/^[0-9a-f]{6}$/i.test(s)) return null;
-    const n=parseInt(s,16);
-    return {r:n>>16&255,g:n>>8&255,b:n&255};
-  }
+  const rgb=hexToRgbLocal(w);
+  const root=document.documentElement;
 
-  function mix(a,b,p){
-    const A=rgb(a),B=rgb(b);
-    if(!A||!B) return a;
-    const f=k=>Math.round(A[k]+(B[k]-A[k])*p);
-    return "#"+[f("r"),f("g"),f("b")]
-      .map(v=>v.toString(16).padStart(2,"0")).join("");
-  }
+  root.style.setProperty("--msn-window",w);
+  root.style.setProperty("--msn-window-light",mixHexLocal(w,"#ffffff",.58));
+  root.style.setProperty("--msn-window-mid",mixHexLocal(w,"#ffffff",.18));
+  root.style.setProperty("--msn-window-dark",mixHexLocal(w,"#000000",.30));
+  root.style.setProperty("--msn-border",b);
+  root.style.setProperty(
+    "--msn-glow",
+    rgb
+      ? `rgba(${rgb.r},${rgb.g},${rgb.b},.45)`
+      : "rgba(24,174,232,.45)"
+  );
 
-  window.applyWindowTheme=function(hex){
-    hex=String(hex||DEFAULT).toLowerCase();
-    const c=rgb(hex);
-    if(!c) hex=DEFAULT;
+  const wc=document.getElementById("windowColor");
+  const bc=document.getElementById("borderColor");
+  if(wc) wc.value=w;
+  if(bc) bc.value=b;
 
-    const root=document.documentElement;
-    root.style.setProperty("--msn-accent",hex);
-    root.style.setProperty("--msn-accent-light",mix(hex,"#ffffff",.62));
-    root.style.setProperty("--msn-accent-mid",mix(hex,"#ffffff",.22));
-    root.style.setProperty("--msn-accent-dark",mix(hex,"#000000",.24));
-    root.style.setProperty("--msn-border",mix(hex,"#000000",.38));
-
-    const x=rgb(hex);
-    root.style.setProperty(
-      "--msn-window-glow",
-      `rgba(${x.r},${x.g},${x.b},.55)`
+  document.querySelectorAll(".theme-preset").forEach(btn=>{
+    btn.classList.toggle(
+      "active",
+      btn.dataset.window?.toLowerCase()===w &&
+      btn.dataset.border?.toLowerCase()===b
     );
+  });
 
-    const meta=document.querySelector('meta[name="theme-color"]');
-    if(meta) meta.setAttribute("content",hex);
+  if(save){
+    localStorage.setItem(
+      "msn_visual_theme",
+      JSON.stringify({window:w,border:b})
+    );
+  }
+}
 
-    const input=document.getElementById("windowColor");
-    if(input) input.value=hex;
+function loadMSNVisualTheme(){
+  let saved=null;
+  try{
+    saved=JSON.parse(
+      localStorage.getItem("msn_visual_theme") || "null"
+    );
+  }catch(_){}
 
-    document.querySelectorAll(".theme-preset").forEach(btn=>{
-      const raw=(btn.style.backgroundColor||"").replace(/\s/g,"").toLowerCase();
-      const target=hex.replace(/\s/g,"").toLowerCase();
-      btn.classList.toggle(
-        "active",
-        raw===target ||
-        (btn.getAttribute("style")||"").toLowerCase().includes(target)
+  applyMSNVisualTheme(
+    saved?.window || MSN_VISUAL_DEFAULT.window,
+    saved?.border || MSN_VISUAL_DEFAULT.border,
+    false
+  );
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  loadMSNVisualTheme();
+
+  document.getElementById("windowColor")?.addEventListener(
+    "input",
+    e=>{
+      applyMSNVisualTheme(
+        e.target.value,
+        document.getElementById("borderColor")?.value,
+        true
+      );
+    }
+  );
+
+  document.getElementById("borderColor")?.addEventListener(
+    "input",
+    e=>{
+      applyMSNVisualTheme(
+        document.getElementById("windowColor")?.value,
+        e.target.value,
+        true
+      );
+    }
+  );
+
+  document.querySelectorAll(".theme-preset").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      applyMSNVisualTheme(
+        btn.dataset.window,
+        btn.dataset.border,
+        true
       );
     });
-
-    try{localStorage.setItem("msn_window_theme",hex)}catch(e){}
-  };
-
-  window.setWindowTheme=function(hex){
-    window.applyWindowTheme(hex);
-  };
-
-  window.loadWindowTheme=function(){
-    let saved=DEFAULT;
-    try{
-      const v=localStorage.getItem("msn_window_theme");
-      if(/^#[0-9a-f]{6}$/i.test(v||"")) saved=v;
-    }catch(e){}
-    window.applyWindowTheme(saved);
-  };
-
-  document.addEventListener("DOMContentLoaded",function(){
-    window.loadWindowTheme();
-
-    const color=document.getElementById("windowColor");
-    if(color){
-      color.addEventListener("input",()=>window.setWindowTheme(color.value));
-      color.addEventListener("change",()=>window.setWindowTheme(color.value));
-    }
   });
-})();
-</script>
+});
 
-
-<script id="msn2008-theme-hook">
-(function(){
-  function apply(){
-    if(typeof window.loadWindowTheme==="function"){
-      window.loadWindowTheme();
-    }
-  }
-  window.addEventListener("load",apply);
-})();
-</script>
-
-
-<script id="msn-border-theme-runtime">
-(function(){
-  function valid(v){
-    return /^#[0-9a-f]{6}$/i.test(String(v||""));
-  }
-  function rgba(hex,a){
-    const n=parseInt(String(hex).slice(1),16);
-    return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;
-  }
-  window.applyBorderTheme=function(hex){
-    if(!valid(hex)) hex="#07569b";
-    document.documentElement.style.setProperty("--msn-border-custom",hex);
-    document.documentElement.style.setProperty("--msn-border-glow",rgba(hex,.55));
-    const el=document.getElementById("borderColor");
-    if(el) el.value=hex;
-    try{localStorage.setItem("msn_border_theme",hex)}catch(e){}
-  };
-  window.setBorderTheme=function(hex){
-    window.applyBorderTheme(hex);
-  };
-  function load(){
-    let v="#07569b";
-    try{
-      const saved=localStorage.getItem("msn_border_theme");
-      if(valid(saved)) v=saved;
-    }catch(e){}
-    window.applyBorderTheme(v);
-    const el=document.getElementById("borderColor");
-    if(el){
-      el.addEventListener("input",()=>window.applyBorderTheme(el.value));
-      el.addEventListener("change",()=>window.applyBorderTheme(el.value));
-    }
-  }
-  if(document.readyState==="loading")
-    document.addEventListener("DOMContentLoaded",load);
-  else load();
-})();
 </script>
 
 </body>
 </html>
-```
