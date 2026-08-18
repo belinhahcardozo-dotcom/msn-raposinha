@@ -8,9 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -25,13 +23,12 @@
       padding: 15px;
     }
 
-    button,
-    input {
+    button, input {
       font-family: Tahoma, Arial, sans-serif;
     }
 
     /* =====================================================
-       LOGO MSN
+       LOGO MSN — TOPO
        ===================================================== */
 
     .msn-logo {
@@ -51,7 +48,6 @@
       left: 7px;
       background: #f7f7f7;
       border: 1px solid #d8d8d8;
-      z-index: 3;
     }
 
     .msn-logo .wing-left,
@@ -61,8 +57,7 @@
       height: 8px;
       top: 8px;
       background: #8fd14f;
-      border: 1px solid #6e9f3d;
-      z-index: 1;
+      border: 1px solid rgba(0,0,0,.15);
     }
 
     .msn-logo .wing-left {
@@ -85,139 +80,105 @@
       top: 7px;
       border-radius: 4px;
       background: #777;
-      z-index: 2;
     }
 
-    /* Logo grande da tela de login */
+    /* =====================================================
+       DOIS BONEQUINHOS MSN — TELA INICIAL
+       ===================================================== */
 
-    .big-msn-logo {
-      width: 74px;
-      height: 74px;
-      margin: 0 auto 13px;
+    .msn-couple-logo {
+      width: 120px;
+      height: 88px;
+      margin: 0 auto 12px;
       position: relative;
     }
 
-    .big-msn-logo .head {
+    .msn-person {
       position: absolute;
-      width: 22px;
-      height: 22px;
+      width: 55px;
+      height: 76px;
+      top: 5px;
+    }
+
+    .msn-person.left {
+      left: 4px;
+      transform: rotate(-7deg);
+    }
+
+    .msn-person.right {
+      right: 4px;
+      transform: rotate(7deg);
+    }
+
+    .msn-person .person-head {
+      position: absolute;
+      width: 27px;
+      height: 27px;
       border-radius: 50%;
-      top: 2px;
-      left: 26px;
-      background: #fff;
-      border: 2px solid #b9b9b9;
+      top: 0;
+      left: 14px;
+      background: #f8f8f8;
+      border: 2px solid #bdbdbd;
       z-index: 3;
     }
 
-    .big-msn-logo .wing-left,
-    .big-msn-logo .wing-right {
+    .msn-person .person-body {
       position: absolute;
-      width: 34px;
-      height: 27px;
-      top: 23px;
-      background: #8fd14f;
-      border: 2px solid #6e9f3d;
-      z-index: 1;
-    }
-
-    .big-msn-logo .wing-left {
-      left: 1px;
-      border-radius: 22px 5px 22px 5px;
-      transform: rotate(-18deg);
-    }
-
-    .big-msn-logo .wing-right {
-      right: 1px;
-      border-radius: 5px 22px 5px 22px;
-      transform: rotate(18deg);
-    }
-
-    .big-msn-logo .body {
-      position: absolute;
-      width: 9px;
-      height: 32px;
-      left: 32px;
-      top: 20px;
-      border-radius: 8px;
+      width: 12px;
+      height: 38px;
+      top: 24px;
+      left: 21px;
+      border-radius: 7px;
       background: #777;
       border: 1px solid #555;
       z-index: 2;
     }
 
-    .big-msn-logo .tail {
+    .msn-person .wing {
       position: absolute;
-      width: 25px;
-      height: 12px;
-      left: 25px;
-      bottom: 7px;
-      border-bottom: 4px solid #777;
-      border-radius: 50%;
-      z-index: 2;
-    }
-
-    /* Avatar MSN usado para a Bruxinha */
-
-    .msn-avatar {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .msn-avatar .head {
-      position: absolute;
-      width: 21px;
-      height: 21px;
-      border-radius: 50%;
-      top: 4px;
-      left: 19px;
-      background: #fff;
-      border: 2px solid #aaa;
-      z-index: 3;
-    }
-
-    .msn-avatar .wing-left,
-    .msn-avatar .wing-right {
-      position: absolute;
-      width: 27px;
-      height: 22px;
-      top: 24px;
-      background: #8fd14f;
-      border: 2px solid #6e9f3d;
+      width: 34px;
+      height: 25px;
+      top: 29px;
       z-index: 1;
+      border: 2px solid;
     }
 
-    .msn-avatar .wing-left {
-      left: 1px;
-      border-radius: 18px 4px 18px 4px;
+    .msn-person .wing-left {
+      left: 0;
+      border-radius: 20px 5px 20px 5px;
       transform: rotate(-18deg);
     }
 
-    .msn-avatar .wing-right {
-      right: 1px;
-      border-radius: 4px 18px 4px 18px;
+    .msn-person .wing-right {
+      right: 0;
+      border-radius: 5px 20px 5px 20px;
       transform: rotate(18deg);
     }
 
-    .msn-avatar .body {
-      position: absolute;
-      width: 8px;
-      height: 28px;
-      left: 25px;
-      top: 20px;
-      border-radius: 7px;
-      background: #777;
-      z-index: 2;
+    /* Bonequinho verde */
+    .msn-person.green .wing {
+      background: #8fd14f;
+      border-color: #6d9e3c;
     }
 
-    .msn-avatar .tail {
+    /* Bonequinho cinza */
+    .msn-person.gray .wing {
+      background: #b9c0c5;
+      border-color: #8b9297;
+    }
+
+    .msn-person.gray .person-body {
+      background: #666;
+    }
+
+    .msn-person .tail {
       position: absolute;
-      width: 22px;
-      height: 10px;
-      left: 18px;
-      bottom: 6px;
-      border-bottom: 3px solid #777;
+      width: 30px;
+      height: 14px;
+      left: 13px;
+      bottom: 1px;
+      border-bottom: 4px solid #777;
       border-radius: 50%;
-      z-index: 2;
     }
 
     /* =====================================================
@@ -593,26 +554,36 @@
   <div id="loginScreen">
 
     <div class="login-title">
-
       <div class="msn-logo">
         <div class="head"></div>
         <div class="wing-left"></div>
         <div class="wing-right"></div>
         <div class="body"></div>
       </div>
-
       MSN Messenger
-
     </div>
 
     <div class="login-content">
 
-      <div class="big-msn-logo">
-        <div class="head"></div>
-        <div class="wing-left"></div>
-        <div class="wing-right"></div>
-        <div class="body"></div>
-        <div class="tail"></div>
+      <!-- DOIS BONEQUINHOS CLÁSSICOS DO MSN -->
+      <div class="msn-couple-logo">
+
+        <div class="msn-person green left">
+          <div class="person-head"></div>
+          <div class="wing wing-left"></div>
+          <div class="wing wing-right"></div>
+          <div class="person-body"></div>
+          <div class="tail"></div>
+        </div>
+
+        <div class="msn-person gray right">
+          <div class="person-head"></div>
+          <div class="wing wing-left"></div>
+          <div class="wing wing-right"></div>
+          <div class="person-body"></div>
+          <div class="tail"></div>
+        </div>
+
       </div>
 
       <div class="login-title-text">
@@ -683,17 +654,10 @@
 
     </div>
 
-
     <div class="profile">
 
       <div class="avatar" id="myAvatar">
-        <div class="msn-avatar">
-          <div class="head"></div>
-          <div class="wing-left"></div>
-          <div class="wing-right"></div>
-          <div class="body"></div>
-          <div class="tail"></div>
-        </div>
+        ☾
       </div>
 
       <div>
@@ -713,7 +677,6 @@
       </div>
 
     </div>
-
 
     <div class="contact-area">
 
@@ -743,9 +706,7 @@
 
     </div>
 
-
     <div class="chat" id="chat"></div>
-
 
     <div class="toolbar">
 
@@ -762,7 +723,6 @@
       </button>
 
     </div>
-
 
     <div class="input-area">
 
@@ -782,7 +742,6 @@
 
     </div>
 
-
     <div class="footer">
       MSN Messenger • Isabella & Raposinha
     </div>
@@ -791,10 +750,6 @@
 
 
   <script>
-
-    /* =====================================================
-       SUPABASE
-       ===================================================== */
 
     const SUPABASE_URL =
       "https://ojoecmioovwmirdvedzr.supabase.co";
@@ -807,11 +762,6 @@
         SUPABASE_URL,
         SUPABASE_KEY
       );
-
-
-    /* =====================================================
-       ELEMENTOS
-       ===================================================== */
 
     const loginScreen =
       document.getElementById("loginScreen");
@@ -837,16 +787,10 @@
     const input =
       document.getElementById("messageInput");
 
-
     let currentUser = null;
     let currentProfile = null;
     let contactProfile = null;
     let realtimeChannel = null;
-
-
-    /* =====================================================
-       LOGIN
-       ===================================================== */
 
     async function login() {
 
@@ -859,11 +803,9 @@
       hideLoginError();
 
       if (!email || !password) {
-
         showLoginError(
           "Digite seu e-mail e sua senha."
         );
-
         return;
       }
 
@@ -872,31 +814,22 @@
 
       try {
 
-        const {
-          data,
-          error
-        } =
+        const { data, error } =
           await supabaseClient.auth
             .signInWithPassword({
               email,
               password
             });
 
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
-        currentUser =
-          data.user;
+        currentUser = data.user;
 
         await startMessenger();
 
       } catch (error) {
 
-        console.error(
-          "Erro no login:",
-          error
-        );
+        console.error(error);
 
         showLoginError(
           getFriendlyAuthError(error)
@@ -906,10 +839,8 @@
 
         loginButton.disabled = false;
         loginButton.textContent = "Entrar";
-
       }
     }
-
 
     function getFriendlyAuthError(error) {
 
@@ -937,45 +868,25 @@
       );
     }
 
-
     function showLoginError(message) {
-
-      loginError.textContent =
-        message;
-
-      loginError.style.display =
-        "block";
+      loginError.textContent = message;
+      loginError.style.display = "block";
     }
-
 
     function hideLoginError() {
-
-      loginError.textContent =
-        "";
-
-      loginError.style.display =
-        "none";
+      loginError.textContent = "";
+      loginError.style.display = "none";
     }
-
-
-    /* =====================================================
-       SESSÃO
-       ===================================================== */
 
     async function checkSession() {
 
       try {
 
-        const {
-          data,
-          error
-        } =
+        const { data, error } =
           await supabaseClient.auth
             .getSession();
 
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
         if (data.session?.user) {
 
@@ -983,7 +894,6 @@
             data.session.user;
 
           await startMessenger();
-
         }
 
       } catch (error) {
@@ -992,147 +902,85 @@
           "Erro ao verificar sessão:",
           error
         );
-
       }
     }
 
+    supabaseClient.auth.onAuthStateChange(
+      async (event, session) => {
 
-    supabaseClient.auth
-      .onAuthStateChange(
-        async (event, session) => {
-
-          if (
-            event === "SIGNED_IN" &&
-            session?.user
-          ) {
-
-            currentUser =
-              session.user;
-
-          }
-
-          if (
-            event === "SIGNED_OUT"
-          ) {
-
-            currentUser = null;
-            currentProfile = null;
-            contactProfile = null;
-
-            if (realtimeChannel) {
-
-              await supabaseClient
-                .removeChannel(
-                  realtimeChannel
-                );
-
-              realtimeChannel = null;
-            }
-
-            messenger.style.display =
-              "none";
-
-            loginScreen.style.display =
-              "block";
-
-            chat.innerHTML =
-              "";
-
-          }
-
+        if (
+          event === "SIGNED_IN" &&
+          session?.user
+        ) {
+          currentUser = session.user;
         }
-      );
 
+        if (event === "SIGNED_OUT") {
 
-    /* =====================================================
-       ABRIR MSN
-       ===================================================== */
+          currentUser = null;
+          currentProfile = null;
+          contactProfile = null;
+
+          if (realtimeChannel) {
+
+            await supabaseClient
+              .removeChannel(
+                realtimeChannel
+              );
+
+            realtimeChannel = null;
+          }
+
+          messenger.style.display = "none";
+          loginScreen.style.display = "block";
+          chat.innerHTML = "";
+        }
+      }
+    );
 
     async function startMessenger() {
 
       if (!currentUser) return;
 
-      loginScreen.style.display =
-        "none";
+      loginScreen.style.display = "none";
+      messenger.style.display = "block";
 
-      messenger.style.display =
-        "block";
-
-      /*
-       Carregamos cada parte separadamente.
-       Se profiles der erro, o MSN continua abrindo.
-      */
-
-      try {
-        await loadMyProfile();
-      } catch (error) {
-        console.error(
-          "Erro no meu perfil:",
-          error
-        );
-        updateFallbackMyProfile();
-      }
-
-      try {
-        await loadContactProfile();
-      } catch (error) {
-        console.error(
-          "Erro no perfil do contato:",
-          error
-        );
-        showFallbackContact();
-      }
-
-      try {
-        await loadMessages();
-      } catch (error) {
-        console.error(
-          "Erro nas mensagens:",
-          error
-        );
-        addSystemMessage(
-          "Não foi possível carregar as mensagens."
-        );
-      }
+      await loadMyProfile();
+      await loadContactProfile();
+      await loadMessages();
 
       subscribeToMessages();
 
       input.focus();
     }
 
-
-    /* =====================================================
-       PERFIL DA PESSOA LOGADA
-       ===================================================== */
-
     async function loadMyProfile() {
 
-      const {
-        data,
-        error
-      } =
+      const { data, error } =
         await supabaseClient
           .from("profiles")
           .select(
             "id, username, status, personal_message, avatar_url"
           )
-          .eq(
-            "id",
-            currentUser.id
-          )
+          .eq("id", currentUser.id)
           .maybeSingle();
 
       if (error) {
-        throw error;
+
+        console.error(
+          "Erro ao carregar meu perfil:",
+          error
+        );
+
+        updateFallbackMyProfile();
+        return;
       }
 
-      currentProfile =
-        data;
+      currentProfile = data;
 
       if (!data) {
 
         updateFallbackMyProfile();
-
         return;
       }
 
@@ -1144,10 +992,7 @@
       document.getElementById("myStatus")
         .textContent =
           "● " +
-          (
-            data.status ||
-            "Online"
-          );
+          (data.status || "Online");
 
       document.getElementById("myMessage")
         .textContent =
@@ -1158,16 +1003,18 @@
       if (data.avatar_url) {
 
         setAvatar(
-          document.getElementById(
-            "myAvatar"
-          ),
+          document.getElementById("myAvatar"),
           data.avatar_url,
-          "msn"
+          getFallbackAvatar()
         );
 
+      } else {
+
+        document.getElementById("myAvatar")
+          .textContent =
+            getFallbackAvatar();
       }
     }
-
 
     function updateFallbackMyProfile() {
 
@@ -1183,21 +1030,15 @@
         .textContent =
           '"Esperando meu amor..."';
 
-      const avatar =
-        document.getElementById(
-          "myAvatar"
-        );
-
-      avatar.innerHTML =
-        createMSNAvatarHTML();
+      document.getElementById("myAvatar")
+        .textContent =
+          getFallbackAvatar();
     }
-
 
     function getFallbackName() {
 
       const email =
-        currentUser?.email
-          ?.toLowerCase();
+        currentUser?.email?.toLowerCase();
 
       if (
         email ===
@@ -1209,16 +1050,25 @@
       return "Bruxinha";
     }
 
+    function getFallbackAvatar() {
 
-    /* =====================================================
-       PERFIL DO AMOR
-       ===================================================== */
+      const email =
+        currentUser?.email?.toLowerCase();
+
+      if (
+        email ===
+        "andressa.verissimo.g@icloud.com"
+      ) {
+        return "🦊";
+      }
+
+      return "☾";
+    }
 
     async function loadContactProfile() {
 
       const myEmail =
-        currentUser?.email
-          ?.toLowerCase();
+        currentUser?.email?.toLowerCase();
 
       const contactUsername =
         myEmail ===
@@ -1226,122 +1076,90 @@
           ? "Raposinha"
           : "Bruxinha";
 
-      const {
-        data,
-        error
-      } =
+      const fallbackAvatar =
+        contactUsername === "Raposinha"
+          ? "🦊"
+          : "☾";
+
+      const { data, error } =
         await supabaseClient
           .from("profiles")
           .select(
             "id, username, status, personal_message, avatar_url"
           )
-          .eq(
-            "username",
-            contactUsername
-          )
+          .eq("username", contactUsername)
           .maybeSingle();
 
       if (error) {
-        throw error;
-      }
 
-      contactProfile =
-        data;
-
-      if (!data) {
+        console.error(
+          "Erro ao carregar perfil do contato:",
+          error
+        );
 
         showFallbackContact(
-          contactUsername
+          contactUsername,
+          fallbackAvatar
         );
 
         return;
       }
 
-      document.getElementById(
-        "contactName"
-      ).textContent =
-        data.username ||
-        contactUsername;
+      contactProfile = data;
 
-      document.getElementById(
-        "contactStatus"
-      ).textContent =
-        "● " +
-        (
-          data.status ||
-          "Online"
+      if (!data) {
+
+        showFallbackContact(
+          contactUsername,
+          fallbackAvatar
         );
+
+        return;
+      }
+
+      document.getElementById("contactName")
+        .textContent =
+          data.username ||
+          contactUsername;
+
+      document.getElementById("contactStatus")
+        .textContent =
+          "● " +
+          (data.status || "Online");
 
       if (data.avatar_url) {
 
         setAvatar(
-          document.getElementById(
-            "contactAvatar"
-          ),
+          document.getElementById("contactAvatar"),
           data.avatar_url,
-          contactUsername === "Raposinha"
-            ? "🦊"
-            : "msn"
+          fallbackAvatar
         );
 
       } else {
 
-        showFallbackContact(
-          contactUsername
-        );
-
+        document.getElementById("contactAvatar")
+          .textContent =
+            fallbackAvatar;
       }
     }
-
 
     function showFallbackContact(
-      forcedName
+      username,
+      avatar
     ) {
 
-      const myEmail =
-        currentUser?.email
-          ?.toLowerCase();
+      document.getElementById("contactName")
+        .textContent =
+          username;
 
-      const name =
-        forcedName ||
-        (
-          myEmail ===
-          "belinhahcardozoalm@gmail.com"
-            ? "Raposinha"
-            : "Bruxinha"
-        );
+      document.getElementById("contactStatus")
+        .textContent =
+          "● Online";
 
-      document.getElementById(
-        "contactName"
-      ).textContent =
-        name;
-
-      document.getElementById(
-        "contactStatus"
-      ).textContent =
-        "● Online";
-
-      const avatar =
-        document.getElementById(
-          "contactAvatar"
-        );
-
-      if (name === "Raposinha") {
-
-        avatar.innerHTML =
-          "🦊";
-
-      } else {
-
-        avatar.innerHTML =
-          createMSNAvatarHTML();
-      }
+      document.getElementById("contactAvatar")
+        .textContent =
+          avatar;
     }
-
-
-    /* =====================================================
-       AVATAR
-       ===================================================== */
 
     function setAvatar(
       element,
@@ -1349,62 +1167,28 @@
       fallback
     ) {
 
-      element.innerHTML =
-        "";
+      element.innerHTML = "";
 
       const img =
-        document.createElement(
-          "img"
-        );
+        document.createElement("img");
 
-      img.src =
-        url;
+      img.src = url;
+      img.alt = "Avatar";
 
-      img.alt =
-        "Avatar";
+      img.onerror = () => {
 
-      img.onerror =
-        () => {
+        element.innerHTML = "";
+        element.textContent = fallback;
+      };
 
-          element.innerHTML =
-            fallback === "msn"
-              ? createMSNAvatarHTML()
-              : fallback;
-        };
-
-      element.appendChild(
-        img
-      );
+      element.appendChild(img);
     }
-
-
-    function createMSNAvatarHTML() {
-
-      return `
-        <div class="msn-avatar">
-          <div class="head"></div>
-          <div class="wing-left"></div>
-          <div class="wing-right"></div>
-          <div class="body"></div>
-          <div class="tail"></div>
-        </div>
-      `;
-    }
-
-
-    /* =====================================================
-       MENSAGENS
-       ===================================================== */
 
     async function loadMessages() {
 
-      chat.innerHTML =
-        "";
+      chat.innerHTML = "";
 
-      const {
-        data,
-        error
-      } =
+      const { data, error } =
         await supabaseClient
           .from("messages")
           .select(
@@ -1412,19 +1196,24 @@
           )
           .order(
             "created_at",
-            {
-              ascending: true
-            }
+            { ascending: true }
           );
 
       if (error) {
-        throw error;
+
+        console.error(
+          "Erro ao carregar mensagens:",
+          error
+        );
+
+        addSystemMessage(
+          "Não foi possível carregar as mensagens."
+        );
+
+        return;
       }
 
-      if (
-        !data ||
-        data.length === 0
-      ) {
+      if (!data || data.length === 0) {
 
         addSystemMessage(
           "Nenhuma mensagem ainda. Mande um oi, meu amor! 💜"
@@ -1434,14 +1223,16 @@
       }
 
       data.forEach(
-        row => renderMessage(row)
+        row => renderMessage(row, false)
       );
 
       scrollChat();
     }
 
-
-    function renderMessage(row) {
+    function renderMessage(
+      row,
+      isRealtime
+    ) {
 
       if (!row) return;
 
@@ -1458,27 +1249,20 @@
         currentUser?.email?.toLowerCase();
 
       const message =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
       message.className =
         mine
           ? "message mine"
           : "message";
 
-      message.dataset.messageId =
-        row.id;
+      message.dataset.messageId = row.id;
 
       const senderName =
-        getNameFromEmail(
-          row.sender
-        );
+        getNameFromEmail(row.sender);
 
       const time =
-        formatTime(
-          row.created_at
-        );
+        formatTime(row.created_at);
 
       message.innerHTML = `
         <div class="sender">
@@ -1489,27 +1273,18 @@
         </div>
 
         <div class="text">
-          ${escapeHTML(
-            row.message || ""
-          )}
+          ${escapeHTML(row.message || "")}
         </div>
       `;
 
-      chat.appendChild(
-        message
-      );
+      chat.appendChild(message);
 
       scrollChat();
     }
 
+    function getNameFromEmail(email) {
 
-    function getNameFromEmail(
-      email
-    ) {
-
-      if (!email) {
-        return "Usuário";
-      }
+      if (!email) return "Usuário";
 
       const normalized =
         email.toLowerCase();
@@ -1518,48 +1293,35 @@
         normalized ===
         "belinhahcardozoalm@gmail.com"
       ) {
-        return "Bruxinha";
+        return "☾ Bruxinha";
       }
 
       if (
         normalized ===
         "andressa.verissimo.g@icloud.com"
       ) {
-        return "Raposinha";
+        return "🦊 Raposinha";
       }
 
       return email;
     }
 
-
-    function addSystemMessage(
-      text
-    ) {
+    function addSystemMessage(text) {
 
       const message =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
       message.className =
         "system-message";
 
-      message.textContent =
-        text;
+      message.textContent = text;
 
-      chat.appendChild(
-        message
-      );
+      chat.appendChild(message);
     }
 
+    function formatTime(dateString) {
 
-    function formatTime(
-      dateString
-    ) {
-
-      if (!dateString) {
-        return "";
-      }
+      if (!dateString) return "";
 
       try {
 
@@ -1579,11 +1341,6 @@
       }
     }
 
-
-    /* =====================================================
-       ENVIAR MENSAGEM
-       ===================================================== */
-
     async function sendMessage() {
 
       const text =
@@ -1600,38 +1357,27 @@
         return;
       }
 
-      input.disabled =
-        true;
+      input.disabled = true;
 
       try {
 
-        const {
-          data,
-          error
-        } =
+        const { data, error } =
           await supabaseClient
             .from("messages")
             .insert({
-              sender:
-                currentUser.email,
-              message:
-                text
+              sender: currentUser.email,
+              message: text
             })
             .select(
               "id, sender, message, created_at"
             )
             .single();
 
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
-        renderMessage(
-          data
-        );
+        renderMessage(data, false);
 
-        input.value =
-          "";
+        input.value = "";
 
       } catch (error) {
 
@@ -1646,17 +1392,10 @@
 
       } finally {
 
-        input.disabled =
-          false;
-
+        input.disabled = false;
         input.focus();
       }
     }
-
-
-    /* =====================================================
-       REALTIME
-       ===================================================== */
 
     function subscribeToMessages() {
 
@@ -1670,9 +1409,7 @@
 
       realtimeChannel =
         supabaseClient
-          .channel(
-            "msn-messages"
-          )
+          .channel("msn-messages")
           .on(
             "postgres_changes",
             {
@@ -1682,12 +1419,11 @@
             },
             payload => {
 
-              if (
-                payload?.new
-              ) {
+              if (payload?.new) {
 
                 renderMessage(
-                  payload.new
+                  payload.new,
+                  true
                 );
               }
             }
@@ -1699,59 +1435,31 @@
                 "MSN Realtime:",
                 status
               );
-
             }
           );
     }
 
+    function addEmoji(emoji) {
 
-    /* =====================================================
-       EMOJIS
-       ===================================================== */
-
-    function addEmoji(
-      emoji
-    ) {
-
-      input.value +=
-        emoji;
-
+      input.value += emoji;
       input.focus();
     }
 
-
-    /* =====================================================
-       NUDGE
-       ===================================================== */
-
     function nudge() {
 
-      messenger.classList.remove(
-        "shake"
-      );
+      messenger.classList.remove("shake");
 
       void messenger.offsetWidth;
 
-      messenger.classList.add(
-        "shake"
-      );
+      messenger.classList.add("shake");
 
       setTimeout(
         () => {
-
-          messenger.classList.remove(
-            "shake"
-          );
-
+          messenger.classList.remove("shake");
         },
         1000
       );
     }
-
-
-    /* =====================================================
-       LOGOUT
-       ===================================================== */
 
     async function logout() {
 
@@ -1760,67 +1468,42 @@
         .signOut();
     }
 
-
-    /* =====================================================
-       UTILITÁRIOS
-       ===================================================== */
-
     function scrollChat() {
 
       requestAnimationFrame(
         () => {
-
           chat.scrollTop =
             chat.scrollHeight;
-
         }
       );
     }
 
-
-    function escapeHTML(
-      text
-    ) {
+    function escapeHTML(text) {
 
       const div =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
       div.textContent =
-        String(
-          text ?? ""
-        );
+        String(text ?? "");
 
       return div.innerHTML;
     }
-
-
-    /* =====================================================
-       ENTER
-       ===================================================== */
 
     passwordInput.addEventListener(
       "keydown",
       event => {
 
-        if (
-          event.key === "Enter"
-        ) {
-
+        if (event.key === "Enter") {
           login();
         }
       }
     );
 
-
     input.addEventListener(
       "keydown",
       event => {
 
-        if (
-          event.key === "Enter"
-        ) {
+        if (event.key === "Enter") {
 
           event.preventDefault();
 
@@ -1828,11 +1511,6 @@
         }
       }
     );
-
-
-    /* =====================================================
-       INICIAR
-       ===================================================== */
 
     checkSession();
 
