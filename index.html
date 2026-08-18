@@ -13,7 +13,8 @@
 
 <style>
 /* =========================================================
-   MSN NO AR — RETRO WINDOWS / MSN MESSENGER
+   MSN NO AR — BRUXINHA & RAPOSINHA
+   Visual inspirado no MSN Messenger 2008
 ========================================================= */
 
 *{
@@ -23,419 +24,289 @@
 html,
 body{
   margin:0;
+  padding:0;
+  width:100%;
   min-height:100%;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#dceaf7;
 }
 
 body{
-  min-height:100vh;
-  padding:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:Tahoma,Verdana,Arial,sans-serif;
-  color:#222;
-  background:
-    radial-gradient(circle at 20% 10%,rgba(255,255,255,.9),transparent 28%),
-    linear-gradient(#cfe6f8 0%,#a8cce8 48%,#c4dced 100%);
-}
-
-/* pequenos pixels decorativos no fundo */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.18;
-  background-image:
-    linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px),
-    linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px);
-  background-size:8px 8px;
+  overflow-x:hidden;
 }
 
 button,
 input,
+textarea,
 select{
-  font-family:Tahoma,Verdana,Arial,sans-serif;
+  font-family:Tahoma,Arial,sans-serif;
 }
 
 button{
   cursor:pointer;
 }
 
-button:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-}
-
-/* =========================================================
-   JANELA PRINCIPAL
-========================================================= */
-
-#loginScreen,
-#messenger{
-  position:relative;
-  width:100%;
-  max-width:1000px;
-  background:#ece9d8;
-  border:1px solid #003c74;
-  border-radius:7px 7px 3px 3px;
-  box-shadow:
-    0 0 0 1px #7ca8cc,
-    0 0 0 2px #d8e8f5,
-    0 12px 35px rgba(0,0,0,.38);
-  overflow:hidden;
-}
-
-#messenger{
-  display:none;
-  min-height:730px;
-}
-
-/* =========================================================
-   BARRA DE TÍTULO
-========================================================= */
-
-.titlebar,
-.login-title,
-.editor-title,
-.settings-title,
-.chat-titlebar{
-  color:#fff;
-  text-shadow:
-    1px 1px 0 #174b78,
-    0 -1px 0 rgba(255,255,255,.2);
-  font-weight:bold;
-  background:
-    linear-gradient(
-      to bottom,
-      #69b7ee 0%,
-      #3d91d0 22%,
-      #1266a8 52%,
-      #075394 100%
-    );
-  border-bottom:1px solid #003c73;
-}
-
-.titlebar{
-  height:35px;
-  display:flex;
-  align-items:center;
-  padding:0 7px;
-  font-size:12px;
-  box-shadow:inset 0 1px rgba(255,255,255,.35);
-}
-
-.login-title{
-  height:38px;
-  display:flex;
-  align-items:center;
-  padding:0 10px;
-  font-size:13px;
-}
-
-.editor-title,
-.settings-title{
-  height:30px;
-  display:flex;
-  align-items:center;
-  padding:0 8px;
-  font-size:11px;
-}
-
-/* =========================================================
-   LOGO MSN
-========================================================= */
-
-.msn-logo{
-  position:relative;
-  width:24px;
-  height:24px;
-  margin-right:7px;
-  flex-shrink:0;
-  filter:drop-shadow(1px 1px 1px rgba(0,0,0,.3));
-}
-
-.msn-logo .head{
-  position:absolute;
-  width:8px;
-  height:8px;
-  left:8px;
-  top:1px;
-  border-radius:50%;
-  background:#fff;
-  border:1px solid #d7d7d7;
-}
-
-.msn-logo .body{
-  position:absolute;
-  width:5px;
-  height:10px;
-  left:9px;
-  top:8px;
-  border-radius:5px;
-  background:#666;
-}
-
-.msn-logo .wing-left,
-.msn-logo .wing-right{
-  position:absolute;
-  top:8px;
-  width:11px;
-  height:8px;
-  background:#8ed24c;
-  border:1px solid #5c9c2f;
-}
-
-.msn-logo .wing-left{
-  left:0;
-  border-radius:9px 2px 9px 2px;
-  transform:rotate(-22deg);
-}
-
-.msn-logo .wing-right{
-  right:0;
-  border-radius:2px 9px 2px 9px;
-  transform:rotate(22deg);
-}
-
-/* =========================================================
-   BOTÕES DE JANELA
-========================================================= */
-
-.window-buttons{
-  margin-left:auto;
-  display:flex;
-  gap:2px;
-}
-
-.window-button{
-  width:23px;
-  height:20px;
-  padding:0;
-  color:#fff;
-  font-weight:bold;
-  font-size:12px;
-  line-height:17px;
-  border:1px solid #d3e8fa;
-  border-radius:2px;
-  background:
-    linear-gradient(#7fc2ef,#1766a5);
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.45);
-  text-align:center;
-}
-
-.window-button:hover{
-  background:
-    linear-gradient(#a8d8f5,#3288c5);
+.hidden{
+  display:none!important;
 }
 
 /* =========================================================
    LOGIN
 ========================================================= */
 
-.login-content{
-  position:relative;
-  padding:34px 25px 30px;
-  text-align:center;
+#loginScreen{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.9),
-      rgba(225,238,248,.95)
-    );
+    radial-gradient(circle at 50% 25%,#fff 0,#eaf6ff 35%,#b9d8ee 100%);
 }
 
-.login-content::before{
-  content:"MSN";
-  position:absolute;
-  right:15px;
-  top:10px;
-  font-size:42px;
-  font-weight:bold;
-  color:rgba(35,105,158,.07);
-  letter-spacing:-5px;
-}
-
-.login-wing{
-  font-size:68px;
-  line-height:1;
-  margin-bottom:10px;
-  filter:
-    drop-shadow(2px 2px 0 #fff)
-    drop-shadow(0 3px 4px rgba(0,0,0,.2));
+.login-card{
+  width:min(420px,92vw);
+  padding:28px;
+  border:1px solid #5a86ad;
+  border-radius:8px;
+  background:linear-gradient(#fff,#edf6fd);
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.25),
+    inset 0 1px #fff;
 }
 
 .login-title-text{
-  color:#174f7c;
-  font-size:20px;
+  color:#07569b;
+  font-size:30px;
   font-weight:bold;
-  margin-bottom:5px;
+  text-shadow:0 1px #fff;
 }
 
 .login-subtitle{
-  color:#666;
-  font-size:11px;
-  margin-bottom:21px;
-}
-
-.login-content input{
-  display:block;
-  width:100%;
-  max-width:390px;
-  height:36px;
-  margin:0 auto 9px;
-  padding:5px 9px;
-  border:1px solid #7d7d7d;
-  border-radius:2px;
-  background:#fff;
-  box-shadow:
-    inset 1px 1px 2px rgba(0,0,0,.15);
+  margin:8px 0 20px;
+  color:#555;
   font-size:12px;
 }
 
-.login-content input:focus,
-.editor-input:focus,
-.editor-select:focus,
-#messageInput:focus,
-.gif-input:focus{
+.login-input{
+  width:100%;
+  height:38px;
+  margin-bottom:10px;
+  padding:8px 10px;
+  border:1px solid #9bb5ca;
+  border-radius:3px;
+  background:#fff;
   outline:none;
-  border-color:#397ca9;
-  box-shadow:
-    0 0 0 1px #a9d6f2,
-    inset 1px 1px 2px rgba(0,0,0,.1);
 }
 
-.login-button,
-.save-button{
-  height:34px;
-  border:1px solid #39729b;
-  border-radius:3px;
-  background:
-    linear-gradient(#f7fcff,#c1e2f4 50%,#9dcce7);
-  color:#174f72;
-  font-size:11px;
-  font-weight:bold;
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.9),
-    0 1px 1px rgba(0,0,0,.15);
+.login-input:focus{
+  border-color:#3c82b8;
+  box-shadow:0 0 4px rgba(30,110,170,.35);
 }
 
 .login-button{
   width:100%;
-  max-width:390px;
+  height:38px;
+  border:1px solid #386b98;
+  border-radius:3px;
+  color:#fff;
+  font-weight:bold;
+  background:linear-gradient(#79b9e8,#286ca2);
+  box-shadow:inset 0 1px rgba(255,255,255,.65);
 }
 
-.login-button:hover,
-.save-button:hover{
-  background:
-    linear-gradient(#fff,#d6effd 50%,#b0d9ee);
+.login-button:hover{
+  background:linear-gradient(#8bc8f1,#3478ad);
 }
 
 #loginError{
-  display:none;
-  width:100%;
-  max-width:390px;
-  margin:12px auto 0;
-  padding:8px;
-  background:#fff0f0;
-  border:1px solid #d89a9a;
-  color:#a33;
-  font-size:10px;
-  text-align:left;
+  min-height:18px;
+  margin-top:10px;
+  color:#b40000;
+  font-size:11px;
 }
 
-.login-footer,
-.footer{
-  text-align:center;
-  color:#666;
-  font-size:9px;
-  padding:6px;
-  background:
-    linear-gradient(#f8f8f8,#ddd);
-  border-top:1px solid #bbb;
+.login-footer{
+  margin-top:15px;
+  color:#58748b;
+  font-size:10px;
 }
 
 /* =========================================================
-   APP
+   MSN PRINCIPAL
 ========================================================= */
 
-.app-body{
-  display:grid;
-  grid-template-columns:275px minmax(0,1fr);
-  min-height:655px;
-  background:#fff;
+#app{
+  min-height:100vh;
+  padding:18px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.messenger{
+  position:relative;
+  width:min(1180px,100%);
+  height:min(780px,calc(100vh - 36px));
+  min-height:560px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid #38678f;
+  border-radius:8px;
+  background:#e8f2fb;
+  box-shadow:
+    0 5px 18px rgba(0,0,0,.35),
+    inset 0 1px rgba(255,255,255,.95);
 }
 
 /* =========================================================
-   SIDEBAR MSN
+   TITLE BAR
+========================================================= */
+
+.window-titlebar{
+  height:34px;
+  flex:0 0 34px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6px 0 9px;
+  color:#fff;
+  font-size:12px;
+  font-weight:bold;
+  text-shadow:0 1px #245078;
+  background:
+    linear-gradient(
+      to bottom,
+      #73b8e9 0%,
+      #3f91c9 42%,
+      #1268a4 55%,
+      #07569b 100%
+    );
+  border-bottom:1px solid #164e79;
+}
+
+.window-title-left{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-width:0;
+}
+
+.window-title-icon{
+  font-size:18px;
+  filter:drop-shadow(0 1px #fff);
+}
+
+.window-title-text{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.window-buttons{
+  display:flex;
+  gap:3px;
+}
+
+.window-button{
+  width:24px;
+  height:22px;
+  padding:0;
+  border:1px solid rgba(255,255,255,.6);
+  border-radius:3px;
+  color:#fff;
+  background:linear-gradient(#7ab9e7,#2d72a7);
+  font-size:11px;
+  line-height:18px;
+  text-shadow:0 1px #28547a;
+}
+
+.window-button:hover{
+  background:linear-gradient(#a3d1ef,#4688b8);
+}
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.msn-toolbar{
+  height:38px;
+  flex:0 0 38px;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:4px 7px;
+  border-bottom:1px solid #a1b8c9;
+  background:linear-gradient(#f8fcff,#d9e8f3);
+}
+
+.toolbar-button{
+  height:28px;
+  min-width:28px;
+  padding:0 8px;
+  border:1px solid #a0b7c8;
+  border-radius:3px;
+  color:#244a66;
+  background:linear-gradient(#fff,#e3edf4);
+  box-shadow:inset 0 1px #fff;
+  font-size:11px;
+}
+
+.toolbar-button:hover,
+.toolbar-button.active{
+  border-color:#6e9bbc;
+  background:linear-gradient(#fff,#c9e2f4);
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+  min-height:0;
+  flex:1;
+  display:flex;
+}
+
+/* =========================================================
+   SIDEBAR
 ========================================================= */
 
 .sidebar{
-  position:relative;
-  min-width:0;
+  width:270px;
+  flex:0 0 270px;
   display:flex;
   flex-direction:column;
-  background:
-    linear-gradient(
-      to right,
-      #f8fbfd,
-      #e5edf3
-    );
-  border-right:2px solid #a8bdcd;
-  box-shadow:inset -1px 0 #fff;
+  border-right:1px solid #9bb4c7;
+  background:linear-gradient(90deg,#edf7fd,#d9e9f5);
 }
 
-.profile{
-  position:relative;
+.my-profile{
   display:flex;
   align-items:center;
-  padding:14px 11px 12px;
-  background:
-    linear-gradient(#fff,#e8f2f8);
-  border-bottom:1px solid #a7bbc9;
-  box-shadow:inset 0 1px #fff;
-}
-
-.profile::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:2px;
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #8dbbd9,
-      transparent
-    );
+  gap:10px;
+  padding:12px;
+  border-bottom:1px solid #adc2d2;
+  background:linear-gradient(#fff,#e5f0f8);
 }
 
 .avatar{
-  position:relative;
-  width:62px;
-  height:62px;
-  margin-right:10px;
+  width:48px;
+  height:48px;
+  flex:0 0 48px;
   display:flex;
   align-items:center;
   justify-content:center;
-  flex-shrink:0;
   overflow:hidden;
-  background:#f4f4f4;
-  border:2px solid #7d9db4;
-  box-shadow:
-    inset 1px 1px #fff,
-    inset -1px -1px #b8b8b8,
-    2px 2px 3px rgba(0,0,0,.16);
-  font-size:34px;
+  border:1px solid #86a9c2;
+  border-radius:4px;
+  background:#fff;
+  box-shadow:0 1px 3px rgba(0,0,0,.18);
+  font-size:30px;
 }
 
-.avatar img,
-.contact-avatar img,
-.editor-avatar img,
-.chat-title-avatar img{
+.avatar img{
   width:100%;
   height:100%;
   object-fit:cover;
@@ -443,153 +314,117 @@ button:disabled{
 
 .profile-info{
   min-width:0;
-  flex:1;
 }
 
-.name{
-  color:#0d4d7c;
-  font-size:14px;
-  font-weight:bold;
-  white-space:nowrap;
+.profile-name{
   overflow:hidden;
+  color:#6845a5;
+  font-size:13px;
+  font-weight:bold;
   text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.status{
-  margin-top:5px;
+.profile-status{
+  margin-top:3px;
+  color:#258625;
   font-size:10px;
 }
 
-.personal-message{
-  margin-top:6px;
+.profile-message{
+  max-width:180px;
+  margin-top:4px;
+  overflow:hidden;
   color:#666;
-  font-size:9px;
-  font-style:italic;
-  line-height:1.25;
-  word-break:break-word;
+  font-size:10px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.edit-button{
-  width:27px;
-  height:25px;
-  padding:0;
-  margin-left:4px;
-  border:1px solid #8ca6b9;
-  background:
-    linear-gradient(#fff,#d9e9f3);
-  color:#245c7d;
-  font-size:12px;
-  box-shadow:inset 0 1px #fff;
-}
-
-.contacts-heading{
-  padding:9px 10px 5px;
-  color:#4e6472;
+.contacts-title{
+  padding:7px 10px;
+  color:#45647b;
   font-size:10px;
   font-weight:bold;
   text-transform:uppercase;
-  border-bottom:1px solid #d1dce3;
-  background:
-    linear-gradient(#f5f9fb,#e2ebf1);
+  background:linear-gradient(#edf6fc,#d8e8f3);
+  border-bottom:1px solid #b0c3d2;
 }
-
-.contacts-heading::before{
-  content:"▾ ";
-  color:#477b9e;
-}
-
-/* =========================================================
-   CONTATO
-========================================================= */
 
 .contact{
   position:relative;
-  margin:0;
   display:flex;
   align-items:center;
-  padding:8px 9px;
-  cursor:pointer;
-  border-bottom:1px solid #cbd8e0;
-  background:
-    linear-gradient(#fff,#edf5f9);
+  gap:9px;
+  padding:9px 10px;
+  border-bottom:1px solid rgba(150,175,194,.45);
+  background:rgba(255,255,255,.3);
 }
 
 .contact:hover{
-  background:
-    linear-gradient(#fff,#dceefa);
+  background:linear-gradient(
+    rgba(255,255,255,.8),
+    rgba(202,228,245,.75)
+  );
 }
 
-.contact:active{
-  background:#c9e3f4;
+.contact.active{
+  background:linear-gradient(#dff1ff,#b9dbf0);
 }
 
-.contact-avatar{
-  width:45px;
-  height:45px;
-  margin-right:9px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-  overflow:hidden;
-  background:#f2e8dc;
-  border:1px solid #8da5b5;
-  box-shadow:
-    inset 1px 1px #fff,
-    1px 1px 2px rgba(0,0,0,.15);
-  font-size:25px;
-}
-
-.contact-info{
-  min-width:0;
-  flex:1;
+.contact .avatar{
+  width:38px;
+  height:38px;
+  flex-basis:38px;
+  font-size:24px;
 }
 
 .contact-name{
-  color:#14527d;
+  color:#d84c83;
   font-size:12px;
   font-weight:bold;
 }
 
 .online{
-  margin-top:3px;
+  color:#26872a;
   font-size:9px;
 }
 
 .contact-message{
-  margin-top:4px;
-  color:#777;
-  font-size:9px;
-  white-space:nowrap;
+  max-width:160px;
+  margin-top:2px;
   overflow:hidden;
+  color:#666;
+  font-size:9px;
   text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.contact-unread{
-  display:none;
-  min-width:20px;
+.unread-badge{
+  position:absolute;
+  top:7px;
+  right:8px;
+  min-width:18px;
   height:18px;
-  padding:0 5px;
-  margin-left:4px;
+  padding:2px 5px;
+  display:none;
+  border:1px solid #a93a66;
+  border-radius:9px;
   color:#fff;
-  background:#b72745;
-  border:1px solid #7f142d;
-  border-radius:2px;
+  background:linear-gradient(#ef78a4,#c63869);
   font-size:9px;
   font-weight:bold;
-  line-height:16px;
   text-align:center;
 }
 
 .sidebar-bottom{
   margin-top:auto;
-  padding:9px 6px;
-  color:#71818a;
-  font-size:8px;
+  padding:10px;
+  color:#6e8394;
+  font-size:9px;
   text-align:center;
-  border-top:1px solid #c1d0d9;
-  background:
-    linear-gradient(#edf4f7,#d9e4ea);
+  border-top:1px solid #b2c5d3;
+  background:linear-gradient(#edf6fc,#d5e5ef);
 }
 
 /* =========================================================
@@ -598,179 +433,139 @@ button:disabled{
 
 .main-chat{
   min-width:0;
+  flex:1;
   display:flex;
   flex-direction:column;
   background:#fff;
 }
 
-.chat-titlebar{
-  min-height:57px;
+.chat-header{
+  min-height:68px;
   display:flex;
   align-items:center;
-  padding:7px 10px;
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.4);
+  gap:10px;
+  padding:8px 12px;
+  border-bottom:1px solid #a5baca;
+  background:
+    linear-gradient(
+      #fff,
+      #e7f2fa
+    );
+  box-shadow:inset 0 1px #fff;
 }
 
-.chat-title-avatar{
-  width:41px;
-  height:41px;
-  margin-right:9px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-  overflow:hidden;
-  background:#eee;
-  border:1px solid #d9edf9;
-  box-shadow:
-    inset 1px 1px rgba(255,255,255,.7),
-    1px 1px 2px rgba(0,0,0,.25);
-  font-size:23px;
+.chat-header .avatar{
+  width:44px;
+  height:44px;
+  flex-basis:44px;
 }
 
-.chat-title-info{
+.chat-title{
   min-width:0;
 }
 
 .chat-title-name{
+  color:#d84c83;
   font-size:14px;
+  font-weight:bold;
 }
 
 .chat-title-status{
   margin-top:3px;
+  color:#2c8c35;
+  font-size:10px;
+}
+
+.chat-title-message{
+  max-width:500px;
+  margin-top:3px;
+  overflow:hidden;
+  color:#777;
   font-size:9px;
-  font-weight:normal;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
-
-.chat-title-actions{
-  margin-left:auto;
-  display:flex;
-  gap:3px;
-}
-
-.chat-action{
-  width:27px;
-  height:24px;
-  padding:0;
-  color:#fff;
-  border:1px solid rgba(255,255,255,.7);
-  background:
-    linear-gradient(#76bbed,#2275b0);
-  border-radius:2px;
-  box-shadow:inset 0 1px rgba(255,255,255,.4);
-}
-
-.chat-action:hover{
-  background:
-    linear-gradient(#a5d8f4,#3989c4);
-}
-
-/* =========================================================
-   ÁREA DA CONVERSA
-========================================================= */
 
 .chat{
+  position:relative;
+  min-height:0;
   flex:1;
-  min-height:350px;
   overflow-y:auto;
-  padding:13px 14px;
-  font-size:12px;
+  padding:14px;
   background:
     linear-gradient(
-      rgba(255,255,255,.95),
-      rgba(247,251,253,.96)
-    ),
-    #fff;
-  border-bottom:1px solid #aebec9;
+      rgba(255,255,255,.92),
+      rgba(248,252,255,.92)
+    );
 }
 
-/* barra de rolagem retrô */
-.chat::-webkit-scrollbar{
-  width:14px;
+.message-row{
+  display:flex;
+  margin:5px 0;
 }
 
-.chat::-webkit-scrollbar-track{
-  background:#e6e6e6;
-  border-left:1px solid #c3c3c3;
-}
-
-.chat::-webkit-scrollbar-thumb{
-  background:
-    linear-gradient(90deg,#d9e4ea,#b7cbd8);
-  border:1px solid #8da2b0;
+.message-row.mine{
+  justify-content:flex-end;
 }
 
 .message{
-  margin-bottom:12px;
-  animation:messageIn .16s ease-out;
+  max-width:min(75%,620px);
+  padding:6px 9px;
+  border:1px solid #c1d1dc;
+  border-radius:4px;
+  color:#222;
+  background:#fff;
+  box-shadow:0 1px 2px rgba(0,0,0,.08);
 }
 
-@keyframes messageIn{
-  from{
-    opacity:0;
-    transform:translateY(3px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+.message-row.mine .message{
+  border-color:#b8cde0;
+  background:#eef7ff;
 }
 
-.message .sender{
-  color:#165c91;
-  font-size:11px;
+.message-meta{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:3px;
+  font-size:9px;
+}
+
+.nickname{
   font-weight:bold;
 }
 
-.message.mine .sender{
-  color:#74418d;
+.nickname.bruxinha{
+  color:#7448c2;
 }
 
-.message .text{
-  display:inline-block;
-  max-width:88%;
-  margin-top:2px;
-  padding:4px 7px;
-  color:#222;
-  line-height:1.45;
-  word-wrap:break-word;
-  white-space:pre-wrap;
-  background:#fff;
-  border:1px solid #d1d9de;
-  border-radius:2px;
-  box-shadow:
-    1px 1px 0 rgba(0,0,0,.04);
-}
-
-.message.mine .text{
-  background:#faf7fc;
-  border-color:#dacbe1;
+.nickname.raposinha{
+  color:#df4c87;
 }
 
 .message-time{
-  margin-left:5px;
   color:#999;
   font-size:8px;
-  font-weight:normal;
+}
+
+.message-body{
+  font-size:11px;
+  line-height:1.45;
+  word-break:break-word;
 }
 
 .message-state{
-  margin-left:5px;
-  color:#777;
+  margin-top:3px;
+  color:#6e8da6;
   font-size:8px;
-  font-weight:normal;
+  text-align:right;
 }
 
-.system-message{
-  margin:10px 0;
-  padding:5px;
-  color:#777;
-  font-size:9px;
-  font-style:italic;
-  text-align:center;
-  border-top:1px dotted #c8c8c8;
-  border-bottom:1px dotted #c8c8c8;
+.message-gif{
+  max-width:260px;
+  max-height:220px;
+  display:block;
+  border-radius:4px;
 }
 
 /* =========================================================
@@ -778,426 +573,419 @@ button:disabled{
 ========================================================= */
 
 .effect-glow{
-  text-shadow:
-    0 0 4px currentColor,
-    0 0 9px currentColor;
-  animation:glowPulse 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes glowPulse{
-  from{filter:brightness(1)}
-  to{filter:brightness(1.35)}
-}
-
-.effect-pulse{
-  display:inline-block;
-  animation:pulseText 1s ease-in-out infinite;
-}
-
-@keyframes pulseText{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.08)}
-}
-
-.effect-rainbow{
-  background:
-    linear-gradient(
-      90deg,
-      #e53935,
-      #e08a00,
-      #248617,
-      #165c91,
-      #7b3fa1,
-      #c62c55
-    );
-  background-size:300% 100%;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent!important;
-  animation:rainbow 2s linear infinite;
-}
-
-@keyframes rainbow{
-  from{background-position:0 50%}
-  to{background-position:300% 50%}
+  text-shadow:0 0 5px currentColor;
 }
 
 .effect-sparkle{
-  text-shadow:
-    0 0 3px #fff,
-    0 0 7px currentColor,
-    0 0 12px currentColor;
-  animation:sparkle 1.2s ease-in-out infinite alternate;
+  animation:sparkle .8s infinite alternate;
 }
 
-@keyframes sparkle{
-  from{opacity:.75}
-  to{
-    opacity:1;
-    text-shadow:
-      0 0 5px #fff,
-      0 0 12px currentColor;
-  }
+.effect-rainbow{
+  background:linear-gradient(
+    90deg,
+    #f00,
+    #f90,
+    #0a5,
+    #08f,
+    #a0f,
+    #f0a
+  );
+  background-size:300% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:rainbow 2s linear infinite;
+}
+
+.effect-pulse{
+  animation:pulse .8s infinite alternate;
+}
+
+.effect-heart{
+  text-shadow:
+    0 0 3px #f06,
+    0 0 8px #f06;
+}
+
+.effect-magic{
+  text-shadow:
+    0 0 3px #8d55ff,
+    0 0 9px #b98cff;
 }
 
 .effect-shake{
   display:inline-block;
-  animation:textShake .35s ease-in-out infinite;
+  animation:shakeWord .35s infinite;
 }
 
-@keyframes textShake{
+@keyframes sparkle{
+  from{opacity:.55}
+  to{opacity:1;text-shadow:0 0 8px #fff,0 0 12px currentColor}
+}
+
+@keyframes rainbow{
+  from{background-position:0 0}
+  to{background-position:300% 0}
+}
+
+@keyframes pulse{
+  from{transform:scale(1)}
+  to{transform:scale(1.08)}
+}
+
+@keyframes shakeWord{
   0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-2px) rotate(-1deg)}
-  75%{transform:translateX(2px) rotate(1deg)}
+  25%{transform:translateX(-2px)}
+  75%{transform:translateX(2px)}
 }
 
-.effect-heart{
-  position:relative;
-  display:inline-block;
-  color:#c62c55;
+@keyframes messengerShake{
+  0%,100%{transform:translate(0,0)}
+  15%{transform:translate(-4px,2px)}
+  30%{transform:translate(4px,-2px)}
+  45%{transform:translate(-3px,-2px)}
+  60%{transform:translate(3px,2px)}
+  75%{transform:translate(-2px,0)}
 }
 
-.effect-heart::after{
-  content:" ♥";
-  animation:heartFloat 1s ease-in-out infinite alternate;
-}
-
-@keyframes heartFloat{
-  from{
-    opacity:.45;
-    transform:translateY(2px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(-3px);
-  }
-}
-
-.effect-magic{
-  position:relative;
-  color:#7b3fa1;
-  text-shadow:0 0 5px #cda6e8;
-}
-
-.effect-magic::after{
-  content:" ✦";
-  animation:magicTwinkle .8s ease-in-out infinite alternate;
-}
-
-@keyframes magicTwinkle{
-  from{
-    opacity:.3;
-    transform:scale(.8);
-  }
-  to{
-    opacity:1;
-    transform:scale(1.2);
-  }
+.messenger.shake{
+  animation:messengerShake .7s ease;
 }
 
 /* =========================================================
-   GIF
+   TYPING
 ========================================================= */
 
-.chat-gif{
-  display:block;
-  max-width:min(300px,80vw);
-  max-height:250px;
-  margin-top:5px;
-  border:1px solid #b7c8d2;
-  box-shadow:1px 1px 2px rgba(0,0,0,.12);
+.typing-indicator{
+  min-height:20px;
+  padding:3px 14px;
+  color:#777;
+  font-size:9px;
+  font-style:italic;
 }
 
 /* =========================================================
-   TOOLBAR
+   COMPOSER
 ========================================================= */
 
-.toolbar{
+.composer{
+  border-top:1px solid #9fb5c5;
+  background:linear-gradient(#eef6fb,#dbe9f3);
+}
+
+.format-toolbar{
+  height:32px;
   display:flex;
-  flex-wrap:wrap;
-  gap:2px;
-  padding:5px 7px;
-  background:
-    linear-gradient(#f8f8f8,#dcdcdc);
-  border-top:1px solid #fff;
-  border-bottom:1px solid #a7a7a7;
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.8);
+  align-items:center;
+  gap:3px;
+  padding:3px 7px;
+  border-bottom:1px solid #b8c9d5;
 }
 
-.toolbar button{
-  min-width:28px;
-  height:26px;
-  padding:0 7px;
-  color:#174f72;
-  border:1px solid #999;
-  border-radius:2px;
-  background:
-    linear-gradient(#fff,#eeeeee 45%,#d4d4d4);
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.9);
-  font-size:11px;
-}
-
-.toolbar button:hover{
-  background:
-    linear-gradient(#fff,#e8f6ff 45%,#c6e1ef);
-  border-color:#638ca7;
-}
-
-.toolbar button:active,
-.toolbar button.active{
-  background:
-    linear-gradient(#c7e4f5,#e5f5fd);
-  box-shadow:
-    inset 1px 1px 2px rgba(0,0,0,.18);
-}
-
-.toolbar .nudge{
-  color:#694f0b;
-  border-color:#a88637;
-  background:
-    linear-gradient(#fff8dc,#f1d27a 50%,#dfb94e);
-}
-
-/* =========================================================
-   PAINÉIS DE FORMATAÇÃO
-========================================================= */
-
-.format-panel,
-.effect-panel{
-  display:none;
-  flex-wrap:wrap;
-  gap:4px;
-  padding:6px 7px;
-  background:#f3f3f3;
-  border-top:1px solid #aaa;
-  border-bottom:1px solid #ccc;
-}
-
-.format-panel button,
-.effect-panel button{
-  min-width:29px;
-  height:26px;
-  padding:0 7px;
-  border:1px solid #999;
-  border-radius:2px;
-  background:linear-gradient(#fff,#ddd);
+.format-button{
+  min-width:27px;
+  height:25px;
+  padding:0 6px;
+  border:1px solid #a3b8c7;
+  border-radius:3px;
+  color:#31536a;
+  background:linear-gradient(#fff,#e2edf4);
   font-size:10px;
 }
 
-.format-panel button.active{
-  background:#c4e3f5;
-  box-shadow:inset 1px 1px 2px rgba(0,0,0,.2);
+.format-button.active{
+  background:#c5e1f4;
+  border-color:#6997b5;
 }
 
-.color-dot{
-  width:25px!important;
-  min-width:25px!important;
-  padding:0!important;
-  border-radius:50%!important;
-}
-
-/* =========================================================
-   INPUT
-========================================================= */
-
-.input-area{
+.message-input-row{
   display:flex;
-  gap:5px;
-  padding:7px;
-  background:
-    linear-gradient(#f3f3f3,#d8d8d8);
-  border-top:1px solid #fff;
+  align-items:flex-end;
+  gap:6px;
+  padding:6px;
 }
 
 #messageInput{
-  flex:1;
   min-width:0;
-  height:34px;
-  padding:5px 8px;
-  border:1px solid #888;
-  border-radius:2px;
+  min-height:42px;
+  max-height:120px;
+  flex:1;
+  resize:vertical;
+  padding:7px 9px;
+  border:1px solid #9cb4c5;
+  border-radius:3px;
+  outline:none;
   background:#fff;
-  box-shadow:
-    inset 1px 1px 2px rgba(0,0,0,.12);
-  font-size:12px;
+  color:#222;
+  font-size:11px;
+}
+
+#messageInput:focus{
+  border-color:#5791ba;
+  box-shadow:0 0 3px rgba(70,135,180,.35);
 }
 
 .send-button{
-  min-width:75px;
-  height:34px;
-  padding:0 12px;
-  color:#174f72;
-  border:1px solid #39729b;
+  height:42px;
+  padding:0 17px;
+  border:1px solid #386b98;
   border-radius:3px;
-  background:
-    linear-gradient(#f7fcff,#c1e2f4 50%,#9dcce7);
-  font-size:11px;
+  color:#fff;
   font-weight:bold;
+  background:linear-gradient(#77b9e7,#286ca2);
+}
+
+.send-button:hover{
+  background:linear-gradient(#8bc8f1,#3478ad);
 }
 
 /* =========================================================
-   PAINEL GIF
+   FOOTER
 ========================================================= */
 
-.panel{
-  display:none;
-  position:absolute;
-  z-index:80;
-  top:45px;
-  right:12px;
-  width:290px;
-  background:#eee;
-  border:1px solid #456a82;
-  box-shadow:
-    4px 5px 15px rgba(0,0,0,.35);
-}
-
-.panel-content{
-  padding:10px;
-  background:#f5f5f5;
-}
-
-.gif-help{
-  margin-bottom:7px;
-  color:#666;
-  font-size:9px;
-  line-height:1.4;
-}
-
-.gif-input{
-  width:100%;
-  height:31px;
-  padding:5px 7px;
-  border:1px solid #999;
-  font-size:10px;
-}
-
-.gif-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:4px;
-  margin-top:7px;
-}
-
-.gif-actions button{
-  height:27px;
-  padding:0 9px;
-  border:1px solid #47799d;
-  background:linear-gradient(#fff,#cde6f4);
-  color:#174f72;
-  border-radius:2px;
-  font-size:10px;
+.footer{
+  height:23px;
+  flex:0 0 23px;
+  padding:5px 9px;
+  border-top:1px solid #9eb5c6;
+  color:#72889a;
+  background:linear-gradient(#edf6fc,#d8e7f1);
+  font-size:8px;
+  text-align:right;
 }
 
 /* =========================================================
    MODAIS
 ========================================================= */
 
-.modal-overlay{
-  display:none;
-  position:absolute;
-  z-index:100;
-  inset:0;
-  padding:45px 12px 12px;
-  align-items:flex-start;
-  justify-content:center;
-  background:rgba(0,35,60,.28);
-}
-
 .modal{
-  width:100%;
-  max-width:410px;
-  overflow:hidden;
-  background:#ece9d8;
-  border:1px solid #355d78;
-  box-shadow:
-    5px 6px 18px rgba(0,0,0,.4);
-}
-
-.editor-content,
-.settings-content{
-  padding:12px;
-  background:
-    linear-gradient(#fff,#edf3f7);
-}
-
-.editor-avatar-area{
-  display:flex;
-  align-items:center;
-  margin-bottom:12px;
-}
-
-.editor-avatar{
-  width:60px;
-  height:60px;
-  margin-right:10px;
-  display:flex;
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:none;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
-  background:#eee;
-  border:2px solid #7d9db4;
-  box-shadow:inset 1px 1px #fff;
-  font-size:30px;
+  padding:15px;
+  background:rgba(0,30,60,.35);
 }
 
-.photo-button{
-  display:inline-block;
-  padding:7px 9px;
-  color:#174f72;
-  border:1px solid #47799d;
-  border-radius:2px;
-  background:linear-gradient(#fff,#cde7f5);
-  font-size:10px;
+.modal-card{
+  width:min(440px,94vw);
+  max-height:90vh;
+  overflow:auto;
+  border:1px solid #4f7899;
+  border-radius:6px;
+  background:#edf6fc;
+  box-shadow:0 5px 20px rgba(0,0,0,.35);
+}
+
+.modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 10px;
+  color:#fff;
+  background:linear-gradient(#72b7e7,#17649b);
+  font-size:11px;
   font-weight:bold;
 }
 
-#avatarFile{
-  display:none;
+.modal-body{
+  padding:14px;
 }
 
 .editor-label{
   display:block;
-  margin:7px 0 3px;
-  color:#555;
+  margin:9px 0 4px;
+  color:#49677e;
   font-size:10px;
   font-weight:bold;
 }
 
-.editor-input,
-.editor-select{
+.editor-input{
   width:100%;
-  height:31px;
-  padding:4px 7px;
-  border:1px solid #999;
-  border-radius:2px;
+  padding:7px;
+  border:1px solid #a2b8c7;
+  border-radius:3px;
+  outline:none;
   background:#fff;
   font-size:11px;
 }
 
-.editor-actions,
-.settings-footer{
+.editor-actions{
   display:flex;
   justify-content:flex-end;
-  gap:5px;
-  margin-top:12px;
+  gap:6px;
+  margin-top:14px;
 }
 
-.save-button,
-.cancel-button{
-  height:29px;
-  padding:0 11px;
-  border-radius:2px;
+.modal-button{
+  padding:6px 12px;
+  border:1px solid #8da9bc;
+  border-radius:3px;
+  background:linear-gradient(#fff,#dceaf2);
+  color:#35576d;
   font-size:10px;
+}
+
+.modal-button.primary{
+  color:#fff;
+  border-color:#386b98;
+  background:linear-gradient(#76b8e5,#286da2);
+}
+
+/* =========================================================
+   GIF PANEL
+========================================================= */
+
+#gifPanel{
+  display:none;
+  padding:7px;
+  border-top:1px solid #aabfce;
+  background:#f2f8fc;
+}
+
+.gif-row{
+  display:flex;
+  gap:5px;
+}
+
+#gifUrlInput{
+  min-width:0;
+  flex:1;
+  height:29px;
+  padding:5px;
+  border:1px solid #9eb5c5;
+  border-radius:3px;
+  font-size:10px;
+}
+
+/* =========================================================
+   NOTIFICAÇÃO
+========================================================= */
+
+#nudgeNotice{
+  position:fixed;
+  left:50%;
+  top:50%;
+  z-index:2000;
+  display:none;
+  padding:10px 15px;
+  transform:translate(-50%,-50%);
+  border:1px solid #7654a4;
+  border-radius:5px;
+  color:#fff;
+  background:linear-gradient(#a878d0,#70449d);
+  box-shadow:0 3px 12px rgba(0,0,0,.35);
+  font-size:11px;
   font-weight:bold;
 }
 
-.cancel-button{
-  color:#555;
-  border:1px solid #999;
-  background:linear-gradient(#fff,#ddd);
+/* =========================================================
+   COLOR PICKER
+========================================================= */
+
+.window-color-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+  margin-top:8px;
+}
+
+.window-color{
+  height:30px;
+  border:2px solid #fff;
+  outline:1px solid #9aaeba;
+  border-radius:3px;
+}
+
+.window-color[data-color="#07569b"]{background:#07569b}
+.window-color[data-color="#7049a7"]{background:#7049a7}
+.window-color[data-color="#c84d7e"]{background:#c84d7e}
+.window-color[data-color="#338a56"]{background:#338a56}
+.window-color[data-color="#aa7a22"]{background:#aa7a22}
+.window-color[data-color="#168e9b"]{background:#168e9b}
+.window-color.selected{
+  outline:2px solid #222;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+.mobile-contact-button{
+  display:none;
+}
+
+@media(max-width:700px){
+
+  #app{
+    padding:0;
+  }
+
+  .messenger{
+    width:100%;
+    height:100vh;
+    min-height:0;
+    border:0;
+    border-radius:0;
+  }
+
+  .sidebar{
+    position:absolute;
+    inset:72px 0 23px 0;
+    z-index:50;
+    width:100%;
+    display:none;
+  }
+
+  .sidebar.mobile-open{
+    display:flex;
+  }
+
+  .mobile-contact-button{
+    display:block;
+  }
+
+  .main-chat{
+    width:100%;
+  }
+
+  .message{
+    max-width:88%;
+  }
+
+  .chat-title-message{
+    max-width:190px;
+  }
+
+  .window-title-text{
+    max-width:190px;
+  }
+}
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.profile-editor-avatar{
+  width:65px;
+  height:65px;
+  margin:0 auto 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  border:1px solid #8caabd;
+  border-radius:4px;
+  background:#fff;
+  font-size:40px;
+}
+
+.profile-editor-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 #profileSaveStatus{
@@ -1206,276 +994,18 @@ button:disabled{
   color:#248617;
   font-size:9px;
 }
-
-.setting-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:9px 2px;
-  border-bottom:1px solid #d1d1d1;
-  font-size:11px;
-}
-
-.setting-row:last-child{
-  border-bottom:0;
-}
-
-.setting-info{
-  min-width:0;
-}
-
-.setting-title{
-  color:#174f7c;
-  font-weight:bold;
-}
-
-.setting-description{
-  margin-top:2px;
-  color:#777;
-  font-size:9px;
-}
-
-.setting-row input[type="checkbox"]{
-  width:18px;
-  height:18px;
-}
-
-.setting-row select{
-  height:28px;
-  border:1px solid #999;
-  font-size:10px;
-}
-
-/* =========================================================
-   NOTIFICAÇÃO / NUDGE
-========================================================= */
-
-.unread-badge{
-  display:none;
-  position:absolute;
-  z-index:150;
-  top:8px;
-  right:47px;
-  min-width:20px;
-  height:18px;
-  padding:0 5px;
-  color:#fff;
-  background:#b72745;
-  border:1px solid #7d1830;
-  border-radius:2px;
-  font-size:9px;
-  font-weight:bold;
-  line-height:16px;
-  text-align:center;
-  box-shadow:1px 2px 3px rgba(0,0,0,.25);
-}
-
-.nudge-notice{
-  display:none;
-  position:absolute;
-  z-index:200;
-  left:50%;
-  top:45%;
-  transform:translate(-50%,-50%);
-  padding:10px 15px;
-  color:#604f08;
-  background:#fffbe0;
-  border:1px solid #c9aa27;
-  box-shadow:
-    3px 4px 10px rgba(0,0,0,.3);
-  font-size:11px;
-  font-weight:bold;
-  white-space:nowrap;
-}
-
-/* =========================================================
-   TREMER
-========================================================= */
-
-@keyframes shake{
-  0%{transform:translate(0,0) rotate(0)}
-  15%{transform:translate(-8px,2px) rotate(-1deg)}
-  30%{transform:translate(8px,-2px) rotate(1deg)}
-  45%{transform:translate(-8px,-2px) rotate(-1deg)}
-  60%{transform:translate(8px,2px) rotate(1deg)}
-  75%{transform:translate(-5px,0) rotate(0)}
-  100%{transform:translate(0,0) rotate(0)}
-}
-
-.shake{
-  animation:shake .45s ease-in-out 2;
-}
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-.status-online{color:#278313!important}
-.status-away{color:#c99500!important}
-.status-busy{color:#c52222!important}
-.status-offline{color:#777!important}
-
-/* =========================================================
-   DETALHES MSN
-========================================================= */
-
-.main-chat::after{
-  content:"";
-  pointer-events:none;
-  position:absolute;
-  width:70px;
-  height:70px;
-  right:10px;
-  bottom:45px;
-  opacity:.035;
-  background:
-    radial-gradient(circle,#1670ae 1px,transparent 1px);
-  background-size:6px 6px;
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:700px){
-
-  body{
-    padding:0;
-    align-items:stretch;
-  }
-
-  #loginScreen,
-  #messenger{
-    max-width:none;
-    min-height:100vh;
-    border:0;
-    border-radius:0;
-  }
-
-  #messenger{
-    min-height:100vh;
-  }
-
-  .app-body{
-    grid-template-columns:1fr;
-    min-height:calc(100vh - 35px);
-  }
-
-  .sidebar{
-    position:absolute;
-    z-index:30;
-    inset:35px 0 0 0;
-    display:none;
-    border-right:0;
-  }
-
-  .sidebar.mobile-open{
-    display:flex;
-  }
-
-  .main-chat{
-    min-height:calc(100vh - 35px);
-  }
-
-  .chat{
-    min-height:0;
-  }
-
-  .mobile-contact-button{
-    display:block!important;
-  }
-
-  .modal-overlay{
-    position:fixed;
-    inset:0;
-  }
-
-  .panel{
-    right:8px;
-    left:8px;
-    width:auto;
-  }
-
-  .main-chat::after{
-    display:none;
-  }
-}
-
-@media(min-width:701px){
-  .mobile-contact-button{
-    display:none!important;
-  }
-}
-
-@media(max-width:430px){
-
-  .login-content{
-    padding:30px 18px;
-  }
-
-  .titlebar{
-    height:35px;
-  }
-
-  .chat-titlebar{
-    min-height:52px;
-  }
-
-  .chat{
-    padding:10px;
-  }
-
-  .message .text{
-    max-width:94%;
-  }
-
-  .toolbar{
-    padding:4px;
-    gap:2px;
-  }
-
-  .toolbar button{
-    padding:0 6px;
-    font-size:10px;
-  }
-
-  .send-button{
-    min-width:65px;
-    padding:0 8px;
-  }
-
-  .input-area{
-    padding:6px;
-  }
-}
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
+<!-- =======================================================
      LOGIN
-===================================================== -->
+======================================================= -->
 
 <div id="loginScreen">
 
-  <div class="login-title">
-
-    <div class="msn-logo">
-      <div class="head"></div>
-      <div class="wing-left"></div>
-      <div class="wing-right"></div>
-      <div class="body"></div>
-    </div>
-
-    MSN Messenger
-
-  </div>
-
-  <div class="login-content">
-
-    <div class="login-wing">🪽</div>
+  <div class="login-card">
 
     <div class="login-title-text">
       MSN no Ar
@@ -1487,21 +1017,23 @@ button:disabled{
 
     <input
       id="emailInput"
+      class="login-input"
       type="email"
       placeholder="E-mail"
-      autocomplete="email"
+      autocomplete="username"
     >
 
     <input
       id="passwordInput"
+      class="login-input"
       type="password"
       placeholder="Senha"
       autocomplete="current-password"
     >
 
     <button
-      class="login-button"
       id="loginButton"
+      class="login-button"
       onclick="login()"
     >
       Entrar
@@ -1518,516 +1050,480 @@ button:disabled{
 </div>
 
 
-<!-- =====================================================
-     MSN
-===================================================== -->
+<!-- =======================================================
+     APP
+======================================================= -->
 
-<div id="messenger">
-
-  <div class="titlebar">
-
-    <div class="msn-logo">
-      <div class="head"></div>
-      <div class="wing-left"></div>
-      <div class="wing-right"></div>
-      <div class="body"></div>
-    </div>
-
-    MSN no Ar — Bruxinha & Raposinha
-
-    <div class="window-buttons">
-
-      <button
-        class="window-button mobile-contact-button"
-        onclick="toggleSidebar()"
-        title="Contatos"
-      >☰</button>
-
-      <button
-        class="window-button"
-        onclick="openSettings()"
-        title="Configurações"
-      >⚙</button>
-
-      <button
-        class="window-button"
-        onclick="logout()"
-        title="Sair"
-      >×</button>
-
-    </div>
-
-  </div>
+<div id="app" style="display:none">
 
   <div
-    class="unread-badge"
-    id="unreadBadge"
-  >0</div>
-
-  <div
-    class="nudge-notice"
-    id="nudgeNotice"
-  ></div>
-
-  <div class="app-body">
-
-    <!-- SIDEBAR -->
-
-    <aside class="sidebar" id="sidebar">
-
-      <div class="profile">
-
-        <div
-          class="avatar"
-          id="myAvatar"
-        >☾</div>
-
-        <div class="profile-info">
-
-          <div
-            class="name"
-            id="myName"
-          >
-            Carregando...
-          </div>
-
-          <div
-            class="status"
-            id="myStatus"
-          >
-            ● Online
-          </div>
-
-          <div
-            class="personal-message"
-            id="myMessage"
-          ></div>
-
-        </div>
-
-        <button
-          class="edit-button"
-          onclick="openProfileEditor()"
-          title="Editar meu perfil"
-        >⚙</button>
-
-      </div>
-
-      <div class="contacts-heading">
-        CONTATOS
-      </div>
-
-      <div
-        class="contact"
-        id="contact"
-        onclick="openConversation()"
-      >
-
-        <div
-          class="contact-avatar"
-          id="contactAvatar"
-        >🦊</div>
-
-        <div class="contact-info">
-
-          <div
-            class="contact-name"
-            id="contactName"
-          >
-            Raposinha
-          </div>
-
-          <div
-            class="online"
-            id="contactStatus"
-          >
-            ● Online
-          </div>
-
-          <div
-            class="contact-message"
-            id="contactMessage"
-          ></div>
-
-        </div>
-
-        <div
-          class="contact-unread"
-          id="contactUnread"
-        >0</div>
-
-      </div>
-
-      <div class="sidebar-bottom">
-        MSN no Ar<br>
-        Bruxinha ♡ Raposinha
-      </div>
-
-    </aside>
-
-
-    <!-- CHAT -->
-
-    <main class="main-chat">
-
-      <div class="chat-titlebar">
-
-        <div
-          class="chat-title-avatar"
-          id="chatTitleAvatar"
-        >🦊</div>
-
-        <div class="chat-title-info">
-
-          <div
-            class="chat-title-name"
-            id="chatTitleName"
-          >
-            Raposinha
-          </div>
-
-          <div
-            class="chat-title-status"
-            id="chatTitleStatus"
-          >
-            ● Online
-          </div>
-
-        </div>
-
-        <div class="chat-title-actions">
-
-          <button
-            class="chat-action"
-            onclick="minimizeConversation()"
-            title="Minimizar"
-          >—</button>
-
-          <button
-            class="chat-action"
-            onclick="clearUnread()"
-            title="Marcar como lidas"
-          >✓</button>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="chat"
-        id="chat"
-      ></div>
-
-
-      <!-- FORMATAÇÃO -->
-
-      <div
-        class="format-panel"
-        id="formatPanel"
-      >
-
-        <button onclick="toggleFormat('bold')">
-          <b>B</b>
-        </button>
-
-        <button onclick="toggleFormat('italic')">
-          <i>I</i>
-        </button>
-
-        <button onclick="toggleFormat('underline')">
-          <u>U</u>
-        </button>
-
-        <button
-          class="color-dot"
-          style="background:#111"
-          onclick="setTextColor('#111')"
-        ></button>
-
-        <button
-          class="color-dot"
-          style="background:#7b3fa1"
-          onclick="setTextColor('#7b3fa1')"
-        ></button>
-
-        <button
-          class="color-dot"
-          style="background:#165c91"
-          onclick="setTextColor('#165c91')"
-        ></button>
-
-        <button
-          class="color-dot"
-          style="background:#c62c55"
-          onclick="setTextColor('#c62c55')"
-        ></button>
-
-        <button
-          class="color-dot"
-          style="background:#248617"
-          onclick="setTextColor('#248617')"
-        ></button>
-
-        <button
-          class="color-dot"
-          style="background:#e08a00"
-          onclick="setTextColor('#e08a00')"
-        ></button>
-
-      </div>
-
-
-      <!-- EFEITOS -->
-
-      <div
-        class="effect-panel"
-        id="effectPanel"
-      >
-
-        <button onclick="applyEffect('glow')">
-          ✨ Brilho
-        </button>
-
-        <button onclick="applyEffect('sparkle')">
-          💫 Glitter
-        </button>
-
-        <button onclick="applyEffect('rainbow')">
-          🌈 Arco-íris
-        </button>
-
-        <button onclick="applyEffect('pulse')">
-          💜 Pulsar
-        </button>
-
-        <button onclick="applyEffect('heart')">
-          💖 Coração
-        </button>
-
-        <button onclick="applyEffect('magic')">
-          🪄 Mágico
-        </button>
-
-        <button onclick="applyEffect('shake')">
-          📳 Tremer
-        </button>
-
-      </div>
-
-
-      <!-- GIF -->
-
-      <div
-        class="panel"
-        id="gifPanel"
-      >
-
-        <div class="editor-title">
-          Enviar GIF
-        </div>
-
-        <div class="panel-content">
-
-          <div class="gif-help">
-            Cole o endereço direto de um GIF (.gif).
-            Ele será enviado como uma mensagem animada.
-          </div>
-
-          <input
-            class="gif-input"
-            id="gifUrlInput"
-            placeholder="https://.../meu-gif.gif"
-          >
-
-          <div class="gif-actions">
-
-            <button onclick="closeGifPanel()">
-              Cancelar
-            </button>
-
-            <button onclick="sendGif()">
-              Enviar GIF
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- TOOLBAR -->
-
-      <div class="toolbar">
-
-        <button
-          id="formatButton"
-          onclick="toggleFormatPanel()"
-          title="Formatação"
-        >A</button>
-
-        <button onclick="addEmoji('😊')">😊</button>
-        <button onclick="addEmoji('😂')">😂</button>
-        <button onclick="addEmoji('🥺')">🥺</button>
-        <button onclick="addEmoji('❤️')">❤️</button>
-        <button onclick="addEmoji('😘')">😘</button>
-        <button onclick="addEmoji('🦊')">🦊</button>
-
-        <button
-          onclick="toggleEffectPanel()"
-          title="Efeitos"
-        >✨</button>
-
-        <button
-          onclick="toggleGifPanel()"
-          title="GIF"
-        >GIF</button>
-
-        <button
-          class="nudge"
-          onclick="sendNudge()"
-        >📳 Nudge</button>
-
-      </div>
-
-
-      <!-- INPUT -->
-
-      <div class="input-area">
-
-        <input
-          id="messageInput"
-          type="text"
-          placeholder="Digite uma mensagem..."
-          autocomplete="off"
-        >
-
-        <button
-          class="send-button"
-          onclick="sendMessage()"
-        >Enviar</button>
-
-      </div>
-
-      <div class="footer">
-        MSN Messenger • Bruxinha ♡ Raposinha
-      </div>
-
-    </main>
-
-  </div>
-
-
-  <!-- =====================================================
-       PERFIL
-  ====================================================== -->
-
-  <div
-    class="modal-overlay"
-    id="profileModal"
+    class="messenger"
+    id="messenger"
   >
 
-    <div class="modal">
+    <div class="window-titlebar">
 
-      <div class="editor-title">
-        Editar meu perfil
+      <div class="window-title-left">
+
+        <div class="window-title-icon">
+          🟢
+        </div>
+
+        <div
+          class="window-title-text"
+          id="windowTitleText"
+        >
+          MSN no Ar — Bruxinha & Raposinha
+        </div>
+
       </div>
 
-      <div class="editor-content">
+      <div class="window-buttons">
 
-        <div class="editor-avatar-area">
+        <button
+          class="window-button mobile-contact-button"
+          onclick="toggleSidebar()"
+          title="Contatos"
+        >
+          ☰
+        </button>
+
+        <button
+          class="window-button"
+          onclick="openSettings()"
+          title="Configurações"
+        >
+          ⚙
+        </button>
+
+        <button
+          class="window-button"
+          onclick="minimizeConversation()"
+          title="Minimizar"
+        >
+          —
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="msn-toolbar">
+
+      <button
+        class="toolbar-button"
+        onclick="openProfileEditor()"
+      >
+        👤 Perfil
+      </button>
+
+      <button
+        class="toolbar-button"
+        onclick="openSettings()"
+      >
+        ⚙ Opções
+      </button>
+
+      <button
+        class="toolbar-button"
+        onclick="sendNudge()"
+      >
+        📳 Nudge
+      </button>
+
+    </div>
+
+
+    <div class="content">
+
+      <!-- SIDEBAR -->
+
+      <aside class="sidebar" id="sidebar">
+
+        <div class="my-profile">
 
           <div
-            class="editor-avatar"
-            id="editorAvatar"
-          >☾</div>
+            class="avatar"
+            id="myAvatar"
+          >
+            ☾
+          </div>
+
+          <div class="profile-info">
+
+            <div
+              class="profile-name"
+              id="myName"
+            >
+              Bruxinha
+            </div>
+
+            <div
+              class="profile-status"
+              id="myStatus"
+            >
+              ● Online
+            </div>
+
+            <div
+              class="profile-message"
+              id="myMessage"
+            >
+              💜
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="contacts-title">
+          Contatos
+        </div>
+
+
+        <div
+          class="contact active"
+          id="contactItem"
+          onclick="openConversation()"
+        >
+
+          <div
+            class="avatar"
+            id="contactAvatar"
+          >
+            🦊
+          </div>
 
           <div>
 
-            <input
-              id="avatarFile"
-              type="file"
-              accept="image/*"
-              onchange="previewAvatar(event)"
+            <div
+              class="contact-name"
+              id="contactName"
             >
+              Raposinha
+            </div>
 
-            <label
-              class="photo-button"
-              for="avatarFile"
+            <div
+              class="online"
+              id="contactStatus"
             >
-              🖼️ Escolher foto
-            </label>
+              ● Online
+            </div>
+
+            <div
+              class="contact-message"
+              id="contactMessage"
+            >
+              🦊
+            </div>
+
+          </div>
+
+          <div
+            class="unread-badge"
+            id="contactUnread"
+          >
+            0
+          </div>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+          MSN no Ar<br>
+          Bruxinha ♡ Raposinha
+        </div>
+
+      </aside>
+
+
+      <!-- CHAT -->
+
+      <main class="main-chat">
+
+        <div class="chat-header">
+
+          <div
+            class="avatar"
+            id="chatAvatar"
+          >
+            🦊
+          </div>
+
+          <div class="chat-title">
+
+            <div
+              class="chat-title-name"
+              id="chatTitleName"
+            >
+              Raposinha
+            </div>
+
+            <div
+              class="chat-title-status"
+              id="chatTitleStatus"
+            >
+              ● Online
+            </div>
+
+            <div
+              class="chat-title-message"
+              id="chatTitleMessage"
+            >
+              🦊
+            </div>
 
           </div>
 
         </div>
 
-        <label class="editor-label">
-          Nome
-        </label>
 
-        <input
-          id="editUsername"
-          class="editor-input"
-          maxlength="40"
-        >
+        <div
+          class="chat"
+          id="chat"
+        ></div>
 
-        <label class="editor-label">
-          Status
-        </label>
 
-        <select
-          id="editStatus"
-          class="editor-select"
-        >
+        <div
+          class="typing-indicator"
+          id="typingIndicator"
+        ></div>
 
-          <option value="Online">
-            🟢 Online
-          </option>
 
-          <option value="Ausente">
-            🟡 Ausente
-          </option>
+        <div class="composer">
 
-          <option value="Ocupado">
-            🔴 Ocupado
-          </option>
+          <div class="format-toolbar">
 
-          <option value="Invisível">
-            ⚪ Invisível
-          </option>
+            <button
+              class="format-button"
+              id="boldButton"
+              onclick="toggleFormat('bold')"
+            >
+              <b>B</b>
+            </button>
 
-        </select>
+            <button
+              class="format-button"
+              id="italicButton"
+              onclick="toggleFormat('italic')"
+            >
+              <i>I</i>
+            </button>
 
-        <label class="editor-label">
-          Mensagem pessoal
-        </label>
+            <button
+              class="format-button"
+              id="underlineButton"
+              onclick="toggleFormat('underline')"
+            >
+              <u>U</u>
+            </button>
 
-        <input
-          id="editPersonalMessage"
-          class="editor-input"
-          maxlength="120"
-        >
+            <button
+              class="format-button"
+              onclick="chooseTextColor()"
+            >
+              🎨
+            </button>
 
-        <div id="profileSaveStatus">
-          Perfil salvo! 💜
+            <button
+              class="format-button"
+              onclick="chooseEffect()"
+            >
+              ✨
+            </button>
+
+            <button
+              class="format-button"
+              onclick="toggleGifPanel()"
+            >
+              GIF
+            </button>
+
+            <button
+              class="format-button"
+              onclick="sendNudge()"
+            >
+              📳
+            </button>
+
+          </div>
+
+
+          <div
+            id="gifPanel"
+          >
+
+            <div class="gif-row">
+
+              <input
+                id="gifUrlInput"
+                type="url"
+                placeholder="Cole aqui o endereço do GIF"
+              >
+
+              <button
+                class="modal-button primary"
+                onclick="sendGif()"
+              >
+                Enviar GIF
+              </button>
+
+              <button
+                class="modal-button"
+                onclick="closeGifPanel()"
+              >
+                ×
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="message-input-row">
+
+            <textarea
+              id="messageInput"
+              placeholder="Digite uma mensagem..."
+              maxlength="2000"
+            ></textarea>
+
+            <button
+              class="send-button"
+              onclick="sendMessage()"
+            >
+              Enviar
+            </button>
+
+          </div>
+
         </div>
 
-        <div class="editor-actions">
 
-          <button
-            class="cancel-button"
-            onclick="closeProfileEditor()"
-          >Cancelar</button>
-
-          <button
-            class="save-button"
-            id="saveProfileButton"
-            onclick="saveProfile()"
-          >Salvar</button>
-
+        <div class="footer">
+          MSN Messenger • Bruxinha ♡ Raposinha
         </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =======================================================
+     NUDGE
+======================================================= -->
+
+<div id="nudgeNotice"></div>
+
+
+<!-- =======================================================
+     PROFILE MODAL
+======================================================= -->
+
+<div
+  class="modal"
+  id="profileModal"
+>
+
+  <div class="modal-card">
+
+    <div class="modal-header">
+
+      <span>
+        Meu perfil — MSN
+      </span>
+
+      <button
+        class="window-button"
+        onclick="closeProfileEditor()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div
+        class="profile-editor-avatar"
+        id="editorAvatar"
+      >
+        ☾
+      </div>
+
+      <label class="editor-label">
+        Foto
+      </label>
+
+      <input
+        id="avatarFile"
+        class="editor-input"
+        type="file"
+        accept="image/*"
+        onchange="previewAvatar(this.files[0])"
+      >
+
+      <label class="editor-label">
+        Nickname
+      </label>
+
+      <input
+        id="editUsername"
+        class="editor-input"
+        maxlength="40"
+      >
+
+      <label class="editor-label">
+        Status
+      </label>
+
+      <select
+        id="editStatus"
+        class="editor-input"
+      >
+        <option value="online">Online</option>
+        <option value="away">Ausente</option>
+        <option value="busy">Ocupado</option>
+        <option value="offline">Offline</option>
+      </select>
+
+      <label class="editor-label">
+        Mensagem pessoal
+      </label>
+
+      <input
+        id="editPersonalMessage"
+        class="editor-input"
+        maxlength="120"
+      >
+
+      <div id="profileSaveStatus">
+        Perfil salvo! 💜
+      </div>
+
+      <div class="editor-actions">
+
+        <button
+          class="modal-button"
+          onclick="closeProfileEditor()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          class="modal-button primary"
+          id="saveProfileButton"
+          onclick="saveProfile()"
+        >
+          Salvar
+        </button>
 
       </div>
 
@@ -2035,133 +1531,174 @@ button:disabled{
 
   </div>
 
+</div>
 
-  <!-- =====================================================
-       CONFIGURAÇÕES
-  ====================================================== -->
 
-  <div
-    class="modal-overlay"
-    id="settingsModal"
-  >
+<!-- =======================================================
+     SETTINGS MODAL
+======================================================= -->
 
-    <div class="modal">
+<div
+  class="modal"
+  id="settingsModal"
+>
 
-      <div class="settings-title">
-        Configurações do MSN
+  <div class="modal-card">
+
+    <div class="modal-header">
+
+      <span>
+        Configurações — MSN
+      </span>
+
+      <button
+        class="window-button"
+        onclick="closeSettings()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <label class="editor-label">
+        Notificações
+      </label>
+
+      <label>
+        <input
+          type="checkbox"
+          id="notificationsEnabled"
+        >
+        Mostrar notificações de novas mensagens
+      </label>
+
+
+      <label class="editor-label">
+        Som
+      </label>
+
+      <label>
+        <input
+          type="checkbox"
+          id="soundEnabled"
+        >
+        Som de mensagem
+      </label>
+
+
+      <label class="editor-label">
+        Nudge
+      </label>
+
+      <label>
+        <input
+          type="checkbox"
+          id="nudgeEnabled"
+        >
+        Permitir Nudge
+      </label>
+
+
+      <label class="editor-label">
+        Estilo da notificação
+      </label>
+
+      <select
+        id="notificationStyle"
+        class="editor-input"
+      >
+        <option value="classic">Clássico</option>
+        <option value="soft">Suave</option>
+        <option value="minimal">Minimalista</option>
+      </select>
+
+
+      <label class="editor-label">
+        Cor da janela
+      </label>
+
+      <div
+        class="window-color-grid"
+        id="windowColorGrid"
+      >
+
+        <button
+          class="window-color"
+          data-color="#07569b"
+          title="Azul MSN"
+          onclick="setWindowColor('#07569b')"
+        ></button>
+
+        <button
+          class="window-color"
+          data-color="#7049a7"
+          title="Roxo"
+          onclick="setWindowColor('#7049a7')"
+        ></button>
+
+        <button
+          class="window-color"
+          data-color="#c84d7e"
+          title="Rosa"
+          onclick="setWindowColor('#c84d7e')"
+        ></button>
+
+        <button
+          class="window-color"
+          data-color="#338a56"
+          title="Verde"
+          onclick="setWindowColor('#338a56')"
+        ></button>
+
+        <button
+          class="window-color"
+          data-color="#aa7a22"
+          title="Dourado"
+          onclick="setWindowColor('#aa7a22')"
+        ></button>
+
+        <button
+          class="window-color"
+          data-color="#168e9b"
+          title="Ciano"
+          onclick="setWindowColor('#168e9b')"
+        ></button>
+
       </div>
 
-      <div class="settings-content">
 
-        <div class="setting-row">
+      <label class="editor-label">
+        Cor personalizada
+      </label>
 
-          <div class="setting-info">
+      <input
+        id="customWindowColor"
+        class="editor-input"
+        type="color"
+        value="#07569b"
+        onchange="setWindowColor(this.value)"
+      >
 
-            <div class="setting-title">
-              🔔 Notificações
-            </div>
 
-            <div class="setting-description">
-              Receber avisos de novas mensagens.
-            </div>
+      <div class="editor-actions">
 
-          </div>
+        <button
+          class="modal-button"
+          onclick="closeSettings()"
+        >
+          Cancelar
+        </button>
 
-          <input
-            id="notificationsEnabled"
-            type="checkbox"
-          >
-
-        </div>
-
-        <div class="setting-row">
-
-          <div class="setting-info">
-
-            <div class="setting-title">
-              🔊 Sons
-            </div>
-
-            <div class="setting-description">
-              Tocar som quando chegar mensagem.
-            </div>
-
-          </div>
-
-          <input
-            id="soundEnabled"
-            type="checkbox"
-          >
-
-        </div>
-
-        <div class="setting-row">
-
-          <div class="setting-info">
-
-            <div class="setting-title">
-              📳 Nudge
-            </div>
-
-            <div class="setting-description">
-              Permitir sons e tremida do Nudge.
-            </div>
-
-          </div>
-
-          <input
-            id="nudgeEnabled"
-            type="checkbox"
-          >
-
-        </div>
-
-        <div class="setting-row">
-
-          <div class="setting-info">
-
-            <div class="setting-title">
-              🎨 Estilo da notificação
-            </div>
-
-            <div class="setting-description">
-              Escolha como o aviso aparece.
-            </div>
-
-          </div>
-
-          <select id="notificationStyle">
-
-            <option value="classic">
-              💌 Clássico
-            </option>
-
-            <option value="soft">
-              💜 Suave
-            </option>
-
-            <option value="minimal">
-              ✨ Minimalista
-            </option>
-
-          </select>
-
-        </div>
-
-        <div class="settings-footer">
-
-          <button
-            class="cancel-button"
-            onclick="closeSettings()"
-          >Fechar</button>
-
-          <button
-            class="save-button"
-            id="saveSettingsButton"
-            onclick="saveSettings()"
-          >Salvar</button>
-
-        </div>
+        <button
+          class="modal-button primary"
+          id="saveSettingsButton"
+          onclick="saveSettings()"
+        >
+          Salvar
+        </button>
 
       </div>
 
@@ -2178,93 +1715,157 @@ button:disabled{
 ========================================================= */
 
 const SUPABASE_URL =
-  "https://ojoecmioovwmirdvedzr.supabase.co";
+  "https://YOUR_PROJECT.supabase.co";
 
-const SUPABASE_KEY =
-  "sb_publishable_1_QzlhlMc2HS_aNkzbJqRg_SgtJzfS3";
-
-const AVATAR_BUCKET = "avatars";
+const SUPABASE_ANON_KEY =
+  "YOUR_SUPABASE_ANON_KEY";
 
 const supabaseClient =
-  window.supabase.createClient(
+  supabase.createClient(
     SUPABASE_URL,
-    SUPABASE_KEY
+    SUPABASE_ANON_KEY
   );
 
 
 /* =========================================================
-   ELEMENTOS
+   UUIDS OFICIALMENTE DEFINIDOS
 ========================================================= */
 
-const loginScreen =
-  document.getElementById("loginScreen");
+const RAPOSINHA_UUID =
+  "0fcac17c-d3e4-41aa-94a6-1f4fd296571e";
 
-const messenger =
-  document.getElementById("messenger");
-
-const emailInput =
-  document.getElementById("emailInput");
-
-const passwordInput =
-  document.getElementById("passwordInput");
-
-const loginButton =
-  document.getElementById("loginButton");
-
-const loginError =
-  document.getElementById("loginError");
-
-const chat =
-  document.getElementById("chat");
-
-const input =
-  document.getElementById("messageInput");
-
-const sidebar =
-  document.getElementById("sidebar");
+const BRUXINHA_UUID =
+  "09bf95ed-21f0-4a71-8020-6b3dc6559070";
 
 
 /* =========================================================
    ESTADO
 ========================================================= */
 
-let currentUser = null;
-let currentProfile = null;
-let contactProfile = null;
+let currentUser =
+  null;
 
-let realtimeChannel = null;
-let presenceChannel = null;
+let currentProfile =
+  null;
 
-let selectedAvatarFile = null;
+let contactProfile =
+  null;
 
-let unreadCount = 0;
+let realtimeChannel =
+  null;
 
-let conversationOpen = true;
+let conversationOpen =
+  true;
 
-let lastActivity =
-  Date.now();
+let unreadCount =
+  0;
 
-let awayTimer = null;
+let typingTimer =
+  null;
 
-let myPresenceStatus = "online";
-
-let contactPresence = false;
-
-let settings = {
-  notifications_enabled:true,
-  sound_enabled:true,
-  nudge_enabled:true,
-  notification_style:"classic"
-};
+let selectedAvatarFile =
+  null;
 
 let messageFormatting = {
+
   bold:false,
   italic:false,
   underline:false,
   color:"#111",
   effect:null,
   ranges:[]
+
 };
+
+let settings = {
+
+  notifications_enabled:true,
+  sound_enabled:true,
+  nudge_enabled:true,
+  notification_style:"classic"
+
+};
+
+const input =
+  document.getElementById(
+    "messageInput"
+  );
+
+const chat =
+  document.getElementById(
+    "chat"
+  );
+
+const sidebar =
+  document.getElementById(
+    "sidebar"
+  );
+
+const messenger =
+  document.getElementById(
+    "messenger"
+  );
+
+
+/* =========================================================
+   IDENTIDADE POR UUID
+========================================================= */
+
+function getOtherUserId(){
+
+  if(!currentUser?.id)
+    return null;
+
+  const id =
+    String(
+      currentUser.id
+    );
+
+  if(id === BRUXINHA_UUID)
+    return RAPOSINHA_UUID;
+
+  if(id === RAPOSINHA_UUID)
+    return BRUXINHA_UUID;
+
+  return null;
+}
+
+
+function getCurrentNickname(){
+
+  if(
+    String(currentUser?.id || "") ===
+    RAPOSINHA_UUID
+  ){
+    return "Raposinha";
+  }
+
+  return "Bruxinha";
+}
+
+
+function getContactNickname(){
+
+  if(
+    String(currentUser?.id || "") ===
+    RAPOSINHA_UUID
+  ){
+    return "Bruxinha";
+  }
+
+  return "Raposinha";
+}
+
+
+function getNicknameClassById(
+  id
+){
+
+  return String(id || "") ===
+    RAPOSINHA_UUID
+      ? "raposinha"
+      : "bruxinha";
+}
 
 
 /* =========================================================
@@ -2274,163 +1875,157 @@ let messageFormatting = {
 async function login(){
 
   const email =
-    emailInput.value.trim();
+    document
+      .getElementById(
+        "emailInput"
+      )
+      .value
+      .trim();
 
   const password =
-    passwordInput.value;
+    document
+      .getElementById(
+        "passwordInput"
+      )
+      .value;
 
-  hideLoginError();
+  const errorBox =
+    document.getElementById(
+      "loginError"
+    );
+
+  const button =
+    document.getElementById(
+      "loginButton"
+    );
+
+  errorBox.textContent =
+    "";
 
   if(!email || !password){
 
-    showLoginError(
-      "Digite seu e-mail e sua senha."
-    );
+    errorBox.textContent =
+      "Digite seu e-mail e senha.";
 
     return;
   }
 
-  loginButton.disabled = true;
-  loginButton.textContent =
+  button.disabled =
+    true;
+
+  button.textContent =
     "Entrando...";
 
   try{
 
     const {data,error} =
-      await supabaseClient.auth.signInWithPassword({
-        email,
-        password
-      });
+      await supabaseClient.auth
+        .signInWithPassword({
+          email,
+          password
+        });
 
-    if(error) throw error;
+    if(error)
+      throw error;
+
+    if(!data?.user)
+      throw new Error(
+        "Não foi possível identificar o usuário."
+      );
 
     currentUser =
       data.user;
 
-    await startMessenger();
+    await initializeApp();
 
   }catch(error){
 
-    console.error(error);
-
-    showLoginError(
-      getFriendlyAuthError(error)
+    console.error(
+      "Erro no login:",
+      error
     );
+
+    errorBox.textContent =
+      error?.message ||
+      "Não foi possível entrar.";
 
   }finally{
 
-    loginButton.disabled = false;
-    loginButton.textContent =
+    button.disabled =
+      false;
+
+    button.textContent =
       "Entrar";
   }
 }
 
 
-function getFriendlyAuthError(error){
-
-  const message =
-    String(error?.message || "")
-      .toLowerCase();
-
-  if(
-    message.includes("invalid login") ||
-    message.includes("invalid credentials")
-  ){
-    return "E-mail ou senha incorretos.";
-  }
-
-  if(
-    message.includes("email not confirmed")
-  ){
-    return "Esse e-mail ainda não foi confirmado no Supabase.";
-  }
-
-  return (
-    error?.message ||
-    "Não foi possível entrar."
-  );
-}
-
-
-function showLoginError(message){
-
-  loginError.textContent =
-    message;
-
-  loginError.style.display =
-    "block";
-}
-
-
-function hideLoginError(){
-
-  loginError.textContent =
-    "";
-
-  loginError.style.display =
-    "none";
-}
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
 async function logout(){
 
-  try{
+  await supabaseClient.auth.signOut();
 
-    if(realtimeChannel){
+  currentUser =
+    null;
 
-      await supabaseClient
-        .removeChannel(
-          realtimeChannel
-        );
+  currentProfile =
+    null;
 
-      realtimeChannel = null;
-    }
+  contactProfile =
+    null;
 
-    if(presenceChannel){
+  if(realtimeChannel){
 
-      await supabaseClient
-        .removeChannel(
-          presenceChannel
-        );
+    await supabaseClient
+      .removeChannel(
+        realtimeChannel
+      );
 
-      presenceChannel = null;
-    }
-
-    await supabaseClient.auth.signOut();
-
-  }catch(error){
-
-    console.error(
-      "Erro ao sair:",
-      error
-    );
+    realtimeChannel =
+      null;
   }
+
+  document.getElementById(
+    "app"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "loginScreen"
+  ).style.display =
+    "flex";
 }
 
 
 /* =========================================================
-   SESSÃO
+   SESSION
 ========================================================= */
 
 async function checkSession(){
 
   try{
 
-    const {data,error} =
-      await supabaseClient.auth.getSession();
+    const {data} =
+      await supabaseClient.auth
+        .getSession();
 
-    if(error) throw error;
-
-    if(data.session?.user){
+    if(data?.session?.user){
 
       currentUser =
         data.session.user;
 
-      await startMessenger();
+      await initializeApp();
+
+    }else{
+
+      document.getElementById(
+        "loginScreen"
+      ).style.display =
+        "flex";
+
+      document.getElementById(
+        "app"
+      ).style.display =
+        "none";
     }
 
   }catch(error){
@@ -2444,68 +2039,49 @@ async function checkSession(){
 
 
 supabaseClient.auth.onAuthStateChange(
-  async(event,session)=>{
+  async(
+    event,
+    session
+  )=>{
 
     if(
-      event === "SIGNED_IN" &&
+      event ===
+      "SIGNED_IN" &&
       session?.user
     ){
 
       currentUser =
         session.user;
+
     }
 
-    if(event === "SIGNED_OUT"){
+    if(
+      event ===
+      "SIGNED_OUT"
+    ){
 
-      currentUser = null;
-      currentProfile = null;
-      contactProfile = null;
-
-      if(realtimeChannel){
-
-        await supabaseClient
-          .removeChannel(
-            realtimeChannel
-          );
-
-        realtimeChannel = null;
-      }
-
-      if(presenceChannel){
-
-        await supabaseClient
-          .removeChannel(
-            presenceChannel
-          );
-
-        presenceChannel = null;
-      }
-
-      messenger.style.display =
-        "none";
-
-      loginScreen.style.display =
-        "block";
-
-      chat.innerHTML = "";
+      currentUser =
+        null;
     }
   }
 );
 
 
 /* =========================================================
-   START
+   INITIALIZE
 ========================================================= */
 
-async function startMessenger(){
+async function initializeApp(){
 
-  if(!currentUser) return;
-
-  loginScreen.style.display =
+  document.getElementById(
+    "loginScreen"
+  ).style.display =
     "none";
 
-  messenger.style.display =
-    "block";
+  document.getElementById(
+    "app"
+  ).style.display =
+    "flex";
 
   await loadMyProfile();
 
@@ -2517,23 +2093,26 @@ async function startMessenger(){
 
   subscribeToMessages();
 
-  startPresence();
-
-  startAutomaticAway();
-
   requestNotificationPermission();
 
-  setupActivityTracking();
+  applySavedWindowColor();
+
+  updateUnreadBadge();
+
+  updateContactUnread();
 
   input.focus();
 }
 
 
 /* =========================================================
-   PERFIL
+   MY PROFILE
 ========================================================= */
 
 async function loadMyProfile(){
+
+  if(!currentUser?.id)
+    return;
 
   const {data,error} =
     await supabaseClient
@@ -2554,489 +2133,148 @@ async function loadMyProfile(){
       error
     );
 
-    updateFallbackMyProfile();
+    updateMyProfileUI({
+      id:currentUser.id,
+      username:getCurrentNickname(),
+      status:"online",
+      personal_message:"",
+      avatar_url:null
+    });
 
     return;
   }
 
   currentProfile =
-    data;
+    data || {
+      id:currentUser.id,
+      username:getCurrentNickname(),
+      status:"online",
+      personal_message:"",
+      avatar_url:null
+    };
 
-  if(!data){
-
-    updateFallbackMyProfile();
-
-    return;
-  }
-
-  updateMyProfileUI(data);
+  updateMyProfileUI(
+    currentProfile
+  );
 }
 
 
-function updateMyProfileUI(data){
+function updateMyProfileUI(
+  data
+){
 
-  document.getElementById("myName")
-    .textContent =
-      data.username ||
-      getFallbackName();
+  const fallback =
+    String(data?.id || "") ===
+    RAPOSINHA_UUID
+      ? "🦊"
+      : "☾";
 
-  const statusElement =
-    document.getElementById("myStatus");
+  document.getElementById(
+    "myName"
+  ).textContent =
+    data?.username ||
+    getCurrentNickname();
 
-  statusElement.textContent =
-    "● " +
-    (
-      myPresenceStatus === "away"
-        ? "Ausente"
-        : data.status || "Online"
+  document.getElementById(
+    "myStatus"
+  ).textContent =
+    formatStatus(
+      data?.status
     );
 
-  applyStatusClass(
-    statusElement,
-    myPresenceStatus === "away"
-      ? "Ausente"
-      : data.status
-  );
-
-  document.getElementById("myMessage")
-    .textContent =
-      data.personal_message
-        ? `"${data.personal_message}"`
-        : "";
+  document.getElementById(
+    "myMessage"
+  ).textContent =
+    data?.personal_message ||
+    "";
 
   const avatar =
-    document.getElementById("myAvatar");
+    document.getElementById(
+      "myAvatar"
+    );
 
-  if(data.avatar_url){
+  avatar.innerHTML =
+    "";
 
-    setAvatar(
-      avatar,
-      data.avatar_url,
-      getFallbackAvatar()
+  if(data?.avatar_url){
+
+    const img =
+      document.createElement(
+        "img"
+      );
+
+    img.src =
+      data.avatar_url;
+
+    img.alt =
+      "Avatar";
+
+    avatar.appendChild(
+      img
     );
 
   }else{
 
-    avatar.innerHTML = "";
-
     avatar.textContent =
-      getFallbackAvatar();
+      fallback;
   }
 }
 
 
-function applyStatusClass(
-  element,
+function formatStatus(
   status
 ){
 
-  element.classList.remove(
-    "status-online",
-    "status-away",
-    "status-busy",
-    "status-offline"
-  );
-
-  if(status === "Ausente"){
-
-    element.classList.add(
-      "status-away"
+  const value =
+    String(
+      status || "online"
     );
 
-    return;
-  }
+  const map = {
 
-  if(status === "Ocupado"){
+    online:"● Online",
+    away:"◐ Ausente",
+    busy:"⛔ Ocupado",
+    offline:"○ Offline"
 
-    element.classList.add(
-      "status-busy"
-    );
+  };
 
-    return;
-  }
-
-  if(status === "Invisível"){
-
-    element.classList.add(
-      "status-offline"
-    );
-
-    return;
-  }
-
-  element.classList.add(
-    "status-online"
+  return (
+    map[value] ||
+    "● Online"
   );
-}
-
-
-function updateFallbackMyProfile(){
-
-  document.getElementById("myName")
-    .textContent =
-      getFallbackName();
-
-  document.getElementById("myStatus")
-    .textContent =
-      "● Online";
-
-  applyStatusClass(
-    document.getElementById("myStatus"),
-    "Online"
-  );
-
-  document.getElementById("myMessage")
-    .textContent =
-      '"Esperando meu amor..."';
-
-  document.getElementById("myAvatar")
-    .textContent =
-      getFallbackAvatar();
-}
-
-
-function getFallbackName(){
-
-  const email =
-    currentUser?.email?.toLowerCase();
-
-  if(
-    email ===
-    "andressa.verissimo.g@icloud.com"
-  ){
-    return "Raposinha";
-  }
-
-  return "Bruxinha";
-}
-
-
-function getFallbackAvatar(){
-
-  const email =
-    currentUser?.email?.toLowerCase();
-
-  if(
-    email ===
-    "andressa.verissimo.g@icloud.com"
-  ){
-    return "🦊";
-  }
-
-  return "☾";
 }
 
 
 /* =========================================================
-   EDITOR DE PERFIL
-========================================================= */
-
-function openProfileEditor(){
-
-  document.getElementById(
-    "editUsername"
-  ).value =
-    currentProfile?.username ||
-    getFallbackName();
-
-  document.getElementById(
-    "editStatus"
-  ).value =
-    currentProfile?.status ||
-    "Online";
-
-  document.getElementById(
-    "editPersonalMessage"
-  ).value =
-    currentProfile?.personal_message ||
-    "";
-
-  selectedAvatarFile =
-    null;
-
-  const editorAvatar =
-    document.getElementById(
-      "editorAvatar"
-    );
-
-  if(currentProfile?.avatar_url){
-
-    setAvatar(
-      editorAvatar,
-      currentProfile.avatar_url,
-      getFallbackAvatar()
-    );
-
-  }else{
-
-    editorAvatar.innerHTML = "";
-
-    editorAvatar.textContent =
-      getFallbackAvatar();
-  }
-
-  document.getElementById(
-    "profileSaveStatus"
-  ).style.display =
-    "none";
-
-  document.getElementById(
-    "profileModal"
-  ).style.display =
-    "flex";
-}
-
-
-function closeProfileEditor(){
-
-  document.getElementById(
-    "profileModal"
-  ).style.display =
-    "none";
-
-  selectedAvatarFile =
-    null;
-
-  document.getElementById(
-    "avatarFile"
-  ).value = "";
-}
-
-
-function previewAvatar(event){
-
-  const file =
-    event.target.files?.[0];
-
-  if(!file) return;
-
-  if(!file.type.startsWith("image/")){
-
-    alert("Escolha uma imagem.");
-
-    return;
-  }
-
-  if(file.size > 8 * 1024 * 1024){
-
-    alert(
-      "A imagem precisa ter no máximo 8 MB."
-    );
-
-    event.target.value = "";
-
-    return;
-  }
-
-  selectedAvatarFile =
-    file;
-
-  const url =
-    URL.createObjectURL(file);
-
-  const editorAvatar =
-    document.getElementById(
-      "editorAvatar"
-    );
-
-  editorAvatar.innerHTML = "";
-
-  const img =
-    document.createElement("img");
-
-  img.src = url;
-  img.alt = "Nova foto";
-
-  editorAvatar.appendChild(img);
-}
-
-
-async function uploadAvatar(file){
-
-  if(!file || !currentUser)
-    return null;
-
-  const extension =
-    (
-      file.name.split(".").pop() ||
-      "jpg"
-    )
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g,"");
-
-  const filePath =
-    currentUser.id +
-    "/avatar-" +
-    Date.now() +
-    "." +
-    extension;
-
-  const {error} =
-    await supabaseClient.storage
-      .from(AVATAR_BUCKET)
-      .upload(
-        filePath,
-        file,
-        {
-          upsert:true,
-          contentType:
-            file.type ||
-            "image/jpeg"
-        }
-      );
-
-  if(error) throw error;
-
-  const {data} =
-    supabaseClient.storage
-      .from(AVATAR_BUCKET)
-      .getPublicUrl(filePath);
-
-  return data.publicUrl;
-}
-
-
-async function saveProfile(){
-
-  if(!currentUser) return;
-
-  const saveButton =
-    document.getElementById(
-      "saveProfileButton"
-    );
-
-  const username =
-    document.getElementById(
-      "editUsername"
-    ).value.trim();
-
-  const status =
-    document.getElementById(
-      "editStatus"
-    ).value;
-
-  const personalMessage =
-    document.getElementById(
-      "editPersonalMessage"
-    ).value.trim();
-
-  if(!username){
-
-    alert("Digite um nome.");
-
-    return;
-  }
-
-  saveButton.disabled =
-    true;
-
-  saveButton.textContent =
-    "Salvando...";
-
-  try{
-
-    let avatarUrl =
-      currentProfile?.avatar_url ||
-      null;
-
-    if(selectedAvatarFile){
-
-      avatarUrl =
-        await uploadAvatar(
-          selectedAvatarFile
-        );
-    }
-
-    const {data,error} =
-      await supabaseClient
-        .from("profiles")
-        .update({
-          username,
-          status,
-          personal_message:
-            personalMessage,
-          avatar_url:
-            avatarUrl
-        })
-        .eq(
-          "id",
-          currentUser.id
-        )
-        .select(
-          "id, username, status, personal_message, avatar_url"
-        )
-        .single();
-
-    if(error) throw error;
-
-    currentProfile =
-      data;
-
-    updateMyProfileUI(data);
-
-    document.getElementById(
-      "profileSaveStatus"
-    ).style.display =
-      "block";
-
-    selectedAvatarFile =
-      null;
-
-    document.getElementById(
-      "avatarFile"
-    ).value = "";
-
-    setTimeout(
-      closeProfileEditor,
-      700
-    );
-
-  }catch(error){
-
-    console.error(
-      "Erro ao salvar perfil:",
-      error
-    );
-
-    alert(
-      "Não foi possível salvar o perfil.\n\n" +
-      (
-        error?.message ||
-        "Erro desconhecido."
-      )
-    );
-
-  }finally{
-
-    saveButton.disabled =
-      false;
-
-    saveButton.textContent =
-      "Salvar";
-  }
-}
-
-
-/* =========================================================
-   CONTATO
+   CONTACT PROFILE — UUID, NÃO NOME
 ========================================================= */
 
 async function loadContactProfile(){
 
-  const myEmail =
-    currentUser?.email?.toLowerCase();
+  const contactId =
+    getOtherUserId();
 
-  const contactUsername =
-    myEmail ===
-      "belinhahcardozoalm@gmail.com"
-      ? "Raposinha"
-      : "Bruxinha";
+  if(!contactId){
+
+    console.error(
+      "UUID do contato não identificado."
+    );
+
+    return;
+  }
 
   const fallbackAvatar =
-    contactUsername ===
-      "Raposinha"
+    contactId ===
+    RAPOSINHA_UUID
       ? "🦊"
       : "☾";
+
+  const fallbackName =
+    contactId ===
+    RAPOSINHA_UUID
+      ? "Raposinha"
+      : "Bruxinha";
 
   const {data,error} =
     await supabaseClient
@@ -3045,450 +2283,194 @@ async function loadContactProfile(){
         "id, username, status, personal_message, avatar_url"
       )
       .eq(
-        "username",
-        contactUsername
+        "id",
+        contactId
       )
       .maybeSingle();
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "Erro ao carregar contato:",
+      error
+    );
 
-    showFallbackContact(
-      contactUsername,
-      fallbackAvatar
+    contactProfile = {
+
+      id:contactId,
+
+      username:fallbackName,
+
+      status:"online",
+
+      personal_message:"",
+
+      avatar_url:null
+
+    };
+
+    updateContactUI(
+      contactProfile
     );
 
     return;
   }
 
   contactProfile =
-    data;
+    data || {
 
-  if(!data){
+      id:contactId,
 
-    showFallbackContact(
-      contactUsername,
-      fallbackAvatar
-    );
+      username:fallbackName,
 
-    return;
-  }
+      status:"online",
 
-  updateContactUI(data);
+      personal_message:"",
+
+      avatar_url:null
+
+    };
+
+  updateContactUI(
+    contactProfile
+  );
 }
 
 
-function updateContactUI(data){
+function updateContactUI(
+  data
+){
 
   const fallbackAvatar =
-    data.username === "Raposinha"
+    String(data?.id || "") ===
+    RAPOSINHA_UUID
       ? "🦊"
       : "☾";
 
   document.getElementById(
     "contactName"
   ).textContent =
-    data.username ||
-    "Raposinha";
+    data?.username ||
+    getContactNickname();
 
   document.getElementById(
     "contactMessage"
   ).textContent =
-    data.personal_message ||
+    data?.personal_message ||
     "";
-
-  const avatar =
-    document.getElementById(
-      "contactAvatar"
-    );
-
-  const titleAvatar =
-    document.getElementById(
-      "chatTitleAvatar"
-    );
-
-  if(data.avatar_url){
-
-    setAvatar(
-      avatar,
-      data.avatar_url,
-      fallbackAvatar
-    );
-
-    setAvatar(
-      titleAvatar,
-      data.avatar_url,
-      fallbackAvatar
-    );
-
-  }else{
-
-    avatar.innerHTML = "";
-    avatar.textContent =
-      fallbackAvatar;
-
-    titleAvatar.innerHTML = "";
-    titleAvatar.textContent =
-      fallbackAvatar;
-  }
-
-  document.getElementById(
-    "chatTitleName"
-  ).textContent =
-    data.username ||
-    "Raposinha";
-
-  updateContactPresenceUI();
-}
-
-
-function updateContactPresenceUI(){
-
-  const statusText =
-    document.getElementById(
-      "contactStatus"
-    );
-
-  const titleStatus =
-    document.getElementById(
-      "chatTitleStatus"
-    );
-
-  if(contactPresence){
-
-    statusText.textContent =
-      "● Online";
-
-    titleStatus.textContent =
-      "● Online";
-
-    applyStatusClass(
-      statusText,
-      "Online"
-    );
-
-    titleStatus.classList.remove(
-      "status-away",
-      "status-busy",
-      "status-offline"
-    );
-
-  }else{
-
-    statusText.textContent =
-      "● Offline";
-
-    titleStatus.textContent =
-      "● Offline";
-
-    applyStatusClass(
-      statusText,
-      "Invisível"
-    );
-
-    titleStatus.classList.add(
-      "status-offline"
-    );
-  }
-}
-
-
-function showFallbackContact(
-  username,
-  avatar
-){
-
-  document.getElementById(
-    "contactName"
-  ).textContent =
-    username;
 
   document.getElementById(
     "contactStatus"
   ).textContent =
-    "● Offline";
-
-  const element =
-    document.getElementById(
-      "contactAvatar"
+    formatStatus(
+      data?.status
     );
-
-  element.innerHTML = "";
-  element.textContent =
-    avatar;
-
-  document.getElementById(
-    "chatTitleAvatar"
-  ).innerHTML = "";
-
-  document.getElementById(
-    "chatTitleAvatar"
-  ).textContent =
-    avatar;
 
   document.getElementById(
     "chatTitleName"
   ).textContent =
-    username;
+    data?.username ||
+    getContactNickname();
 
-  updateContactPresenceUI();
+  document.getElementById(
+    "chatTitleStatus"
+  ).textContent =
+    formatStatus(
+      data?.status
+    );
+
+  document.getElementById(
+    "chatTitleMessage"
+  ).textContent =
+    data?.personal_message ||
+    "";
+
+  setAvatarElement(
+    document.getElementById(
+      "contactAvatar"
+    ),
+    data?.avatar_url,
+    fallbackAvatar
+  );
+
+  setAvatarElement(
+    document.getElementById(
+      "chatAvatar"
+    ),
+    data?.avatar_url,
+    fallbackAvatar
+  );
 }
 
 
-function setAvatar(
+function setAvatarElement(
   element,
   url,
   fallback
 ){
 
-  element.innerHTML = "";
+  if(!element)
+    return;
 
-  const img =
-    document.createElement("img");
+  element.innerHTML =
+    "";
 
-  img.src = url;
-  img.alt = "Avatar";
+  if(url){
 
-  img.onerror = ()=>{
+    const img =
+      document.createElement(
+        "img"
+      );
 
-    element.innerHTML = "";
+    img.src =
+      url;
+
+    img.alt =
+      "Avatar";
+
+    img.onerror =
+      ()=>{
+        element.textContent =
+          fallback;
+      };
+
+    element.appendChild(
+      img
+    );
+
+  }else{
 
     element.textContent =
       fallback;
-  };
-
-  element.appendChild(img);
-}
-
-
-/* =========================================================
-   PRESENCE
-========================================================= */
-
-function startPresence(){
-
-  if(!currentUser)
-    return;
-
-  if(presenceChannel){
-
-    supabaseClient
-      .removeChannel(
-        presenceChannel
-      );
-  }
-
-  presenceChannel =
-    supabaseClient
-      .channel(
-        "msn-presence",
-        {
-          config:{
-            presence:{
-              key:currentUser.id
-            }
-          }
-        }
-      )
-      .on(
-        "presence",
-        {event:"sync"},
-        updatePresenceList
-      )
-      .on(
-        "presence",
-        {event:"join"},
-        updatePresenceList
-      )
-      .on(
-        "presence",
-        {event:"leave"},
-        updatePresenceList
-      )
-      .subscribe(
-        async status=>{
-
-          if(status === "SUBSCRIBED"){
-
-            await presenceChannel.track({
-
-              user_id:
-                currentUser.id,
-
-              name:
-                currentProfile?.username ||
-                getFallbackName(),
-
-              status:"online",
-
-              last_seen:
-                new Date().toISOString()
-
-            });
-          }
-        }
-      );
-}
-
-
-function updatePresenceList(){
-
-  if(!presenceChannel)
-    return;
-
-  const state =
-    presenceChannel.presenceState();
-
-  const contactId =
-    contactProfile?.id;
-
-  if(!contactId){
-
-    contactPresence =
-      false;
-
-    updateContactPresenceUI();
-
-    return;
-  }
-
-  contactPresence =
-    !!state[contactId];
-
-  updateContactPresenceUI();
-}
-
-
-async function updatePresence(){
-
-  if(!presenceChannel ||
-     !currentUser)
-    return;
-
-  try{
-
-    await presenceChannel.track({
-
-      user_id:
-        currentUser.id,
-
-      name:
-        currentProfile?.username ||
-        getFallbackName(),
-
-      status:
-        myPresenceStatus,
-
-      last_seen:
-        new Date().toISOString()
-
-    });
-
-  }catch(error){
-
-    console.log(
-      "Presence:",
-      error
-    );
   }
 }
 
 
 /* =========================================================
-   STATUS AUTOMÁTICO
-========================================================= */
-
-function setupActivityTracking(){
-
-  [
-    "mousemove",
-    "mousedown",
-    "keydown",
-    "touchstart",
-    "scroll"
-  ].forEach(
-    eventName=>{
-
-      document.addEventListener(
-        eventName,
-        registerActivity,
-        {passive:true}
-      );
-    }
-  );
-}
-
-
-function registerActivity(){
-
-  lastActivity =
-    Date.now();
-
-  if(myPresenceStatus === "away"){
-
-    myPresenceStatus =
-      "online";
-
-    updatePresence();
-
-    if(currentProfile){
-
-      updateMyProfileUI(
-        currentProfile
-      );
-    }
-  }
-}
-
-
-function startAutomaticAway(){
-
-  clearInterval(
-    awayTimer
-  );
-
-  awayTimer =
-    setInterval(
-      checkAutomaticAway,
-      30000
-    );
-}
-
-
-function checkAutomaticAway(){
-
-  if(
-    Date.now() -
-    lastActivity >
-    5 * 60 * 1000
-  ){
-
-    if(myPresenceStatus !== "away"){
-
-      myPresenceStatus =
-        "away";
-
-      updatePresence();
-
-      if(currentProfile){
-
-        updateMyProfileUI(
-          currentProfile
-        );
-      }
-    }
-  }
-}
-
-
-/* =========================================================
-   MENSAGENS
+   LOAD MESSAGES
 ========================================================= */
 
 async function loadMessages(){
 
-  chat.innerHTML = "";
+  if(
+    !currentUser?.id ||
+    !contactProfile?.id
+  ){
+    return;
+  }
+
+  chat.innerHTML =
+    "";
+
+  const myId =
+    String(
+      currentUser.id
+    );
+
+  const contactId =
+    String(
+      contactProfile.id
+    );
 
   const {data,error} =
     await supabaseClient
@@ -3496,32 +2478,27 @@ async function loadMessages(){
       .select(
         "id, sender, recipient, message, formatting, created_at, read_at"
       )
+      .or(
+        `and(sender.eq.${myId},recipient.eq.${contactId}),and(sender.eq.${contactId},recipient.eq.${myId})`
+      )
       .order(
         "created_at",
-        {ascending:true}
+        {
+          ascending:true
+        }
       );
 
   if(error){
 
-    console.error(error);
-
-    addSystemMessage(
-      "Não foi possível carregar as mensagens."
+    console.error(
+      "Erro ao carregar mensagens:",
+      error
     );
 
     return;
   }
 
-  if(!data || !data.length){
-
-    addSystemMessage(
-      "Nenhuma mensagem ainda. Mande um oi, meu amor! 💜"
-    );
-
-    return;
-  }
-
-  data.forEach(
+  (data || []).forEach(
     row=>{
       renderMessage(
         row,
@@ -3532,19 +2509,24 @@ async function loadMessages(){
 
   scrollChat();
 
-  setTimeout(
-    markVisibleMessagesAsRead,
-    300
-  );
+  if(conversationOpen){
+
+    await markVisibleMessagesAsRead();
+  }
 }
 
 
+/* =========================================================
+   RENDER MESSAGE
+========================================================= */
+
 function renderMessage(
   row,
-  isRealtime
+  realtime=false
 ){
 
-  if(!row) return;
+  if(!row?.id)
+    return;
 
   if(
     document.querySelector(
@@ -3554,538 +2536,271 @@ function renderMessage(
     return;
   }
 
-  if(
-    row.formatting?.type === "nudge"
-  ){
+  const myId =
+    String(
+      currentUser?.id || ""
+    );
 
-    if(isRealtime){
-      handleIncomingNudge(row);
-    }
-
-    return;
-  }
+  const senderId =
+    String(
+      row.sender || ""
+    );
 
   const mine =
-    String(row.sender || "")
-      .toLowerCase() ===
-    String(currentUser?.email || "")
-      .toLowerCase();
+    senderId ===
+    myId;
 
-  const message =
-    document.createElement("div");
+  const rowElement =
+    document.createElement(
+      "div"
+    );
 
-  message.className =
-    mine
-      ? "message mine"
-      : "message";
+  rowElement.className =
+    "message-row" +
+    (
+      mine
+        ? " mine"
+        : ""
+    );
 
-  message.dataset.messageId =
+  rowElement.dataset.messageId =
     row.id;
 
-  const senderName =
-    getNameFromEmail(
-      row.sender
+  const messageElement =
+    document.createElement(
+      "div"
+    );
+
+  messageElement.className =
+    "message";
+
+  const meta =
+    document.createElement(
+      "div"
+    );
+
+  meta.className =
+    "message-meta";
+
+  const nickname =
+    document.createElement(
+      "span"
+    );
+
+  nickname.className =
+    "nickname " +
+    getNicknameClassById(
+      senderId
+    );
+
+  nickname.textContent =
+    getNameByUserId(
+      senderId
     );
 
   const time =
+    document.createElement(
+      "span"
+    );
+
+  time.className =
+    "message-time";
+
+  time.textContent =
     formatTime(
       row.created_at
     );
 
-  let text =
-    renderFormattedText(
-      row.message || "",
-      row.formatting || {}
-    );
-
-  if(
-    row.formatting?.type === "gif" &&
-    row.formatting?.gif_url
-  ){
-
-    text += `
-      <img
-        class="chat-gif"
-        src="${escapeAttributeURL(row.formatting.gif_url)}"
-        alt="GIF"
-        loading="lazy"
-        onerror="this.style.display='none'"
-      >
-    `;
-  }
-
-  const state =
-    mine
-      ? (
-          row.read_at
-            ? "✓✓ Lida"
-            : "✓ Enviada"
-        )
-      : "";
-
-  message.innerHTML = `
-    <div class="sender">
-      ${escapeHTML(senderName)}
-      <span class="message-time">
-        ${escapeHTML(time)}
-      </span>
-      ${
-        state
-          ? `<span class="message-state">${escapeHTML(state)}</span>`
-          : ""
-      }
-    </div>
-
-    <div class="text">
-      ${text}
-    </div>
-  `;
-
-  chat.appendChild(
-    message
+  meta.appendChild(
+    nickname
   );
 
+  meta.appendChild(
+    time
+  );
+
+  const body =
+    document.createElement(
+      "div"
+    );
+
+  body.className =
+    "message-body";
+
+  const formatting =
+    row.formatting ||
+    {};
+
   if(
-    isRealtime &&
-    !mine
+    formatting.type ===
+    "gif"
   ){
 
-    registerIncomingMessage(
-      row
+    const gif =
+      document.createElement(
+        "img"
+      );
+
+    gif.className =
+      "message-gif";
+
+    gif.src =
+      escapeAttributeURL(
+        formatting.gif_url
+      );
+
+    gif.alt =
+      "GIF";
+
+    gif.loading =
+      "lazy";
+
+    gif.onerror =
+      ()=>{
+        gif.replaceWith(
+          document.createTextNode(
+            "🎞️ GIF indisponível"
+          )
+        );
+      };
+
+    body.appendChild(
+      gif
+    );
+
+  }else{
+
+    body.innerHTML =
+      renderFormattedText(
+        row.message || "",
+        formatting
+      );
+  }
+
+  messageElement.appendChild(
+    meta
+  );
+
+  messageElement.appendChild(
+    body
+  );
+
+  if(mine){
+
+    const state =
+      document.createElement(
+        "div"
+      );
+
+    state.className =
+      "message-state";
+
+    state.textContent =
+      row.read_at
+        ? "✓✓ Lida"
+        : "✓ Enviada";
+
+    messageElement.appendChild(
+      state
     );
   }
 
-  if(
-    !mine &&
-    conversationOpen
-  ){
+  rowElement.appendChild(
+    messageElement
+  );
 
-    markMessageAsRead(
-      row
-    );
+  chat.appendChild(
+    rowElement
+  );
+
+  if(realtime){
+
+    if(!mine){
+
+      registerIncomingMessage(
+        row
+      );
+    }
+
   }
 
   scrollChat();
 }
 
 
-function getNameFromEmail(
-  email
-){
-
-  if(!email)
-    return "Usuário";
-
-  const normalized =
-    email.toLowerCase();
-
-  if(
-    normalized ===
-    "belinhahcardozoalm@gmail.com"
-  ){
-    return "☾ Bruxinha";
-  }
-
-  if(
-    normalized ===
-    "andressa.verissimo.g@icloud.com"
-  ){
-    return "🦊 Raposinha";
-  }
-
-  return email;
-}
-
-
-function addSystemMessage(
-  text
-){
-
-  const message =
-    document.createElement("div");
-
-  message.className =
-    "system-message";
-
-  message.textContent =
-    text;
-
-  chat.appendChild(
-    message
-  );
-}
-
-
-function formatTime(
-  dateString
-){
-
-  if(!dateString)
-    return "";
-
-  try{
-
-    return new Date(
-      dateString
-    ).toLocaleTimeString(
-      "pt-BR",
-      {
-        hour:"2-digit",
-        minute:"2-digit"
-      }
-    );
-
-  }catch{
-
-    return "";
-  }
-}
-
-
 /* =========================================================
-   LEITURA
+   FORMAT TEXT
 ========================================================= */
-
-async function markMessageAsRead(
-  row
-){
-
-  if(
-    !row ||
-    row.read_at ||
-    row.sender === currentUser?.email
-  ){
-    return;
-  }
-
-  try{
-
-    const now =
-      new Date().toISOString();
-
-    const {error} =
-      await supabaseClient
-        .from("messages")
-        .update({
-          read_at:now
-        })
-        .eq(
-          "id",
-          row.id
-        )
-        .is(
-          "read_at",
-          null
-        );
-
-    if(error){
-
-      console.log(
-        "Não foi possível marcar como lida:",
-        error
-      );
-
-      return;
-    }
-
-    const element =
-      document.querySelector(
-        `[data-message-id="${row.id}"]`
-      );
-
-    if(element){
-      element.classList.add(
-        "message-read"
-      );
-    }
-
-  }catch(error){
-
-    console.log(
-      "Read:",
-      error
-    );
-  }
-}
-
-
-async function markVisibleMessagesAsRead(){
-
-  if(
-    !currentUser ||
-    !conversationOpen
-  ){
-    return;
-  }
-
-  const rows =
-    await supabaseClient
-      .from("messages")
-      .select(
-        "id, sender, recipient, message, formatting, created_at, read_at"
-      )
-      .is(
-        "read_at",
-        null
-      )
-      .neq(
-        "sender",
-        currentUser.email
-      )
-      .order(
-        "created_at",
-        {ascending:false}
-      )
-      .limit(30);
-
-  if(rows.error){
-
-    console.log(
-      "Read batch:",
-      rows.error
-    );
-
-    return;
-  }
-
-  for(
-    const row of rows.data || []
-  ){
-
-    await markMessageAsRead(
-      row
-    );
-  }
-
-  clearUnread();
-}
-
-
-/* =========================================================
-   FORMATAÇÃO
-========================================================= */
-
-function toggleFormatPanel(){
-
-  const panel =
-    document.getElementById(
-      "formatPanel"
-    );
-
-  panel.style.display =
-    panel.style.display === "flex"
-      ? "none"
-      : "flex";
-}
-
-
-function toggleEffectPanel(){
-
-  const panel =
-    document.getElementById(
-      "effectPanel"
-    );
-
-  panel.style.display =
-    panel.style.display === "flex"
-      ? "none"
-      : "flex";
-}
-
-
-function toggleFormat(
-  type
-){
-
-  messageFormatting[type] =
-    !messageFormatting[type];
-
-  updateFormatButtonState();
-
-  input.focus();
-}
-
-
-function setTextColor(
-  color
-){
-
-  messageFormatting.color =
-    color;
-
-  input.focus();
-}
-
-
-function updateFormatButtonState(){
-
-  const buttons =
-    document.querySelectorAll(
-      "#formatPanel button"
-    );
-
-  if(!buttons.length)
-    return;
-
-  buttons[0].classList.toggle(
-    "active",
-    messageFormatting.bold
-  );
-
-  buttons[1].classList.toggle(
-    "active",
-    messageFormatting.italic
-  );
-
-  buttons[2].classList.toggle(
-    "active",
-    messageFormatting.underline
-  );
-}
-
-
-function applyEffect(
-  effect
-){
-
-  const start =
-    input.selectionStart;
-
-  const end =
-    input.selectionEnd;
-
-  if(start === end){
-
-    messageFormatting.effect =
-      effect;
-
-    closeEffectPanel();
-
-    input.focus();
-
-    return;
-  }
-
-  if(!messageFormatting.ranges){
-    messageFormatting.ranges = [];
-  }
-
-  messageFormatting.ranges.push({
-    start,
-    end,
-    effect
-  });
-
-  closeEffectPanel();
-
-  input.focus();
-}
-
-
-function closeEffectPanel(){
-
-  document.getElementById(
-    "effectPanel"
-  ).style.display =
-    "none";
-}
-
 
 function renderFormattedText(
   text,
   formatting
 ){
 
-  const safe =
-    escapeHTML(text);
-
-  let output =
-    safe;
-
-  if(formatting.bold){
-    output =
-      `<strong>${output}</strong>`;
-  }
-
-  if(formatting.italic){
-    output =
-      `<em>${output}</em>`;
-  }
-
-  if(formatting.underline){
-    output =
-      `<u>${output}</u>`;
-  }
-
-  const allowedColors = [
-    "#111",
-    "#7b3fa1",
-    "#165c91",
-    "#c62c55",
-    "#248617",
-    "#e08a00"
-  ];
-
-  if(
-    allowedColors.includes(
-      formatting.color
-    )
-  ){
-
-    output =
-      `<span style="color:${formatting.color}">${output}</span>`;
-  }
-
-  if(formatting.effect){
-
-    output =
-      `<span class="effect-${safeEffect(formatting.effect)}">${output}</span>`;
-  }
-
-  if(
-    Array.isArray(
-      formatting.ranges
-    ) &&
-    formatting.ranges.length
-  ){
-
-    output =
-      renderEffectRanges(
-        text,
-        formatting
-      );
-  }
-
-  return output;
-}
-
-
-function renderEffectRanges(
-  text,
-  formatting
-){
+  let safeText =
+    String(
+      text || ""
+    );
 
   const ranges =
-    [...formatting.ranges]
-      .filter(
-        range =>
-          Number.isInteger(range.start) &&
-          Number.isInteger(range.end) &&
-          range.start >= 0 &&
-          range.end > range.start &&
-          range.end <= text.length
-      )
-      .sort(
-        (a,b)=>
-          a.start - b.start
-      );
+    Array.isArray(
+      formatting?.ranges
+    )
+      ? formatting.ranges
+          .filter(
+            range=>
+              Number.isFinite(
+                range.start
+              ) &&
+              Number.isFinite(
+                range.end
+              ) &&
+              range.start >= 0 &&
+              range.end > range.start &&
+              range.end <=
+                safeText.length
+          )
+          .sort(
+            (a,b)=>
+              a.start-b.start
+          )
+      : [];
 
   if(!ranges.length){
-    return escapeHTML(text);
+
+    let html =
+      escapeHTML(
+        safeText
+      );
+
+    if(formatting?.bold)
+      html =
+        `<strong>${html}</strong>`;
+
+    if(formatting?.italic)
+      html =
+        `<em>${html}</em>`;
+
+    if(formatting?.underline)
+      html =
+        `<u>${html}</u>`;
+
+    if(formatting?.color)
+      html =
+        `<span style="color:${safeCssColor(formatting.color)}">${html}</span>`;
+
+    if(formatting?.effect)
+      html =
+        `<span class="effect-${safeEffect(formatting.effect)}">${html}</span>`;
+
+    return html;
   }
 
-  let output = "";
-  let cursor = 0;
+  let output =
+    "";
+
+  let cursor =
+    0;
 
   ranges.forEach(
     range=>{
@@ -4095,22 +2810,42 @@ function renderEffectRanges(
 
       output +=
         escapeHTML(
-          text.substring(
+          safeText.substring(
             cursor,
             range.start
           )
         );
 
-      const selected =
+      let selected =
         escapeHTML(
-          text.substring(
+          safeText.substring(
             range.start,
             range.end
           )
         );
 
+      if(range.bold)
+        selected =
+          `<strong>${selected}</strong>`;
+
+      if(range.italic)
+        selected =
+          `<em>${selected}</em>`;
+
+      if(range.underline)
+        selected =
+          `<u>${selected}</u>`;
+
+      if(range.color)
+        selected =
+          `<span style="color:${safeCssColor(range.color)}">${selected}</span>`;
+
+      if(range.effect)
+        selected =
+          `<span class="effect-${safeEffect(range.effect)}">${selected}</span>`;
+
       output +=
-        `<span class="effect-${safeEffect(range.effect)}">${selected}</span>`;
+        selected;
 
       cursor =
         range.end;
@@ -4119,7 +2854,9 @@ function renderEffectRanges(
 
   output +=
     escapeHTML(
-      text.substring(cursor)
+      safeText.substring(
+        cursor
+      )
     );
 
   return output;
@@ -4148,8 +2885,37 @@ function safeEffect(
 }
 
 
+function safeCssColor(
+  color
+){
+
+  const value =
+    String(
+      color || ""
+    ).trim();
+
+  if(
+    /^#[0-9a-f]{3,8}$/i.test(
+      value
+    )
+  ){
+    return value;
+  }
+
+  if(
+    /^rgb(a)?\([0-9., %]+\)$/i.test(
+      value
+    )
+  ){
+    return value;
+  }
+
+  return "#111";
+}
+
+
 /* =========================================================
-   ENVIAR MENSAGEM
+   SEND MESSAGE — UUID
 ========================================================= */
 
 async function sendMessage(){
@@ -4169,10 +2935,13 @@ async function sendMessage(){
     return;
   }
 
-  if(!contactProfile?.id){
+  const recipientId =
+    getOtherUserId();
+
+  if(!recipientId){
 
     alert(
-      "Não consegui identificar a Raposinha."
+      "Não consegui identificar o destinatário."
     );
 
     return;
@@ -4217,10 +2986,10 @@ async function sendMessage(){
         .insert({
 
           sender:
-            currentUser.email,
+            currentUser.id,
 
           recipient:
-            contactProfile.id,
+            recipientId,
 
           message:
             text,
@@ -4233,7 +3002,8 @@ async function sendMessage(){
         )
         .single();
 
-    if(error) throw error;
+    if(error)
+      throw error;
 
     renderMessage(
       data,
@@ -4299,7 +3069,8 @@ function toggleGifPanel(){
     );
 
   panel.style.display =
-    panel.style.display === "block"
+    panel.style.display ===
+      "block"
       ? "none"
       : "block";
 
@@ -4347,17 +3118,31 @@ async function sendGif(){
   }
 
   if(
-    !currentUser ||
-    !contactProfile?.id
+    !currentUser
   ){
+    return;
+  }
+
+  const recipientId =
+    getOtherUserId();
+
+  if(!recipientId){
+
+    alert(
+      "Destinatário não identificado."
+    );
+
     return;
   }
 
   try{
 
     const formatting = {
+
       type:"gif",
+
       gif_url:url
+
     };
 
     const {data,error} =
@@ -4366,10 +3151,10 @@ async function sendGif(){
         .insert({
 
           sender:
-            currentUser.email,
+            currentUser.id,
 
           recipient:
-            contactProfile.id,
+            recipientId,
 
           message:
             "[GIF]",
@@ -4382,7 +3167,8 @@ async function sendGif(){
         )
         .single();
 
-    if(error) throw error;
+    if(error)
+      throw error;
 
     renderMessage(
       data,
@@ -4414,7 +3200,9 @@ function escapeAttributeURL(
 ){
 
   const value =
-    String(url || "");
+    String(
+      url || ""
+    );
 
   if(
     !/^https?:\/\//i.test(
@@ -4425,10 +3213,22 @@ function escapeAttributeURL(
   }
 
   return value
-    .replace(/&/g,"&amp;")
-    .replace(/"/g,"&quot;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    );
 }
 
 
@@ -4501,56 +3301,49 @@ function processRealtimeMessage(
   row
 ){
 
-  if(!row)
-    return;
-
-  const sender =
-    String(row.sender || "")
-      .toLowerCase();
-
-  const recipient =
-    String(row.recipient || "");
-
-  const myEmail =
-    String(
-      currentUser?.email || ""
-    ).toLowerCase();
-
-  const myId =
-    String(
-      currentUser?.id || ""
-    );
-
-  const belongsToConversation =
-    (
-      sender === myEmail &&
-      recipient === myId
-    ) ||
-    (
-      recipient === myId
-    ) ||
-    (
-      sender === myEmail
-    ) ||
-    (
-      contactProfile?.id &&
-      (
-        recipient ===
-          String(contactProfile.id) ||
-        sender ===
-          String(contactProfile.id)
-      )
-    );
-
   if(
-    row.recipient &&
-    !belongsToConversation
+    !row ||
+    !currentUser?.id
   ){
     return;
   }
 
+  const sender =
+    String(
+      row.sender || ""
+    );
+
+  const recipient =
+    String(
+      row.recipient || ""
+    );
+
+  const myId =
+    String(
+      currentUser.id
+    );
+
+  const contactId =
+    String(
+      getOtherUserId() || ""
+    );
+
+  const belongsToConversation =
+    (
+      sender === myId &&
+      recipient === contactId
+    ) ||
+    (
+      sender === contactId &&
+      recipient === myId
+    );
+
+  if(!belongsToConversation)
+    return;
+
   if(
-    row.formatting?.type === "nudge"
+    row.formatting?.type ===
+    "nudge"
   ){
 
     handleIncomingNudge(
@@ -4583,10 +3376,12 @@ function updateRenderedMessage(
     return;
 
   const mine =
-    String(row.sender || "")
-      .toLowerCase() ===
-    String(currentUser?.email || "")
-      .toLowerCase();
+    String(
+      row.sender || ""
+    ) ===
+    String(
+      currentUser?.id || ""
+    );
 
   if(!mine)
     return;
@@ -4603,6 +3398,121 @@ function updateRenderedMessage(
     row.read_at
       ? "✓✓ Lida"
       : "✓ Enviada";
+}
+
+
+/* =========================================================
+   READ_AT
+========================================================= */
+
+async function markMessageAsRead(
+  row
+){
+
+  if(
+    !row?.id ||
+    !currentUser?.id
+  ){
+    return;
+  }
+
+  if(
+    String(row.recipient || "") !==
+    String(currentUser.id)
+  ){
+    return;
+  }
+
+  if(row.read_at)
+    return;
+
+  const readAt =
+    new Date().toISOString();
+
+  const {error} =
+    await supabaseClient
+      .from("messages")
+      .update({
+        read_at:readAt
+      })
+      .eq(
+        "id",
+        row.id
+      )
+      .is(
+        "read_at",
+        null
+      );
+
+  if(error){
+
+    console.error(
+      "Erro ao marcar mensagem como lida:",
+      error
+    );
+  }
+}
+
+
+async function markVisibleMessagesAsRead(){
+
+  if(
+    !currentUser?.id ||
+    !contactProfile?.id
+  ){
+    return;
+  }
+
+  const {error} =
+    await supabaseClient
+      .from("messages")
+      .update({
+        read_at:
+          new Date().toISOString()
+      })
+      .eq(
+        "recipient",
+        currentUser.id
+      )
+      .eq(
+        "sender",
+        contactProfile.id
+      )
+      .is(
+        "read_at",
+        null
+      );
+
+  if(error){
+
+    console.error(
+      "Erro ao marcar mensagens:",
+      error
+    );
+  }
+
+  document
+    .querySelectorAll(
+      ".message-state"
+    )
+    .forEach(
+      element=>{
+        const message =
+          element.closest(
+            ".message-row"
+          );
+
+        if(message){
+
+          const id =
+            message.dataset.messageId;
+
+          if(id)
+            element.textContent =
+              "✓✓ Lida";
+        }
+      }
+    );
 }
 
 
@@ -4643,12 +3553,13 @@ function registerIncomingMessage(
 ){
 
   const sender =
-    getNameFromEmail(
+    getNameByUserId(
       row.sender
     );
 
   const messageText =
-    row.message || "";
+    row.message ||
+    "";
 
   const shouldNotify =
     !conversationOpen ||
@@ -4762,6 +3673,9 @@ function updateUnreadBadge(){
       "unreadBadge"
     );
 
+  if(!badge)
+    return;
+
   if(unreadCount > 0){
 
     badge.textContent =
@@ -4786,6 +3700,9 @@ function updateContactUnread(){
     document.getElementById(
       "contactUnread"
     );
+
+  if(!badge)
+    return;
 
   if(unreadCount > 0){
 
@@ -4838,8 +3755,6 @@ document.addEventListener(
     if(!document.hidden){
 
       clearUnread();
-
-      registerActivity();
     }
   }
 );
@@ -4850,17 +3765,160 @@ window.addEventListener(
   ()=>{
 
     clearUnread();
-
-    registerActivity();
   }
 );
+
+
+/* =========================================================
+   TYPING
+========================================================= */
+
+let typingChannel =
+  null;
+
+let isTyping =
+  false;
+
+
+function subscribeToTyping(){
+
+  if(typingChannel){
+
+    supabaseClient
+      .removeChannel(
+        typingChannel
+      );
+  }
+
+  typingChannel =
+    supabaseClient
+      .channel(
+        "msn-typing"
+      )
+      .on(
+        "broadcast",
+        {
+          event:"typing"
+        },
+        payload=>{
+
+          const sender =
+            String(
+              payload?.payload?.sender || ""
+            );
+
+          if(
+            sender ===
+            String(
+              currentUser?.id || ""
+            )
+          ){
+            return;
+          }
+
+          const active =
+            !!payload?.payload?.typing;
+
+          showTypingIndicator(
+            active
+          );
+        }
+      )
+      .subscribe();
+}
+
+
+async function broadcastTyping(
+  typing
+){
+
+  if(!typingChannel)
+    return;
+
+  try{
+
+    await typingChannel.send({
+      type:"broadcast",
+      event:"typing",
+      payload:{
+        sender:
+          currentUser?.id,
+        typing:!!typing
+      }
+    });
+
+  }catch(error){
+
+    console.log(
+      "Typing:",
+      error
+    );
+  }
+}
+
+
+function handleTypingInput(){
+
+  if(!currentUser)
+    return;
+
+  if(!isTyping){
+
+    isTyping =
+      true;
+
+    broadcastTyping(
+      true
+    );
+  }
+
+  clearTimeout(
+    typingTimer
+  );
+
+  typingTimer =
+    setTimeout(
+      ()=>{
+        isTyping =
+          false;
+
+        broadcastTyping(
+          false
+        );
+      },
+      1200
+    );
+}
+
+
+function showTypingIndicator(
+  active
+){
+
+  const element =
+    document.getElementById(
+      "typingIndicator"
+    );
+
+  if(!active){
+
+    element.textContent =
+      "";
+
+    return;
+  }
+
+  element.textContent =
+    `${getContactNickname()} está digitando…`;
+}
 
 
 /* =========================================================
    SOM
 ========================================================= */
 
-let audioContext = null;
+let audioContext =
+  null;
 
 
 function getAudioContext(){
@@ -4885,7 +3943,9 @@ function getAudioContext(){
 
     audioContext
       .resume()
-      .catch(()=>{});
+      .catch(
+        ()=>{}
+      );
   }
 
   return audioContext;
@@ -4937,13 +3997,17 @@ function playMessageSound(){
     now + .22
   );
 
-  oscillator.connect(gain);
+  oscillator.connect(
+    gain
+  );
 
   gain.connect(
     ctx.destination
   );
 
-  oscillator.start(now);
+  oscillator.start(
+    now
+  );
 
   oscillator.stop(
     now + .24
@@ -4967,7 +4031,10 @@ function playNudgeSound(){
     390,
     520
   ].forEach(
-    (frequency,index)=>{
+    (
+      frequency,
+      index
+    )=>{
 
       const oscillator =
         ctx.createOscillator();
@@ -5000,13 +4067,17 @@ function playNudgeSound(){
         start + .09
       );
 
-      oscillator.connect(gain);
+      oscillator.connect(
+        gain
+      );
 
       gain.connect(
         ctx.destination
       );
 
-      oscillator.start(start);
+      oscillator.start(
+        start
+      );
 
       oscillator.stop(
         start + .1
@@ -5028,15 +4099,18 @@ async function sendNudge(){
   if(!settings.nudge_enabled)
     return;
 
-  const senderName =
-    getFallbackName();
+  const recipientId =
+    getOtherUserId();
+
+  if(!recipientId)
+    return;
 
   playNudgeSound();
 
   shakeMessenger();
 
   showNudgeNotice(
-    `${senderName} tremeu sua tela! 📳`
+    `${getCurrentNickname()} tremeu sua tela! 📳`
   );
 
   try{
@@ -5046,10 +4120,10 @@ async function sendNudge(){
       .insert({
 
         sender:
-          currentUser.email,
+          currentUser.id,
 
         recipient:
-          contactProfile?.id || null,
+          recipientId,
 
         message:
           "📳 NUDGE",
@@ -5129,7 +4203,7 @@ function handleIncomingNudge(
   }
 
   const sender =
-    getNameFromEmail(
+    getNameByUserId(
       row.sender
     );
 
@@ -5196,31 +4270,6 @@ async function loadSettings(){
 
     };
 
-  }else{
-
-    try{
-
-      await supabaseClient
-        .from("user_settings")
-        .insert({
-
-          user_id:
-            currentUser.id,
-
-          notifications_enabled:true,
-          sound_enabled:true,
-          nudge_enabled:true,
-          notification_style:"classic"
-
-        });
-
-    }catch(error){
-
-      console.log(
-        "Não foi possível criar configurações:",
-        error
-      );
-    }
   }
 }
 
@@ -5246,6 +4295,21 @@ function openSettings(){
     "notificationStyle"
   ).value =
     settings.notification_style;
+
+  const savedColor =
+    localStorage.getItem(
+      "msnWindowColor"
+    ) ||
+    "#07569b";
+
+  document.getElementById(
+    "customWindowColor"
+  ).value =
+    savedColor;
+
+  updateSelectedWindowColor(
+    savedColor
+  );
 
   document.getElementById(
     "settingsModal"
@@ -5361,6 +4425,216 @@ async function saveSettings(){
 
 
 /* =========================================================
+   WINDOW COLOR
+========================================================= */
+
+function setWindowColor(
+  color
+){
+
+  if(
+    !/^#[0-9a-f]{6}$/i.test(
+      color
+    )
+  ){
+    return;
+  }
+
+  localStorage.setItem(
+    "msnWindowColor",
+    color
+  );
+
+  applyWindowColor(
+    color
+  );
+
+  const picker =
+    document.getElementById(
+      "customWindowColor"
+    );
+
+  if(picker)
+    picker.value =
+      color;
+
+  updateSelectedWindowColor(
+    color
+  );
+}
+
+
+function applyWindowColor(
+  color
+){
+
+  const dark =
+    shadeColor(
+      color,
+      -28
+    );
+
+  const light =
+    shadeColor(
+      color,
+      38
+    );
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--msn-color",
+      color
+    );
+
+  const titlebar =
+    document.querySelector(
+      ".window-titlebar"
+    );
+
+  if(titlebar){
+
+    titlebar.style.background =
+      `linear-gradient(to bottom,${light} 0%,${color} 48%,${dark} 100%)`;
+  }
+
+  const titleButtons =
+    document.querySelectorAll(
+      ".window-button"
+    );
+
+  titleButtons.forEach(
+    button=>{
+
+      button.style.background =
+        `linear-gradient(${light},${dark})`;
+    }
+  );
+
+  const sendButton =
+    document.querySelector(
+      ".send-button"
+    );
+
+  if(sendButton){
+
+    sendButton.style.background =
+      `linear-gradient(${light},${dark})`;
+  }
+
+  const modalHeaders =
+    document.querySelectorAll(
+      ".modal-header"
+    );
+
+  modalHeaders.forEach(
+    header=>{
+
+      header.style.background =
+        `linear-gradient(${light},${dark})`;
+    }
+  );
+}
+
+
+function applySavedWindowColor(){
+
+  const color =
+    localStorage.getItem(
+      "msnWindowColor"
+    ) ||
+    "#07569b";
+
+  applyWindowColor(
+    color
+  );
+}
+
+
+function updateSelectedWindowColor(
+  color
+){
+
+  document
+    .querySelectorAll(
+      ".window-color"
+    )
+    .forEach(
+      button=>{
+
+        button.classList.toggle(
+          "selected",
+          button.dataset.color
+            .toLowerCase() ===
+            color.toLowerCase()
+        );
+      }
+    );
+}
+
+
+function shadeColor(
+  color,
+  amount
+){
+
+  const num =
+    parseInt(
+      color.slice(1),
+      16
+    );
+
+  let r =
+    (num >> 16) + amount;
+
+  let g =
+    ((num >> 8) & 0x00FF) +
+    amount;
+
+  let b =
+    (num & 0x0000FF) +
+    amount;
+
+  r =
+    Math.max(
+      0,
+      Math.min(
+        255,
+        r
+      )
+    );
+
+  g =
+    Math.max(
+      0,
+      Math.min(
+        255,
+        g
+      )
+    );
+
+  b =
+    Math.max(
+      0,
+      Math.min(
+        255,
+        b
+      )
+    );
+
+  return "#" +
+    (
+      0x1000000 +
+      (r << 16) +
+      (g << 8) +
+      b
+    )
+      .toString(16)
+      .slice(1);
+}
+
+
+/* =========================================================
    CONVERSA
 ========================================================= */
 
@@ -5392,7 +4666,8 @@ function minimizeConversation(){
     false;
 
   if(
-    window.innerWidth <= 700
+    window.innerWidth <=
+    700
   ){
 
     sidebar.classList.add(
@@ -5412,6 +4687,140 @@ function toggleSidebar(){
   sidebar.classList.toggle(
     "mobile-open"
   );
+}
+
+
+/* =========================================================
+   FORMAT TOOLBAR
+========================================================= */
+
+function toggleFormat(
+  type
+){
+
+  if(
+    type === "bold"
+  ){
+
+    messageFormatting.bold =
+      !messageFormatting.bold;
+
+  }else if(
+    type === "italic"
+  ){
+
+    messageFormatting.italic =
+      !messageFormatting.italic;
+
+  }else if(
+    type === "underline"
+  ){
+
+    messageFormatting.underline =
+      !messageFormatting.underline;
+  }
+
+  updateFormatButtonState();
+
+  input.focus();
+}
+
+
+function updateFormatButtonState(){
+
+  document.getElementById(
+    "boldButton"
+  ).classList.toggle(
+    "active",
+    !!messageFormatting.bold
+  );
+
+  document.getElementById(
+    "italicButton"
+  ).classList.toggle(
+    "active",
+    !!messageFormatting.italic
+  );
+
+  document.getElementById(
+    "underlineButton"
+  ).classList.toggle(
+    "active",
+    !!messageFormatting.underline
+  );
+}
+
+
+function chooseTextColor(){
+
+  const color =
+    prompt(
+      "Digite a cor em hexadecimal:",
+      messageFormatting.color ||
+      "#111111"
+    );
+
+  if(!color)
+    return;
+
+  if(
+    !/^#[0-9a-f]{6}$/i.test(
+      color
+    )
+  ){
+
+    alert(
+      "Use uma cor como #ff00aa."
+    );
+
+    return;
+  }
+
+  messageFormatting.color =
+    color;
+
+  input.focus();
+}
+
+
+function chooseEffect(){
+
+  const effect =
+    prompt(
+      "Efeito: glow, sparkle, rainbow, pulse, heart, magic ou shake",
+      messageFormatting.effect ||
+      "glow"
+    );
+
+  if(!effect)
+    return;
+
+  if(
+    ![
+      "glow",
+      "sparkle",
+      "rainbow",
+      "pulse",
+      "heart",
+      "magic",
+      "shake"
+    ].includes(
+      effect
+        .toLowerCase()
+    )
+  ){
+
+    alert(
+      "Efeito não reconhecido."
+    );
+
+    return;
+  }
+
+  messageFormatting.effect =
+    effect.toLowerCase();
+
+  input.focus();
 }
 
 
@@ -5449,8 +4858,407 @@ function addEmoji(
 
 
 /* =========================================================
+   PROFILE EDITOR
+========================================================= */
+
+function openProfileEditor(){
+
+  const data =
+    currentProfile ||
+    {};
+
+  document.getElementById(
+    "editUsername"
+  ).value =
+    data.username ||
+    getCurrentNickname();
+
+  document.getElementById(
+    "editStatus"
+  ).value =
+    data.status ||
+    "online";
+
+  document.getElementById(
+    "editPersonalMessage"
+  ).value =
+    data.personal_message ||
+    "";
+
+  const avatar =
+    document.getElementById(
+      "editorAvatar"
+    );
+
+  avatar.innerHTML =
+    "";
+
+  if(data.avatar_url){
+
+    const img =
+      document.createElement(
+        "img"
+      );
+
+    img.src =
+      data.avatar_url;
+
+    img.alt =
+      "Avatar";
+
+    avatar.appendChild(
+      img
+    );
+
+  }else{
+
+    avatar.textContent =
+      getCurrentNickname() ===
+      "Raposinha"
+        ? "🦊"
+        : "☾";
+  }
+
+  document.getElementById(
+    "profileSaveStatus"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "profileModal"
+  ).style.display =
+    "flex";
+}
+
+
+function closeProfileEditor(){
+
+  document.getElementById(
+    "profileModal"
+  ).style.display =
+    "none";
+}
+
+
+function previewAvatar(
+  file
+){
+
+  selectedAvatarFile =
+    file ||
+    null;
+
+  if(!file)
+    return;
+
+  const url =
+    URL.createObjectURL(
+      file
+    );
+
+  const avatar =
+    document.getElementById(
+      "editorAvatar"
+    );
+
+  avatar.innerHTML =
+    "";
+
+  const img =
+    document.createElement(
+      "img"
+    );
+
+  img.src =
+    url;
+
+  img.alt =
+    "Nova foto";
+
+  avatar.appendChild(
+    img
+  );
+}
+
+
+async function uploadAvatar(
+  file
+){
+
+  if(
+    !file ||
+    !currentUser
+  ){
+    return null;
+  }
+
+  const extension =
+    (
+      file.name
+        .split(".")
+        .pop() ||
+      "jpg"
+    )
+      .toLowerCase()
+      .replace(
+        /[^a-z0-9]/g,
+        ""
+      );
+
+  const filePath =
+    currentUser.id +
+    "/avatar-" +
+    Date.now() +
+    "." +
+    extension;
+
+  const {error} =
+    await supabaseClient.storage
+      .from("avatars")
+      .upload(
+        filePath,
+        file,
+        {
+          upsert:true,
+          contentType:
+            file.type ||
+            "image/jpeg"
+        }
+      );
+
+  if(error)
+    throw error;
+
+  const {data} =
+    supabaseClient.storage
+      .from("avatars")
+      .getPublicUrl(
+        filePath
+      );
+
+  return data.publicUrl;
+}
+
+
+async function saveProfile(){
+
+  if(!currentUser)
+    return;
+
+  const saveButton =
+    document.getElementById(
+      "saveProfileButton"
+    );
+
+  const username =
+    document.getElementById(
+      "editUsername"
+    ).value.trim();
+
+  const status =
+    document.getElementById(
+      "editStatus"
+    ).value;
+
+  const personalMessage =
+    document.getElementById(
+      "editPersonalMessage"
+    ).value.trim();
+
+  if(!username){
+
+    alert(
+      "Digite um nome."
+    );
+
+    return;
+  }
+
+  saveButton.disabled =
+    true;
+
+  saveButton.textContent =
+    "Salvando...";
+
+  try{
+
+    let avatarUrl =
+      currentProfile?.avatar_url ||
+      null;
+
+    if(selectedAvatarFile){
+
+      avatarUrl =
+        await uploadAvatar(
+          selectedAvatarFile
+        );
+    }
+
+    const {data,error} =
+      await supabaseClient
+        .from("profiles")
+        .update({
+
+          username,
+
+          status,
+
+          personal_message:
+            personalMessage,
+
+          avatar_url:
+            avatarUrl
+
+        })
+        .eq(
+          "id",
+          currentUser.id
+        )
+        .select(
+          "id, username, status, personal_message, avatar_url"
+        )
+        .single();
+
+    if(error)
+      throw error;
+
+    currentProfile =
+      data;
+
+    updateMyProfileUI(
+      data
+    );
+
+    document.getElementById(
+      "profileSaveStatus"
+    ).style.display =
+      "block";
+
+    selectedAvatarFile =
+      null;
+
+    document.getElementById(
+      "avatarFile"
+    ).value =
+      "";
+
+    setTimeout(
+      closeProfileEditor,
+      700
+    );
+
+  }catch(error){
+
+    console.error(
+      "Erro ao salvar perfil:",
+      error
+    );
+
+    alert(
+      "Não foi possível salvar o perfil.\n\n" +
+      (
+        error?.message ||
+        "Erro desconhecido."
+      )
+    );
+
+  }finally{
+
+    saveButton.disabled =
+      false;
+
+    saveButton.textContent =
+      "Salvar";
+  }
+}
+
+
+/* =========================================================
    UTILITÁRIOS
 ========================================================= */
+
+function getNameByUserId(
+  id
+){
+
+  const value =
+    String(
+      id || ""
+    );
+
+  if(
+    value ===
+    RAPOSINHA_UUID
+  ){
+    return "Raposinha";
+  }
+
+  if(
+    value ===
+    BRUXINHA_UUID
+  ){
+    return "Bruxinha";
+  }
+
+  if(
+    value ===
+    String(
+      currentUser?.id || ""
+    )
+  ){
+
+    return (
+      currentProfile?.username ||
+      getCurrentNickname()
+    );
+  }
+
+  if(
+    value ===
+    String(
+      contactProfile?.id || ""
+    )
+  ){
+
+    return (
+      contactProfile?.username ||
+      getContactNickname()
+    );
+  }
+
+  return "Contato";
+}
+
+
+function formatTime(
+  date
+){
+
+  if(!date)
+    return "";
+
+  const value =
+    new Date(
+      date
+    );
+
+  if(
+    Number.isNaN(
+      value.getTime()
+    )
+  ){
+    return "";
+  }
+
+  return value.toLocaleTimeString(
+    "pt-BR",
+    {
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+}
+
 
 function scrollChat(){
 
@@ -5482,14 +5290,19 @@ function escapeHTML(
 
 
 /* =========================================================
-   ENTER
+   INPUT / ENTER / TYPING
 ========================================================= */
 
-passwordInput.addEventListener(
+document.getElementById(
+  "passwordInput"
+).addEventListener(
   "keydown",
   event=>{
 
-    if(event.key === "Enter"){
+    if(
+      event.key ===
+      "Enter"
+    ){
 
       event.preventDefault();
 
@@ -5504,7 +5317,8 @@ input.addEventListener(
   event=>{
 
     if(
-      event.key === "Enter" &&
+      event.key ===
+        "Enter" &&
       !event.shiftKey
     ){
 
@@ -5513,6 +5327,12 @@ input.addEventListener(
       sendMessage();
     }
   }
+);
+
+
+input.addEventListener(
+  "input",
+  handleTypingInput
 );
 
 
@@ -5562,8 +5382,17 @@ document.getElementById(
    INIT
 ========================================================= */
 
-checkSession();
+(async function(){
 
+  await checkSession();
+
+  if(currentUser){
+
+    subscribeToTyping();
+
+  }
+
+})();
 </script>
 
 </body>
