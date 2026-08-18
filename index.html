@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSN Messenger</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Tahoma, Arial, sans-serif;
+      background:
+        linear-gradient(rgba(255,255,255,.35), rgba(255,255,255,.35)),
+        #d9e8f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .messenger {
+      width: 100%;
+      max-width: 390px;
+      min-height: 650px;
+      background: #f1f1f1;
+      border: 1px solid #55738c;
+      border-radius: 8px 8px 4px 4px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.35);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .titlebar {
+      height: 32px;
+      background: linear-gradient(#5fa7e2, #1766a5);
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 9px;
+      font-size: 13px;
+      font-weight: bold;
+      text-shadow: 1px 1px 1px #24506e;
+    }
+
+    .msn-logo {
+      width: 20px;
+      height: 20px;
+      margin-right: 7px;
+      border-radius: 50%;
+      background: #8fd14f;
+      border: 2px solid white;
+      position: relative;
+    }
+
+    .msn-logo::after {
+      content: "☁";
+      position: absolute;
+      color: white;
+      font-size: 12px;
+      left: 2px;
+      top: -1px;
+    }
+
+    .window-buttons {
+      margin-left: auto;
+      display: flex;
+      gap: 3px;
+    }
+
+    .window-button {
+      width: 22px;
+      height: 20px;
+      background: rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.5);
+      color: white;
+      text-align: center;
+      line-height: 18px;
+      border-radius: 2px;
+    }
+
+    .profile {
+      background: linear-gradient(#fff, #e7eef4);
+      padding: 14px;
+      display: flex;
+      border-bottom: 1px solid #b5c4d0;
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border: 2px solid #9ab3c7;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+      margin-right: 12px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,.2);
+    }
+
+    .name {
+      font-size: 17px;
+      color: #174f7c;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+
+    .status {
+      color: #278313;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .personal-message {
+      color: #555;
+      font-size: 11px;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    .contact-area {
+      background: #fff;
+      padding: 9px;
+      border-bottom: 1px solid #c4c4c4;
+    }
+
+    .contact-title {
+      font-size: 11px;
+      color: #666;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .contact {
+      display: flex;
+      align-items: center;
+      padding: 7px;
+      background: linear-gradient(#fff, #eaf4fb);
+      border: 1px solid #b9d1e2;
+      border-radius: 3px;
+    }
+
+    .contact-avatar {
+      width: 38px;
+      height: 38px;
+      background: #f2e8dc;
+      border: 1px solid #aaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-right: 8px;
+    }
+
+    .contact-name {
+      color: #14527d;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .online {
+      color: #248617;
+      font-size: 10px;
+    }
+
+    .chat {
+      background: white;
+      height: 300px;
+      overflow-y: auto;
+      padding: 10px;
+      font-size: 12px;
+    }
+
+    .message {
+      margin-bottom: 10px;
+    }
+
+    .message .sender {
+      font-weight: bold;
+      color: #165c91;
+    }
+
+    .message.mine .sender {
+      color: #7b3fa1;
+    }
+
+    .message .text {
+      margin-top: 2px;
+      color: #222;
+    }
+
+    .typing {
+      display: none;
+      font-size: 10px;
+      color: #777;
+      font-style: italic;
+      padding: 3px 10px;
+      background: #f3f3f3;
+    }
+
+    .input-area {
+      background: linear-gradient(#f7f7f7, #dedede);
+      border-top: 1px solid #aaa;
+      padding: 8px;
+      display: flex;
+      gap: 5px;
+    }
+
+    input {
+      flex: 1;
+      height: 32px;
+      border: 1px solid #999;
+      border-radius: 2px;
+      padding: 5px 8px;
+      font-family: Tahoma, Arial, sans-serif;
+      font-size: 12px;
+    }
+
+    button {
+      border: 1px solid #47799d;
+      background: linear-gradient(#e9f7ff, #a9d7f1);
+      color: #174f72;
+      border-radius: 3px;
+      padding: 0 10px;
+      font-family: Tahoma, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    button:active {
+      background: #8ec5e5;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 5px;
+      padding: 5px 8px;
+      background: #eeeeee;
+      border-top: 1px solid #ccc;
+    }
+
+    .toolbar button {
+      height: 25px;
+      padding: 0 8px;
+    }
+
+    .nudge {
+      background: linear-gradient(#fff4d6, #f0c765);
+      border-color: #b28b30;
+      color: #694f0b;
+    }
+
+    .footer {
+      text-align: center;
+      color: #777;
+      font-size: 9px;
+      padding: 5px;
+      background: #eee;
+    }
+
+    @keyframes shake {
+      0%   { transform: translate(0,0) rotate(0); }
+      15%  { transform: translate(-8px,2px) rotate(-1deg); }
+      30%  { transform: translate(8px,-2px) rotate(1deg); }
+      45%  { transform: translate(-8px,-2px) rotate(-1deg); }
+      60%  { transform: translate(8px,2px) rotate(1deg); }
+      75%  { transform: translate(-5px,0) rotate(0); }
+      100% { transform: translate(0,0) rotate(0); }
+    }
+
+    .shake {
+      animation: shake .45s ease-in-out 2;
+    }
+
+    @media (max-width: 420px) {
+      .messenger {
+        min-height: calc(100vh - 30px);
+      }
+
+      .chat {
+        height: 34vh;
+        min-height: 220px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="messenger" id="messenger">
+
+    <div class="titlebar">
+      <div class="msn-logo"></div>
+      MSN Messenger
+      <div class="window-buttons">
+        <div class="window-button">−</div>
+        <div class="window-button">□</div>
+        <div class="window-button">×</div>
+      </div>
+    </div>
+
+    <div class="profile">
+      <div class="avatar">👩🏻</div>
+
+      <div>
+        <div class="name">Isabella</div>
+        <div class="status">● Online</div>
+        <div class="personal-message">
+          "Esperando minha raposinha..."
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-area">
+      <div class="contact-title">ONLINE — 1</div>
+
+      <div class="contact">
+        <div class="contact-avatar">🦊</div>
+
+        <div>
+          <div class="contact-name">Raposinha</div>
+          <div class="online">● Online</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat" id="chat">
+
+      <div class="message">
+        <div class="sender">Raposinha</div>
+        <div class="text">Oi, gata 🦊💜</div>
+      </div>
+
+      <div class="message mine">
+        <div class="sender">Isabella</div>
+        <div class="text">Oi, raposinha! 🥺</div>
+      </div>
+
+    </div>
+
+    <div class="typing" id="typing">
+      Raposinha está digitando...
+    </div>
+
+    <div class="toolbar">
+      <button onclick="addEmoji('😊')">😊</button>
+      <button onclick="addEmoji('😂')">😂</button>
+      <button onclick="addEmoji('🥺')">🥺</button>
+      <button onclick="addEmoji('❤️')">❤️</button>
+      <button class="nudge" onclick="nudge()">📳 Nudge</button>
+    </div>
+
+    <div class="input-area">
+      <input
+        id="messageInput"
+        type="text"
+        placeholder="Digite uma mensagem..."
+        onkeydown="if(event.key === 'Enter') sendMessage()"
+      >
+
+      <button onclick="sendMessage()">Enviar</button>
+    </div>
+
+    <div class="footer">
+      MSN Messenger • Isabella & Raposinha
+    </div>
+
+  </div>
+
+  <script>
+
+    const messenger = document.getElementById("messenger");
+    const chat = document.getElementById("chat");
+    const input = document.getElementById("messageInput");
+
+    function sendMessage() {
+
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      const message = document.createElement("div");
+      message.className = "message mine";
+
+      message.innerHTML = `
+        <div class="sender">Isabella</div>
+        <div class="text">${escapeHTML(text)}</div>
+      `;
+
+      chat.appendChild(message);
+
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function addEmoji(emoji) {
+      input.value += emoji;
+      input.focus();
+    }
+
+    function nudge() {
+
+      messenger.classList.remove("shake");
+
+      void messenger.offsetWidth;
+
+      messenger.classList.add("shake");
+
+      setTimeout(() => {
+        messenger.classList.remove("shake");
+      }, 1000);
+    }
+
+    function escapeHTML(text) {
+
+      const div = document.createElement("div");
+
+      div.textContent = text;
+
+      return div.innerHTML;
+    }
+
+  </script>
+
+</body>
+</html>
