@@ -26,12 +26,13 @@
     }
 
     button,
-    input {
+    input,
+    select {
       font-family: Tahoma, Arial, sans-serif;
     }
 
     /* =====================================================
-       LOGO MSN — PEQUENA
+       LOGO MSN
        ===================================================== */
 
     .msn-logo {
@@ -85,16 +86,65 @@
       background: #777;
     }
 
-    /* =====================================================
-       LOGO CLÁSSICA MSN — TELA INICIAL
-       ===================================================== */
-
     .big-msn-logo {
-      display: block;
-      width: 92px;
-      height: 92px;
-      object-fit: contain;
+      width: 70px;
+      height: 70px;
       margin: 0 auto 13px;
+      position: relative;
+    }
+
+    .big-msn-logo .head {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      top: 2px;
+      left: 24px;
+      background: #fff;
+      border: 2px solid #b9b9b9;
+    }
+
+    .big-msn-logo .wing-left,
+    .big-msn-logo .wing-right {
+      position: absolute;
+      width: 32px;
+      height: 25px;
+      top: 23px;
+      background: #8fd14f;
+      border: 2px solid #6e9f3d;
+    }
+
+    .big-msn-logo .wing-left {
+      left: 1px;
+      border-radius: 22px 5px 22px 5px;
+      transform: rotate(-18deg);
+    }
+
+    .big-msn-logo .wing-right {
+      right: 1px;
+      border-radius: 5px 22px 5px 22px;
+      transform: rotate(18deg);
+    }
+
+    .big-msn-logo .body {
+      position: absolute;
+      width: 9px;
+      height: 31px;
+      left: 30px;
+      top: 20px;
+      border-radius: 8px;
+      background: #777;
+      border: 1px solid #555;
+    }
+
+    .big-msn-logo .tail {
+      position: absolute;
+      width: 23px;
+      height: 12px;
+      left: 24px;
+      bottom: 7px;
+      border-bottom: 4px solid #777;
+      border-radius: 50%;
     }
 
     /* =====================================================
@@ -154,6 +204,15 @@
       background: white;
     }
 
+    .login-button,
+    .send-button,
+    .toolbar button,
+    .edit-button,
+    .save-button,
+    .cancel-button {
+      cursor: pointer;
+    }
+
     .login-button {
       width: 100%;
       height: 34px;
@@ -164,7 +223,6 @@
       border-radius: 3px;
       font-size: 12px;
       font-weight: bold;
-      cursor: pointer;
     }
 
     .login-button:disabled {
@@ -241,9 +299,11 @@
 
     .profile {
       background: linear-gradient(#fff, #e7eef4);
-      padding: 14px;
+      padding: 12px 14px;
       display: flex;
+      align-items: center;
       border-bottom: 1px solid #b5c4d0;
+      position: relative;
     }
 
     .avatar {
@@ -268,11 +328,16 @@
       object-fit: cover;
     }
 
+    .profile-info {
+      min-width: 0;
+      flex: 1;
+    }
+
     .name {
       font-size: 17px;
       color: #174f7c;
       font-weight: bold;
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     .status {
@@ -284,9 +349,27 @@
     .personal-message {
       color: #555;
       font-size: 11px;
-      margin-top: 8px;
+      margin-top: 7px;
       font-style: italic;
+      word-break: break-word;
     }
+
+    .edit-button {
+      width: 25px;
+      height: 25px;
+      padding: 0;
+      margin-left: 6px;
+      border: 1px solid #8aa5b9;
+      border-radius: 3px;
+      background: linear-gradient(#fff, #d9eaf5);
+      color: #245c7d;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* =====================================================
+       CONTATO
+       ===================================================== */
 
     .contact-area {
       background: #fff;
@@ -335,6 +418,10 @@
       font-size: 10px;
     }
 
+    /* =====================================================
+       CHAT
+       ===================================================== */
+
     .chat {
       background: white;
       height: 300px;
@@ -378,6 +465,10 @@
       margin: 8px 0;
     }
 
+    /* =====================================================
+       INPUT
+       ===================================================== */
+
     .input-area {
       background: linear-gradient(#f7f7f7, #dedede);
       border-top: 1px solid #aaa;
@@ -403,8 +494,11 @@
       padding: 0 10px;
       font-size: 11px;
       font-weight: bold;
-      cursor: pointer;
     }
+
+    /* =====================================================
+       TOOLBAR
+       ===================================================== */
 
     .toolbar {
       display: flex;
@@ -421,7 +515,6 @@
       background: linear-gradient(#e9f7ff, #a9d7f1);
       color: #174f72;
       border-radius: 3px;
-      cursor: pointer;
     }
 
     .nudge {
@@ -430,13 +523,138 @@
       color: #694f0b !important;
     }
 
-    .footer {
-      text-align: center;
-      color: #777;
-      font-size: 9px;
-      padding: 5px;
-      background: #eee;
+    /* =====================================================
+       EDITAR PERFIL
+       ===================================================== */
+
+    #profileEditor {
+      display: none;
+      position: absolute;
+      z-index: 20;
+      left: 12px;
+      right: 12px;
+      top: 45px;
+      background: #f4f4f4;
+      border: 1px solid #55738c;
+      border-radius: 5px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.4);
+      overflow: hidden;
     }
+
+    .editor-title {
+      height: 31px;
+      display: flex;
+      align-items: center;
+      padding: 0 9px;
+      background: linear-gradient(#5fa7e2, #1766a5);
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .editor-content {
+      padding: 12px;
+      background: linear-gradient(#fff, #edf3f7);
+    }
+
+    .editor-avatar-area {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .editor-avatar {
+      width: 58px;
+      height: 58px;
+      border: 2px solid #9ab3c7;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 30px;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .editor-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-button {
+      border: 1px solid #47799d;
+      background: linear-gradient(#e9f7ff, #a9d7f1);
+      color: #174f72;
+      border-radius: 3px;
+      padding: 7px 9px;
+      font-size: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #avatarFile {
+      display: none;
+    }
+
+    .editor-label {
+      display: block;
+      color: #555;
+      font-size: 10px;
+      font-weight: bold;
+      margin: 7px 0 3px;
+    }
+
+    .editor-input,
+    .editor-select {
+      width: 100%;
+      height: 31px;
+      border: 1px solid #999;
+      border-radius: 3px;
+      padding: 4px 7px;
+      font-size: 11px;
+      background: white;
+    }
+
+    .editor-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 5px;
+      margin-top: 12px;
+    }
+
+    .save-button,
+    .cancel-button {
+      height: 28px;
+      padding: 0 10px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .save-button {
+      border: 1px solid #47799d;
+      background: linear-gradient(#e9f7ff, #a9d7f1);
+      color: #174f72;
+    }
+
+    .cancel-button {
+      border: 1px solid #999;
+      background: linear-gradient(#fff, #ddd);
+      color: #555;
+    }
+
+    #profileSaveStatus {
+      display: none;
+      margin-top: 7px;
+      font-size: 9px;
+      color: #248617;
+    }
+
+    /* =====================================================
+       SHAKE
+       ===================================================== */
 
     @keyframes shake {
       0%   { transform: translate(0,0) rotate(0); }
@@ -467,7 +685,9 @@
 
 <body>
 
-  <!-- LOGIN -->
+  <!-- =====================================================
+       LOGIN
+       ===================================================== -->
 
   <div id="loginScreen">
 
@@ -486,13 +706,15 @@
 
     <div class="login-content">
 
-      <!-- LOGO CLÁSSICA DOS DOIS BONEQUINHOS -->
+      <div class="big-msn-logo">
 
-      <img
-        class="big-msn-logo"
-        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/MSN_messenger_icon.png"
-        alt="Logo clássica do MSN Messenger"
-      >
+        <div class="head"></div>
+        <div class="wing-left"></div>
+        <div class="wing-right"></div>
+        <div class="body"></div>
+        <div class="tail"></div>
+
+      </div>
 
       <div class="login-title-text">
         Entrar no MSN
@@ -535,17 +757,21 @@
   </div>
 
 
-  <!-- MSN -->
+  <!-- =====================================================
+       MSN
+       ===================================================== -->
 
   <div id="messenger">
 
     <div class="titlebar">
 
       <div class="msn-logo">
+
         <div class="head"></div>
         <div class="wing-left"></div>
         <div class="wing-right"></div>
         <div class="body"></div>
+
       </div>
 
       MSN Messenger
@@ -565,30 +791,185 @@
     </div>
 
 
-    <div class="profile">
+    <!-- ===================================================
+         EDITOR DE PERFIL
+         =================================================== -->
 
-      <div class="avatar" id="myAvatar">
-        ☾
+    <div id="profileEditor">
+
+      <div class="editor-title">
+        Editar meu perfil
       </div>
 
-      <div>
+      <div class="editor-content">
 
-        <div class="name" id="myName">
-          Carregando...
+        <div class="editor-avatar-area">
+
+          <div
+            class="editor-avatar"
+            id="editorAvatar"
+          >
+            ☾
+          </div>
+
+          <div>
+
+            <input
+              id="avatarFile"
+              type="file"
+              accept="image/*"
+              onchange="previewAvatar(event)"
+            >
+
+            <label
+              class="photo-button"
+              for="avatarFile"
+            >
+              🖼️ Escolher foto
+            </label>
+
+          </div>
+
         </div>
 
-        <div class="status" id="myStatus">
-          ● Online
+
+        <label class="editor-label">
+          Nome
+        </label>
+
+        <input
+          id="editUsername"
+          class="editor-input"
+          type="text"
+          maxlength="40"
+          placeholder="Seu nome"
+        >
+
+
+        <label class="editor-label">
+          Status
+        </label>
+
+        <select
+          id="editStatus"
+          class="editor-select"
+        >
+
+          <option value="Online">
+            🟢 Online
+          </option>
+
+          <option value="Ausente">
+            🟡 Ausente
+          </option>
+
+          <option value="Ocupado">
+            🔴 Ocupado
+          </option>
+
+          <option value="Invisível">
+            ⚪ Invisível
+          </option>
+
+        </select>
+
+
+        <label class="editor-label">
+          Mensagem pessoal
+        </label>
+
+        <input
+          id="editPersonalMessage"
+          class="editor-input"
+          type="text"
+          maxlength="120"
+          placeholder="O que você está pensando?"
+        >
+
+
+        <div
+          id="profileSaveStatus"
+        >
+          Perfil salvo! 💜
         </div>
 
-        <div class="personal-message" id="myMessage">
-          "..."
+
+        <div class="editor-actions">
+
+          <button
+            class="cancel-button"
+            onclick="closeProfileEditor()"
+          >
+            Cancelar
+          </button>
+
+          <button
+            class="save-button"
+            id="saveProfileButton"
+            onclick="saveProfile()"
+          >
+            Salvar
+          </button>
+
         </div>
 
       </div>
 
     </div>
 
+
+    <!-- ===================================================
+         PERFIL
+         =================================================== -->
+
+    <div class="profile">
+
+      <div
+        class="avatar"
+        id="myAvatar"
+      >
+        ☾
+      </div>
+
+      <div class="profile-info">
+
+        <div
+          class="name"
+          id="myName"
+        >
+          Carregando...
+        </div>
+
+        <div
+          class="status"
+          id="myStatus"
+        >
+          ● Online
+        </div>
+
+        <div
+          class="personal-message"
+          id="myMessage"
+        >
+          "..."
+        </div>
+
+      </div>
+
+      <button
+        class="edit-button"
+        onclick="openProfileEditor()"
+        title="Editar meu perfil"
+      >
+        ⚙️
+      </button>
+
+    </div>
+
+
+    <!-- ===================================================
+         CONTATO
+         =================================================== -->
 
     <div class="contact-area">
 
@@ -598,17 +979,26 @@
 
       <div class="contact">
 
-        <div class="contact-avatar" id="contactAvatar">
+        <div
+          class="contact-avatar"
+          id="contactAvatar"
+        >
           🦊
         </div>
 
         <div>
 
-          <div class="contact-name" id="contactName">
+          <div
+            class="contact-name"
+            id="contactName"
+          >
             Raposinha
           </div>
 
-          <div class="online" id="contactStatus">
+          <div
+            class="online"
+            id="contactStatus"
+          >
             ● Online
           </div>
 
@@ -619,15 +1009,37 @@
     </div>
 
 
-    <div class="chat" id="chat"></div>
+    <!-- ===================================================
+         CHAT
+         =================================================== -->
 
+    <div
+      class="chat"
+      id="chat"
+    ></div>
+
+
+    <!-- ===================================================
+         TOOLBAR
+         =================================================== -->
 
     <div class="toolbar">
 
-      <button onclick="addEmoji('😊')">😊</button>
-      <button onclick="addEmoji('😂')">😂</button>
-      <button onclick="addEmoji('🥺')">🥺</button>
-      <button onclick="addEmoji('❤️')">❤️</button>
+      <button onclick="addEmoji('😊')">
+        😊
+      </button>
+
+      <button onclick="addEmoji('😂')">
+        😂
+      </button>
+
+      <button onclick="addEmoji('🥺')">
+        🥺
+      </button>
+
+      <button onclick="addEmoji('❤️')">
+        ❤️
+      </button>
 
       <button
         class="nudge"
@@ -638,6 +1050,10 @@
 
     </div>
 
+
+    <!-- ===================================================
+         ENVIO
+         =================================================== -->
 
     <div class="input-area">
 
@@ -676,6 +1092,9 @@
 
     const SUPABASE_KEY =
       "sb_publishable_1_QzlhlMc2HS_aNkzbJqRg_SgtJzfS3";
+
+    const AVATAR_BUCKET =
+      "avatars";
 
     const supabaseClient =
       window.supabase.createClient(
@@ -717,6 +1136,7 @@
     let currentProfile = null;
     let contactProfile = null;
     let realtimeChannel = null;
+    let selectedAvatarFile = null;
 
 
     /* =====================================================
@@ -941,7 +1361,7 @@
 
 
     /* =====================================================
-       PERFIL DA PESSOA LOGADA
+       MEU PERFIL
        ===================================================== */
 
     async function loadMyProfile() {
@@ -983,6 +1403,12 @@
         return;
       }
 
+      updateMyProfileUI(data);
+    }
+
+
+    function updateMyProfileUI(data) {
+
       document.getElementById("myName")
         .textContent =
           data.username ||
@@ -1002,21 +1428,23 @@
             ? `"${data.personal_message}"`
             : "";
 
+      const myAvatar =
+        document.getElementById(
+          "myAvatar"
+        );
+
       if (data.avatar_url) {
 
         setAvatar(
-          document.getElementById(
-            "myAvatar"
-          ),
+          myAvatar,
           data.avatar_url,
           getFallbackAvatar()
         );
 
       } else {
 
-        document.getElementById(
-          "myAvatar"
-        ).textContent =
+        myAvatar.innerHTML = "";
+        myAvatar.textContent =
           getFallbackAvatar();
 
       }
@@ -1074,6 +1502,367 @@
       }
 
       return "☾";
+    }
+
+
+    /* =====================================================
+       EDITAR PERFIL
+       ===================================================== */
+
+    function openProfileEditor() {
+
+      const editor =
+        document.getElementById(
+          "profileEditor"
+        );
+
+      const username =
+        currentProfile?.username ||
+        getFallbackName();
+
+      const status =
+        currentProfile?.status ||
+        "Online";
+
+      const personalMessage =
+        currentProfile?.personal_message ||
+        "";
+
+      document.getElementById(
+        "editUsername"
+      ).value =
+        username;
+
+      document.getElementById(
+        "editStatus"
+      ).value =
+        status;
+
+      document.getElementById(
+        "editPersonalMessage"
+      ).value =
+        personalMessage;
+
+      selectedAvatarFile =
+        null;
+
+      const editorAvatar =
+        document.getElementById(
+          "editorAvatar"
+        );
+
+      if (
+        currentProfile?.avatar_url
+      ) {
+
+        setAvatar(
+          editorAvatar,
+          currentProfile.avatar_url,
+          getFallbackAvatar()
+        );
+
+      } else {
+
+        editorAvatar.innerHTML = "";
+        editorAvatar.textContent =
+          getFallbackAvatar();
+
+      }
+
+      document.getElementById(
+        "profileSaveStatus"
+      ).style.display =
+        "none";
+
+      editor.style.display =
+        "block";
+    }
+
+
+    function closeProfileEditor() {
+
+      document.getElementById(
+        "profileEditor"
+      ).style.display =
+        "none";
+
+      selectedAvatarFile =
+        null;
+
+      document.getElementById(
+        "avatarFile"
+      ).value =
+        "";
+    }
+
+
+    function previewAvatar(event) {
+
+      const file =
+        event.target.files?.[0];
+
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+
+        alert(
+          "Escolha uma imagem."
+        );
+
+        return;
+      }
+
+      if (
+        file.size >
+        8 * 1024 * 1024
+      ) {
+
+        alert(
+          "A imagem precisa ter no máximo 8 MB."
+        );
+
+        event.target.value =
+          "";
+
+        return;
+      }
+
+      selectedAvatarFile =
+        file;
+
+      const url =
+        URL.createObjectURL(
+          file
+        );
+
+      const editorAvatar =
+        document.getElementById(
+          "editorAvatar"
+        );
+
+      editorAvatar.innerHTML =
+        "";
+
+      const img =
+        document.createElement(
+          "img"
+        );
+
+      img.src =
+        url;
+
+      img.alt =
+        "Nova foto";
+
+      editorAvatar.appendChild(
+        img
+      );
+    }
+
+
+    async function uploadAvatar(
+      file
+    ) {
+
+      if (!file || !currentUser) {
+        return null;
+      }
+
+      const extension =
+        (
+          file.name
+            .split(".")
+            .pop() ||
+          "jpg"
+        )
+        .toLowerCase()
+        .replace(
+          /[^a-z0-9]/g,
+          ""
+        );
+
+      const filePath =
+        currentUser.id +
+        "/avatar-" +
+        Date.now() +
+        "." +
+        extension;
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .storage
+          .from(
+            AVATAR_BUCKET
+          )
+          .upload(
+            filePath,
+            file,
+            {
+              upsert: true,
+              contentType:
+                file.type ||
+                "image/jpeg"
+            }
+          );
+
+      if (error) {
+        throw error;
+      }
+
+      const {
+        data
+      } =
+        supabaseClient
+          .storage
+          .from(
+            AVATAR_BUCKET
+          )
+          .getPublicUrl(
+            filePath
+          );
+
+      return data.publicUrl;
+    }
+
+
+    async function saveProfile() {
+
+      if (!currentUser) {
+        return;
+      }
+
+      const saveButton =
+        document.getElementById(
+          "saveProfileButton"
+        );
+
+      const username =
+        document.getElementById(
+          "editUsername"
+        ).value.trim();
+
+      const status =
+        document.getElementById(
+          "editStatus"
+        ).value;
+
+      const personalMessage =
+        document.getElementById(
+          "editPersonalMessage"
+        ).value.trim();
+
+      if (!username) {
+
+        alert(
+          "Digite um nome."
+        );
+
+        return;
+      }
+
+      saveButton.disabled =
+        true;
+
+      saveButton.textContent =
+        "Salvando...";
+
+      try {
+
+        let avatarUrl =
+          currentProfile?.avatar_url ||
+          null;
+
+        if (selectedAvatarFile) {
+
+          avatarUrl =
+            await uploadAvatar(
+              selectedAvatarFile
+            );
+        }
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("profiles")
+            .update({
+              username,
+              status,
+              personal_message:
+                personalMessage,
+              avatar_url:
+                avatarUrl
+            })
+            .eq(
+              "id",
+              currentUser.id
+            )
+            .select(
+              "id, username, status, personal_message, avatar_url"
+            )
+            .single();
+
+        if (error) {
+          throw error;
+        }
+
+        currentProfile =
+          data;
+
+        updateMyProfileUI(
+          data
+        );
+
+        const statusBox =
+          document.getElementById(
+            "profileSaveStatus"
+          );
+
+        statusBox.textContent =
+          "Perfil salvo! 💜";
+
+        statusBox.style.display =
+          "block";
+
+        selectedAvatarFile =
+          null;
+
+        document.getElementById(
+          "avatarFile"
+        ).value =
+          "";
+
+        setTimeout(
+          closeProfileEditor,
+          700
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Erro ao salvar perfil:",
+          error
+        );
+
+        alert(
+          "Não foi possível salvar o perfil.\n\n" +
+          (
+            error?.message ||
+            "Erro desconhecido."
+          )
+        );
+
+      } finally {
+
+        saveButton.disabled =
+          false;
+
+        saveButton.textContent =
+          "Salvar";
+      }
     }
 
 
@@ -1170,6 +1959,11 @@
 
         document.getElementById(
           "contactAvatar"
+        ).innerHTML =
+          "";
+
+        document.getElementById(
+          "contactAvatar"
         ).textContent =
           fallbackAvatar;
       }
@@ -1190,6 +1984,11 @@
         "contactStatus"
       ).textContent =
         "● Online";
+
+      document.getElementById(
+        "contactAvatar"
+      ).innerHTML =
+        "";
 
       document.getElementById(
         "contactAvatar"
@@ -1290,10 +2089,11 @@
       }
 
       data.forEach(
-        row => renderMessage(
-          row,
-          false
-        )
+        row =>
+          renderMessage(
+            row,
+            false
+          )
       );
 
       scrollChat();
@@ -1351,7 +2151,9 @@
         </div>
 
         <div class="text">
-          ${escapeHTML(row.message || "")}
+          ${escapeHTML(
+            row.message || ""
+          )}
         </div>
       `;
 
@@ -1441,7 +2243,7 @@
 
 
     /* =====================================================
-       ENVIAR
+       ENVIAR MENSAGEM
        ===================================================== */
 
     async function sendMessage() {
@@ -1527,7 +2329,6 @@
           .removeChannel(
             realtimeChannel
           );
-
       }
 
       realtimeChannel =
