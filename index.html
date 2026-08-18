@@ -1799,6 +1799,116 @@ body {
 }
 </style>
 
+
+<style id="msn-real-scroll-fix">
+/* =========================================================
+   CORREÇÃO DEFINITIVA DA ROLAGEM
+   A página inteira fica fixa.
+   Só #chat recebe a barra de rolagem.
+========================================================= */
+
+html,
+body{
+  width:100%;
+  height:100%;
+  min-height:100%;
+  margin:0 !important;
+  overflow:hidden !important;
+}
+
+body{
+  box-sizing:border-box;
+  padding:14px !important;
+}
+
+/* A janela cabe dentro da viewport. */
+#messenger{
+  box-sizing:border-box;
+  height:calc(100vh - 28px) !important;
+  min-height:0 !important;
+  max-height:calc(100vh - 28px) !important;
+  overflow:hidden !important;
+}
+
+/* A área interna ocupa exatamente o espaço restante. */
+#messenger .app-body{
+  height:calc(
+    100vh - 28px - 35px - 27px - 18px
+  ) !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:hidden !important;
+}
+
+/* O painel da conversa não cresce além da janela. */
+#messenger .main-chat{
+  height:100% !important;
+  min-height:0 !important;
+  max-height:100% !important;
+  overflow:hidden !important;
+}
+
+/* Somente a lista de mensagens rola. */
+#messenger .main-chat .chat{
+  flex:1 1 auto !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+}
+
+/* Mantém cabeçalho, ferramentas e campo de mensagem fixos. */
+#messenger .chat-titlebar,
+#messenger .format-panel,
+#messenger .effect-panel,
+#messenger .toolbar,
+#messenger .input-area,
+#messenger .footer{
+  flex-shrink:0 !important;
+}
+
+/* A barra de rolagem pertence visualmente ao chat. */
+#messenger .chat::-webkit-scrollbar{
+  width:14px;
+}
+#messenger .chat::-webkit-scrollbar-track{
+  background:#e7edf1;
+  border-left:1px solid #b5c5ce;
+}
+#messenger .chat::-webkit-scrollbar-thumb{
+  background:linear-gradient(
+    90deg,
+    #dceaf1 0%,
+    #a9c3d2 48%,
+    #86aabd 100%
+  );
+  border:1px solid #7795a5;
+  border-radius:2px;
+}
+#messenger .chat::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(
+    90deg,
+    #cde3ee 0%,
+    #8fb4c8 48%,
+    #6f9db3 100%
+  );
+}
+
+/* Firefox */
+#messenger .chat{
+  scrollbar-width:auto;
+  scrollbar-color:#9db8c8 #e7edf1;
+}
+
+/* Evita rolagem horizontal acidental. */
+#messenger,
+#messenger .app-body,
+#messenger .main-chat{
+  overflow-x:hidden !important;
+}
+</style>
+
 </head>
 
 <body>
