@@ -1451,23 +1451,20 @@ button:disabled{
 }
 </style>
 
-<style id="msn-color-fix">
-.color-dot{
+<style id="msn-color-click-fix">
+#formatPanel .color-dot{
   cursor:pointer !important;
   pointer-events:auto !important;
-  position:relative;
-  transition:transform .08s ease, box-shadow .08s ease;
+  user-select:none;
 }
-.color-dot:hover{
-  transform:scale(1.08);
-  box-shadow:0 0 0 2px rgba(80,150,210,.35), inset 0 1px rgba(255,255,255,.55) !important;
+#formatPanel .color-dot:hover{
+  outline:2px solid rgba(60,130,190,.35);
+  outline-offset:1px;
+  transform:scale(1.06);
 }
-.color-dot.active{
-  box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 3px #4c8fbd,
-    inset 0 1px rgba(255,255,255,.55) !important;
-  transform:scale(1.08);
+#formatPanel .color-dot.active{
+  outline:2px solid #fff;
+  box-shadow:0 0 0 3px #4b86ae,inset 0 1px rgba(255,255,255,.55) !important;
 }
 </style>
 
@@ -1748,15 +1745,15 @@ button:disabled{
         id="formatPanel"
       >
 
-        <button type="button" onclick="toggleFormat('bold')">
+        <button onclick="toggleFormat('bold')">
           <b>B</b>
         </button>
 
-        <button type="button" onclick="toggleFormat('italic')">
+        <button onclick="toggleFormat('italic')">
           <i>I</i>
         </button>
 
-        <button type="button" onclick="toggleFormat('underline')">
+        <button onclick="toggleFormat('underline')">
           <u>U</u>
         </button>
 
@@ -3044,20 +3041,51 @@ async function saveProfile(){
 
 async function loadContactProfile(){
 
-  const myEmail =
-    currentUser?.email?.toLowerCase();
+  /*
+    DESTINATÁRIO FIXO POR UUID
+    O nickname é apenas visual.
+  */
+  const myId = String(currentUser?.id || "");
+  const myEmail = String(currentUser?.email || "").toLowerCase();
+
+  const RAPOSINHA_UUID =
+    "0fcac17c-d3e4-41aa-94a6-1f4fd296571e";
+
+  const BRUXINHA_UUID =
+    "09bf95ed-21f0-4a71-8020-6b3dc6559070";
+
+  const isBruxinha =
+    myId === BRUXINHA_UUID ||
+    myEmail === "belinhahcardozoalm@gmail.com";
+
+  const contactId =
+    isBruxinha
+      ? RAPOSINHA_UUID
+      : BRUXINHA_UUID;
 
   const contactUsername =
-    myEmail ===
-      "belinhahcardozoalm@gmail.com"
+    isBruxinha
       ? "Raposinha"
       : "Bruxinha";
 
   const fallbackAvatar =
-    contactUsername ===
-      "Raposinha"
+    isBruxinha
       ? "🦊"
       : "☾";
+
+  /*
+    IMPORTANTE:
+    já definimos o destinatário pelo UUID antes da consulta
+    ao perfil. Assim, RLS de profiles não pode deixar
+    contactProfile.id vazio e impedir o envio.
+  */
+  contactProfile = {
+    id: contactId,
+    username: contactUsername,
+    status: "Online",
+    personal_message: "",
+    avatar_url: null
+  };
 
   const {data,error} =
     await supabaseClient
@@ -3066,14 +3094,16 @@ async function loadContactProfile(){
         "id, username, status, personal_message, avatar_url"
       )
       .eq(
-        "username",
-        contactUsername
+        "id",
+        contactId
       )
       .maybeSingle();
 
   if(error){
-
-    console.error(error);
+    console.error(
+      "Não foi possível carregar o perfil pelo UUID:",
+      error
+    );
 
     showFallbackContact(
       contactUsername,
@@ -3083,22 +3113,24 @@ async function loadContactProfile(){
     return;
   }
 
-  contactProfile =
-    data;
+  if(data){
+    contactProfile = {
+      ...data,
+      id: contactId
+    };
 
-  if(!data){
-
-    showFallbackContact(
-      contactUsername,
-      fallbackAvatar
+    updateContactUI(
+      contactProfile
     );
 
     return;
   }
 
-  updateContactUI(data);
+  showFallbackContact(
+    contactUsername,
+    fallbackAvatar
+  );
 }
-
 
 function updateContactUI(data){
 
@@ -3937,24 +3969,23 @@ function setTextColor(
   document
     .querySelectorAll("#formatPanel .color-dot")
     .forEach(function(button){
+
       const bg =
-        (button.style.backgroundColor || "").replace(/\s/g,"").toLowerCase();
+        (button.style.backgroundColor || "")
+          .replace(/\\s/g,"")
+          .toLowerCase();
 
       const target =
-        color.replace(/\s/g,"").toLowerCase();
+        String(color)
+          .replace(/\\s/g,"")
+          .toLowerCase();
 
       button.classList.toggle(
         "active",
-        bg === target ||
-        bg === color.toLowerCase()
+        bg === target
       );
     });
 
-  /*
-    Não usamos click para controlar a seleção do texto:
-    a cor é uma configuração da próxima mensagem, portanto
-    continua funcionando mesmo depois que o botão recebe foco.
-  */
   input.focus();
 }
 
@@ -4211,14 +4242,39 @@ async function sendMessage(){
     return;
   }
 
-  if(!contactProfile?.id){
+  /*
+    O destinatário é resolvido por UUID, independentemente
+    do nickname/perfil carregado na interface.
+  */
+  const RAPOSINHA_UUID =
+    "0fcac17c-d3e4-41aa-94a6-1f4fd296571e";
 
+  const BRUXINHA_UUID =
+    "09bf95ed-21f0-4a71-8020-6b3dc6559070";
+
+  const currentId =
+    String(currentUser?.id || "");
+
+  const recipientUUID =
+    currentId === BRUXINHA_UUID
+      ? RAPOSINHA_UUID
+      : BRUXINHA_UUID;
+
+  if(!currentId){
     alert(
-      "Não consegui identificar a Raposinha."
+      "Você precisa estar conectada."
     );
-
     return;
   }
+
+  if(!contactProfile){
+    contactProfile = {
+      id: recipientUUID
+    };
+  }
+
+  contactProfile.id =
+    recipientUUID;
 
   input.disabled =
     true;
@@ -4262,7 +4318,7 @@ async function sendMessage(){
             currentUser.email,
 
           recipient:
-            contactProfile.id,
+            recipientUUID,
 
           message:
             text,
@@ -5606,30 +5662,6 @@ document.getElementById(
 
 checkSession();
 
-</script>
-
-
-<script id="msn-color-init">
-document.addEventListener("DOMContentLoaded", function(){
-  const color =
-    (typeof messageFormatting !== "undefined" &&
-     messageFormatting.color)
-      ? messageFormatting.color
-      : "#111";
-
-  document
-    .querySelectorAll("#formatPanel .color-dot")
-    .forEach(function(button){
-      const bg =
-        (button.style.backgroundColor || "")
-          .replace(/\s/g,"")
-          .toLowerCase();
-
-      if(bg === color.toLowerCase()){
-        button.classList.add("active");
-      }
-    });
-});
 </script>
 
 </body>
