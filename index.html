@@ -245,6 +245,75 @@ button:disabled{
    TEMA DA JANELA — MSN 2008
 ========================================================= */
 
+function hexToRgb(hex){
+  const clean = String(hex || "").replace("#", "");
+  if(!/^[0-9a-fA-F]{6}$/.test(clean)) return null;
+  return {
+    r:parseInt(clean.slice(0,2),16),
+    g:parseInt(clean.slice(2,4),16),
+    b:parseInt(clean.slice(4,6),16)
+  };
+}
+
+function mixHex(a,b,amount){
+  const A = hexToRgb(a);
+  const B = hexToRgb(b);
+  if(!A || !B) return a;
+  const t = Math.max(0,Math.min(1,amount));
+  const channel = key => Math.round(A[key] + (B[key]-A[key])*t);
+  return `#${[channel("r"),channel("g"),channel("b")]
+    .map(v=>v.toString(16).padStart(2,"0"))
+    .join("")}`;
+}
+
+function applyWindowTheme(hex){
+  const base = hexToRgb(hex);
+  if(!base) return;
+
+  const root = document.documentElement;
+  const light = mixHex(hex,"#ffffff",.58);
+  const mid = mixHex(hex,"#ffffff",.18);
+  const dark = mixHex(hex,"#000000",.22);
+  const border = mixHex(hex,"#000000",.38);
+
+  root.style.setProperty("--msn-accent",hex);
+  root.style.setProperty("--msn-accent-light",light);
+  root.style.setProperty("--msn-accent-mid",mid);
+  root.style.setProperty("--msn-accent-dark",dark);
+  root.style.setProperty("--msn-border",border);
+  root.style.setProperty("--msn-window-glow",`rgba(${base.r},${base.g},${base.b},.42)`);
+
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content",hex);
+
+  const inputColor = document.getElementById("windowColor");
+  if(inputColor) inputColor.value = hex;
+
+  document.querySelectorAll(".theme-preset").forEach(button=>{
+    const buttonColor = String(button.style.backgroundColor || "").toLowerCase();
+    const normalized = hex.toLowerCase();
+    button.classList.toggle(
+      "active",
+      buttonColor === normalized || button.getAttribute("style")?.toLowerCase().includes(normalized)
+    );
+  });
+
+  localStorage.setItem("msn_window_theme",hex);
+}
+
+function setWindowTheme(hex){
+  applyWindowTheme(String(hex || DEFAULT_WINDOW_THEME).toLowerCase());
+}
+
+function loadWindowTheme(){
+  const saved = localStorage.getItem("msn_window_theme");
+  applyWindowTheme(
+    /^#[0-9a-f]{6}$/i.test(saved || "")
+      ? saved
+      : DEFAULT_WINDOW_THEME
+  );
+}
+
+
 /* =========================================================
    LOGIN
 ========================================================= */
@@ -1017,35 +1086,6 @@ button:disabled{
    INPUT
 ========================================================= */
 
-.typing-indicator{
-  display:none;
-  min-height:20px;
-  padding:3px 9px 0;
-  color:#557080;
-  background:#f1f5f7;
-  border-top:1px solid #c7d4dc;
-  font-size:9px;
-  font-style:italic;
-}
-
-.typing-indicator.visible{
-  display:block;
-}
-
-.typing-dots::after{
-  content:"";
-  display:inline-block;
-  width:16px;
-  animation:typingDots 1.2s steps(4,end) infinite;
-}
-
-@keyframes typingDots{
-  0%{content:""}
-  25%{content:"."}
-  50%{content:".."}
-  75%,100%{content:"..."}
-}
-
 .input-area{
   display:flex;
   gap:5px;
@@ -1637,156 +1677,7 @@ button:disabled{
     padding:6px;
   }
 }
-.nickname-bruxinha{color:#8b3db2;font-weight:700;}
-.nickname-raposinha{color:#e33f91;font-weight:700;}
 </style>
-
-<style id="msn2008-visual-only">
-/* =========================================================
-   MSN MESSENGER 2008 — PELE VISUAL
-   NÃO ALTERA LOGIN, SUPABASE OU LÓGICA DE MENSAGENS
-========================================================= */
-
-#loginScreen,#messenger{
-  border:1px solid var(--msn-border) !important;
-  border-radius:7px 7px 3px 3px !important;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.95),
-    0 0 0 2px var(--msn-accent-light),
-    0 0 18px var(--msn-window-glow),
-    0 13px 36px rgba(0,0,0,.36) !important;
-}
-
-.titlebar,.login-title,.chat-titlebar,.editor-title,.settings-title{
-  background:
-    linear-gradient(to bottom,
-      var(--msn-accent-light) 0%,
-      var(--msn-accent-mid) 30%,
-      var(--msn-accent) 62%,
-      var(--msn-accent-dark) 100%) !important;
-  border-bottom-color:var(--msn-border) !important;
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.72),
-    inset 0 -1px rgba(0,0,0,.18) !important;
-}
-
-.window-button,.chat-action{
-  background:
-    linear-gradient(to bottom,
-      var(--msn-accent-light),
-      var(--msn-accent)) !important;
-  border-color:rgba(255,255,255,.78) !important;
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.65),
-    0 1px 2px rgba(0,0,0,.18) !important;
-}
-
-.window-button:hover,.chat-action:hover{
-  background:
-    linear-gradient(to bottom,#fff,var(--msn-accent-mid)) !important;
-}
-
-.sidebar{
-  background:
-    linear-gradient(to right,#fbfdff,#edf6fb 72%,#dcebf4) !important;
-  border-right-color:#91afc1 !important;
-}
-
-.profile,.contact{
-  background:
-    linear-gradient(#fff,#edf6fb) !important;
-}
-
-.contact:hover{
-  background:
-    linear-gradient(#fff,#d9edf9) !important;
-}
-
-.contacts-heading{
-  background:
-    linear-gradient(#f8fcff,#dcecf4) !important;
-}
-
-.toolbar,.format-panel,.effect-panel{
-  background:
-    linear-gradient(#fff,#eef2f4 48%,#d0d9de) !important;
-}
-
-.toolbar button,.format-panel button,.effect-panel button{
-  background:
-    linear-gradient(#fff,#f4f4f4 46%,#d1d1d1) !important;
-  border-color:#899aa5 !important;
-  box-shadow:inset 0 1px #fff,0 1px 1px rgba(0,0,0,.1) !important;
-}
-
-.toolbar button:hover,.format-panel button:hover,.effect-panel button:hover{
-  background:
-    linear-gradient(#fff,#eaf8ff 48%,#c2e1f1) !important;
-  border-color:var(--msn-border) !important;
-}
-
-.toolbar button.active,.format-panel button.active{
-  background:
-    linear-gradient(#c8e8fa,#eaf7fd) !important;
-  border-color:#5c91af !important;
-}
-
-.send-button,.login-button,.save-button{
-  background:
-    linear-gradient(#fff,#e6f5fc 45%,#a7d4ea) !important;
-  border-color:var(--msn-border) !important;
-  color:#174f72 !important;
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.9),
-    0 1px 1px rgba(0,0,0,.15) !important;
-}
-
-.send-button:hover,.login-button:hover,.save-button:hover{
-  background:
-    linear-gradient(#fff,#effaff 45%,#b9e0f2) !important;
-}
-
-#messageInput{
-  border-color:#9db2bf !important;
-  box-shadow:
-    inset 1px 1px 2px rgba(0,0,0,.1),
-    inset 0 1px #fff !important;
-}
-
-/* Moldura interna/chanfro característico de janelas antigas */
-.app-body{
-  border-top:1px solid #fff;
-}
-
-.chat{
-  background:
-    linear-gradient(#fff,#f6fafc) !important;
-}
-
-/* Preserva e deixa mais legíveis as cores de nicknames */
-.message .sender.nickname-bruxinha,
-.message.mine .sender.nickname-bruxinha{
-  color:#6d3bb1 !important;
-}
-.message .sender.nickname-raposinha,
-.message.mine .sender.nickname-raposinha{
-  color:#d13d79 !important;
-}
-
-/* Painel de personalização com acabamento MSN */
-.theme-preview{
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.8),
-    0 1px 2px rgba(0,0,0,.12) !important;
-}
-
-.theme-preset{
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.8),
-    0 1px 2px rgba(0,0,0,.12) !important;
-}
-</style>
-
 </head>
 
 <body>
@@ -2229,11 +2120,6 @@ button:disabled{
       </div>
 
 
-      <!-- DIGITAÇÃO -->
-      <div id="typingIndicator" class="typing-indicator">
-        <span id="typingName">Raposinha</span> está digitando<span class="typing-dots"></span>
-      </div>
-
       <!-- INPUT -->
 
       <div class="input-area">
@@ -2544,75 +2430,6 @@ button:disabled{
 
 
 <script>
-function hexToRgb(hex){
-  const clean = String(hex || "").replace("#", "");
-  if(!/^[0-9a-fA-F]{6}$/.test(clean)) return null;
-  return {
-    r:parseInt(clean.slice(0,2),16),
-    g:parseInt(clean.slice(2,4),16),
-    b:parseInt(clean.slice(4,6),16)
-  };
-}
-
-function mixHex(a,b,amount){
-  const A = hexToRgb(a);
-  const B = hexToRgb(b);
-  if(!A || !B) return a;
-  const t = Math.max(0,Math.min(1,amount));
-  const channel = key => Math.round(A[key] + (B[key]-A[key])*t);
-  return `#${[channel("r"),channel("g"),channel("b")]
-    .map(v=>v.toString(16).padStart(2,"0"))
-    .join("")}`;
-}
-
-function applyWindowTheme(hex){
-  const base = hexToRgb(hex);
-  if(!base) return;
-
-  const root = document.documentElement;
-  const light = mixHex(hex,"#ffffff",.58);
-  const mid = mixHex(hex,"#ffffff",.18);
-  const dark = mixHex(hex,"#000000",.22);
-  const border = mixHex(hex,"#000000",.38);
-
-  root.style.setProperty("--msn-accent",hex);
-  root.style.setProperty("--msn-accent-light",light);
-  root.style.setProperty("--msn-accent-mid",mid);
-  root.style.setProperty("--msn-accent-dark",dark);
-  root.style.setProperty("--msn-border",border);
-  root.style.setProperty("--msn-window-glow",`rgba(${base.r},${base.g},${base.b},.42)`);
-
-  document.querySelector('meta[name="theme-color"]')?.setAttribute("content",hex);
-
-  const inputColor = document.getElementById("windowColor");
-  if(inputColor) inputColor.value = hex;
-
-  document.querySelectorAll(".theme-preset").forEach(button=>{
-    const buttonColor = String(button.style.backgroundColor || "").toLowerCase();
-    const normalized = hex.toLowerCase();
-    button.classList.toggle(
-      "active",
-      buttonColor === normalized || button.getAttribute("style")?.toLowerCase().includes(normalized)
-    );
-  });
-
-  localStorage.setItem("msn_window_theme",hex);
-}
-
-function setWindowTheme(hex){
-  applyWindowTheme(String(hex || DEFAULT_WINDOW_THEME).toLowerCase());
-}
-
-function loadWindowTheme(){
-  const saved = localStorage.getItem("msn_window_theme");
-  applyWindowTheme(
-    /^#[0-9a-f]{6}$/i.test(saved || "")
-      ? saved
-      : DEFAULT_WINDOW_THEME
-  );
-}
-
-
 /* =========================================================
    SUPABASE
 ========================================================= */
@@ -2638,10 +2455,6 @@ const USER_EMAILS = {
 };
 
 const DEFAULT_WINDOW_THEME = "#07569b";
-
-/* UUIDs oficiais das duas contas */
-const RAPOSINHA_UUID = "0fcac17c-d3e4-41aa-94a6-1f4fd296571e";
-const BRUXINHA_UUID = "09bf95ed-21f0-4a71-8020-6b3dc6559070";
 
 const supabaseClient =
   window.supabase.createClient(
@@ -2707,9 +2520,6 @@ let awayTimer = null;
 let myPresenceStatus = "online";
 
 let contactPresence = false;
-let typingTimer = null;
-let remoteTypingTimer = null;
-let remoteTyping = false;
 
 let settings = {
   notifications_enabled:true,
@@ -3675,18 +3485,8 @@ function updateContactPresenceUI(){
 
 function showFallbackContact(
   username,
-  avatar,
-  id
+  avatar
 ){
-
-  contactProfile = {
-    id: id || null,
-    username,
-    status: "Online",
-    personal_message: "",
-    avatar_url: null
-  };
-
 
   document.getElementById(
     "contactName"
@@ -3795,15 +3595,6 @@ function startPresence(){
         {event:"leave"},
         updatePresenceList
       )
-      .on(
-        "broadcast",
-        {event:"typing"},
-        payload=>{
-          const data = payload?.payload || {};
-          if(String(data.user_id || "") !== String(contactProfile?.id || "")) return;
-          setRemoteTyping(!!data.typing);
-        }
-      )
       .subscribe(
         async status=>{
 
@@ -3892,64 +3683,6 @@ async function updatePresence(){
   }
 }
 
-
-/* =========================================================
-   DIGITAÇÃO — BROADCAST, SEM GRAVAR NO BANCO
-========================================================= */
-
-function setRemoteTyping(isTyping){
-
-  remoteTyping = !!isTyping;
-
-  const indicator = document.getElementById("typingIndicator");
-  const name = document.getElementById("typingName");
-
-  if(!indicator || !name) return;
-
-  name.textContent = contactProfile?.username ||
-    (contactProfile?.id === USER_UUIDS.raposinha ? "Raposinha" : "Bruxinha");
-
-  indicator.classList.toggle("visible", remoteTyping);
-
-  if(remoteTyping){
-    clearTimeout(remoteTypingTimer);
-    remoteTypingTimer = setTimeout(()=>setRemoteTyping(false), 2500);
-  }
-}
-
-async function broadcastTyping(isTyping){
-
-  if(!presenceChannel || !currentUser?.id) return;
-
-  try{
-    await presenceChannel.send({
-      type:"broadcast",
-      event:"typing",
-      payload:{
-        user_id:currentUser.id,
-        typing:!!isTyping
-      }
-    });
-  }catch(error){
-    console.debug("Typing broadcast:", error);
-  }
-}
-
-function handleTypingInput(){
-
-  clearTimeout(typingTimer);
-
-  if(!input.value){
-    broadcastTyping(false);
-    return;
-  }
-
-  broadcastTyping(true);
-
-  typingTimer = setTimeout(()=>{
-    broadcastTyping(false);
-  }, 1800);
-}
 
 /* =========================================================
    STATUS AUTOMÁTICO
@@ -4052,9 +3785,6 @@ async function loadMessages(){
       .select(
         "id, sender, recipient, message, formatting, created_at, read_at"
       )
-      .or(
-        `and(sender.eq.${currentUser.id},recipient.eq.${contactProfile?.id}),and(sender.eq.${contactProfile?.id},recipient.eq.${currentUser.id})`
-      )
       .order(
         "created_at",
         {ascending:true}
@@ -4125,18 +3855,18 @@ function renderMessage(
   }
 
   const mine =
-    String(row.sender || "") ===
-    String(currentUser?.id || "");
+    String(row.sender || "").toLowerCase() ===
+    String(currentUser?.email || "").toLowerCase();
 
   const senderName =
     getNameFromEmail(row.sender);
 
-  const senderId = String(row.sender || "");
-
   const senderRole =
-    senderId === USER_UUIDS.raposinha
+    String(row.sender || "").toLowerCase() ===
+      USER_EMAILS.raposinha
       ? "raposinha"
-      : senderId === USER_UUIDS.bruxinha
+      : String(row.sender || "").toLowerCase() ===
+          USER_EMAILS.bruxinha
         ? "bruxinha"
         : "generic";
 
@@ -4229,19 +3959,31 @@ function renderMessage(
 }
 
 
-function getNameFromEmail(value){
+function getNameFromEmail(
+  email
+){
 
-  const id = String(value || "");
+  if(!email)
+    return "Usuário";
 
-  if(id === BRUXINHA_UUID) return "☾ Bruxinha";
-  if(id === RAPOSINHA_UUID) return "🦊 Raposinha";
+  const normalized =
+    email.toLowerCase();
 
-  const normalized = id.toLowerCase();
+  if(
+    normalized ===
+    "belinhahcardozoalm@gmail.com"
+  ){
+    return "☾ Bruxinha";
+  }
 
-  if(normalized === "belinhahcardozoalm@gmail.com") return "☾ Bruxinha";
-  if(normalized === "andressa.verissimo.g@icloud.com") return "🦊 Raposinha";
+  if(
+    normalized ===
+    "andressa.verissimo.g@icloud.com"
+  ){
+    return "🦊 Raposinha";
+  }
 
-  return value || "Usuário";
+  return email;
 }
 
 
@@ -4301,7 +4043,7 @@ async function markMessageAsRead(
   if(
     !row ||
     row.read_at ||
-    String(row.sender) === String(currentUser?.id)
+    row.sender === currentUser?.email
   ){
     return;
   }
@@ -4376,13 +4118,9 @@ async function markVisibleMessagesAsRead(){
         "read_at",
         null
       )
-      .eq(
-        "recipient",
-        currentUser.id
-      )
-      .eq(
+      .neq(
         "sender",
-        contactProfile?.id || ""
+        currentUser.email
       )
       .order(
         "created_at",
@@ -4752,9 +4490,6 @@ function safeEffect(
 
 async function sendMessage(){
 
-  clearTimeout(typingTimer);
-  broadcastTyping(false);
-
   const text =
     input.value.trim();
 
@@ -4818,7 +4553,7 @@ async function sendMessage(){
         .insert({
 
           sender:
-            currentUser.id,
+            currentUser.email,
 
           recipient:
             contactProfile.id,
@@ -4967,7 +4702,7 @@ async function sendGif(){
         .insert({
 
           sender:
-            currentUser.id,
+            currentUser.email,
 
           recipient:
             contactProfile.id,
@@ -5098,27 +4833,73 @@ function subscribeToMessages(){
 }
 
 
-function processRealtimeMessage(row){
+function processRealtimeMessage(
+  row
+){
 
-  if(!row || !currentUser?.id) return;
+  if(!row)
+    return;
 
-  const sender = String(row.sender || "");
-  const recipient = String(row.recipient || "");
-  const myId = String(currentUser.id);
-  const contactId = String(contactProfile?.id || (myId === BRUXINHA_UUID ? RAPOSINHA_UUID : BRUXINHA_UUID));
+  const sender =
+    String(row.sender || "")
+      .toLowerCase();
+
+  const recipient =
+    String(row.recipient || "");
+
+  const myEmail =
+    String(
+      currentUser?.email || ""
+    ).toLowerCase();
+
+  const myId =
+    String(
+      currentUser?.id || ""
+    );
 
   const belongsToConversation =
-    (sender === myId && recipient === contactId) ||
-    (sender === contactId && recipient === myId);
+    (
+      sender === myEmail &&
+      recipient === myId
+    ) ||
+    (
+      recipient === myId
+    ) ||
+    (
+      sender === myEmail
+    ) ||
+    (
+      contactProfile?.id &&
+      (
+        recipient ===
+          String(contactProfile.id) ||
+        sender ===
+          String(contactProfile.id)
+      )
+    );
 
-  if(!belongsToConversation) return;
-
-  if(row.formatting?.type === "nudge"){
-    handleIncomingNudge(row);
+  if(
+    row.recipient &&
+    !belongsToConversation
+  ){
     return;
   }
 
-  renderMessage(row, true);
+  if(
+    row.formatting?.type === "nudge"
+  ){
+
+    handleIncomingNudge(
+      row
+    );
+
+    return;
+  }
+
+  renderMessage(
+    row,
+    true
+  );
 }
 
 
@@ -5138,7 +4919,10 @@ function updateRenderedMessage(
     return;
 
   const mine =
-    String(row.sender || "") === String(currentUser?.id || "");
+    String(row.sender || "")
+      .toLowerCase() ===
+    String(currentUser?.email || "")
+      .toLowerCase();
 
   if(!mine)
     return;
@@ -5598,7 +5382,7 @@ async function sendNudge(){
       .insert({
 
         sender:
-          currentUser.id,
+          currentUser.email,
 
         recipient:
           contactProfile?.id || null,
@@ -6063,19 +5847,6 @@ passwordInput.addEventListener(
 
 
 input.addEventListener(
-  "input",
-  handleTypingInput
-);
-
-input.addEventListener(
-  "blur",
-  ()=>{
-    clearTimeout(typingTimer);
-    broadcastTyping(false);
-  }
-);
-
-input.addEventListener(
   "keydown",
   event=>{
 
@@ -6144,16 +5915,13 @@ checkSession();
 </script>
 
 
-<script id="msn2008-theme-enhancement">
-(function(){
-  function refreshMSNVisual(){
-    const root=document.documentElement;
-    const accent=getComputedStyle(root).getPropertyValue("--msn-accent").trim();
-    if(!accent) return;
-    root.style.setProperty("--msn-title-highlight",accent);
-  }
-  document.addEventListener("DOMContentLoaded",refreshMSNVisual);
-})();
+<script>
+window.addEventListener("error", function (e) {
+  console.error("MSN erro JavaScript:", e.error || e.message);
+});
+window.addEventListener("unhandledrejection", function (e) {
+  console.error("MSN Promise rejeitada:", e.reason);
+});
 </script>
 
 </body>
