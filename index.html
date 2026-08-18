@@ -30,7 +30,125 @@
       font-family: Tahoma, Arial, sans-serif;
     }
 
-    /* LOGIN */
+    /* =====================================================
+       LOGO MSN
+       ===================================================== */
+
+    .msn-logo {
+      width: 22px;
+      height: 22px;
+      margin-right: 7px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .msn-logo .head {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      top: 1px;
+      left: 7px;
+      background: #f7f7f7;
+      border: 1px solid #d8d8d8;
+    }
+
+    .msn-logo .wing-left,
+    .msn-logo .wing-right {
+      position: absolute;
+      width: 10px;
+      height: 8px;
+      top: 8px;
+      background: #8fd14f;
+      border: 1px solid rgba(0,0,0,.15);
+    }
+
+    .msn-logo .wing-left {
+      left: 1px;
+      border-radius: 8px 2px 8px 2px;
+      transform: rotate(-20deg);
+    }
+
+    .msn-logo .wing-right {
+      right: 1px;
+      border-radius: 2px 8px 2px 8px;
+      transform: rotate(20deg);
+    }
+
+    .msn-logo .body {
+      position: absolute;
+      width: 4px;
+      height: 10px;
+      left: 9px;
+      top: 7px;
+      border-radius: 4px;
+      background: #777;
+    }
+
+    .big-msn-logo {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 13px;
+      position: relative;
+    }
+
+    .big-msn-logo .head {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      top: 2px;
+      left: 24px;
+      background: #fff;
+      border: 2px solid #b9b9b9;
+    }
+
+    .big-msn-logo .wing-left,
+    .big-msn-logo .wing-right {
+      position: absolute;
+      width: 32px;
+      height: 25px;
+      top: 23px;
+      background: #8fd14f;
+      border: 2px solid #6e9f3d;
+    }
+
+    .big-msn-logo .wing-left {
+      left: 1px;
+      border-radius: 22px 5px 22px 5px;
+      transform: rotate(-18deg);
+    }
+
+    .big-msn-logo .wing-right {
+      right: 1px;
+      border-radius: 5px 22px 5px 22px;
+      transform: rotate(18deg);
+    }
+
+    .big-msn-logo .body {
+      position: absolute;
+      width: 9px;
+      height: 31px;
+      left: 30px;
+      top: 20px;
+      border-radius: 8px;
+      background: #777;
+      border: 1px solid #555;
+    }
+
+    .big-msn-logo .tail {
+      position: absolute;
+      width: 23px;
+      height: 12px;
+      left: 24px;
+      bottom: 7px;
+      border-bottom: 4px solid #777;
+      border-radius: 50%;
+    }
+
+    /* =====================================================
+       LOGIN
+       ===================================================== */
 
     #loginScreen {
       width: 100%;
@@ -54,42 +172,10 @@
       text-shadow: 1px 1px 1px #24506e;
     }
 
-    .msn-logo {
-      width: 21px;
-      height: 21px;
-      margin-right: 7px;
-      border-radius: 50%;
-      background: #8fd14f;
-      border: 2px solid white;
-      position: relative;
-    }
-
-    .msn-logo::after {
-      content: "☁";
-      position: absolute;
-      color: white;
-      font-size: 12px;
-      left: 2px;
-      top: -1px;
-    }
-
     .login-content {
       padding: 25px 22px;
       text-align: center;
       background: linear-gradient(#fff, #e7eef4);
-    }
-
-    .login-avatar {
-      width: 76px;
-      height: 76px;
-      margin: 0 auto 12px;
-      border: 2px solid #9ab3c7;
-      background: #eee;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 42px;
-      box-shadow: inset 0 0 5px rgba(0,0,0,.2);
     }
 
     .login-title-text {
@@ -130,8 +216,9 @@
       cursor: pointer;
     }
 
-    .login-button:active {
-      background: #8ec5e5;
+    .login-button:disabled {
+      opacity: .65;
+      cursor: wait;
     }
 
     #loginError {
@@ -154,7 +241,9 @@
       background: #eee;
     }
 
-    /* MSN */
+    /* =====================================================
+       MSN
+       ===================================================== */
 
     #messenger {
       display: none;
@@ -248,19 +337,6 @@
       font-style: italic;
     }
 
-    .logout {
-      margin-left: auto;
-      margin-top: 3px;
-      height: 24px;
-      padding: 0 7px;
-      border: 1px solid #aaa;
-      background: linear-gradient(#fff, #ddd);
-      color: #555;
-      border-radius: 3px;
-      font-size: 9px;
-      cursor: pointer;
-    }
-
     .contact-area {
       background: #fff;
       padding: 9px;
@@ -333,6 +409,7 @@
       margin-top: 2px;
       color: #222;
       word-wrap: break-word;
+      white-space: pre-wrap;
     }
 
     .message-time {
@@ -342,13 +419,12 @@
       font-weight: normal;
     }
 
-    .typing {
-      display: none;
-      font-size: 10px;
+    .system-message {
       color: #777;
       font-style: italic;
-      padding: 3px 10px;
-      background: #f3f3f3;
+      font-size: 10px;
+      text-align: center;
+      margin: 8px 0;
     }
 
     .input-area {
@@ -440,19 +516,31 @@
 
 <body>
 
-  <!-- LOGIN -->
+  <!-- =====================================================
+       LOGIN
+       ===================================================== -->
 
   <div id="loginScreen">
 
     <div class="login-title">
-      <div class="msn-logo"></div>
+      <div class="msn-logo">
+        <div class="head"></div>
+        <div class="wing-left"></div>
+        <div class="wing-right"></div>
+        <div class="body"></div>
+      </div>
+
       MSN Messenger
     </div>
 
     <div class="login-content">
 
-      <div class="login-avatar">
-        ☾
+      <div class="big-msn-logo">
+        <div class="head"></div>
+        <div class="wing-left"></div>
+        <div class="wing-right"></div>
+        <div class="body"></div>
+        <div class="tail"></div>
       </div>
 
       <div class="login-title-text">
@@ -460,7 +548,7 @@
       </div>
 
       <div class="login-subtitle">
-        Entre para conversar com sua raposinha 💜
+        Entre para conversar com seu amor 💜
       </div>
 
       <input
@@ -496,13 +584,20 @@
   </div>
 
 
-  <!-- MSN -->
+  <!-- =====================================================
+       MSN
+       ===================================================== -->
 
-  <div class="messenger" id="messenger">
+  <div id="messenger">
 
     <div class="titlebar">
 
-      <div class="msn-logo"></div>
+      <div class="msn-logo">
+        <div class="head"></div>
+        <div class="wing-left"></div>
+        <div class="wing-right"></div>
+        <div class="body"></div>
+      </div>
 
       MSN Messenger
 
@@ -549,7 +644,7 @@
     <div class="contact-area">
 
       <div class="contact-title">
-        ONLINE — 1
+        CONVERSA — 1
       </div>
 
       <div class="contact">
@@ -578,11 +673,6 @@
     <div class="chat" id="chat"></div>
 
 
-    <div class="typing" id="typing">
-      Raposinha está digitando...
-    </div>
-
-
     <div class="toolbar">
 
       <button onclick="addEmoji('😊')">😊</button>
@@ -607,7 +697,6 @@
         type="text"
         placeholder="Digite uma mensagem..."
         autocomplete="off"
-        onkeydown="if(event.key === 'Enter') sendMessage()"
       >
 
       <button
@@ -621,7 +710,7 @@
 
 
     <div class="footer">
-      MSN Messenger • Bruxinha & Raposinha
+      MSN Messenger • Isabella & Raposinha
     </div>
 
   </div>
@@ -629,9 +718,9 @@
 
   <script>
 
-    /* =========================================================
+    /* =====================================================
        SUPABASE
-       ========================================================= */
+       ===================================================== */
 
     const SUPABASE_URL =
       "https://ojoecmioovwmirdvedzr.supabase.co";
@@ -646,9 +735,9 @@
       );
 
 
-    /* =========================================================
+    /* =====================================================
        ELEMENTOS
-       ========================================================= */
+       ===================================================== */
 
     const loginScreen =
       document.getElementById("loginScreen");
@@ -677,12 +766,13 @@
 
     let currentUser = null;
     let currentProfile = null;
+    let contactProfile = null;
     let realtimeChannel = null;
 
 
-    /* =========================================================
+    /* =====================================================
        LOGIN
-       ========================================================= */
+       ===================================================== */
 
     async function login() {
 
@@ -708,17 +798,22 @@
 
       try {
 
-        const { data, error } =
-          await supabaseClient.auth.signInWithPassword({
-            email: email,
-            password: password
-          });
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth
+            .signInWithPassword({
+              email,
+              password
+            });
 
         if (error) {
           throw error;
         }
 
-        currentUser = data.user;
+        currentUser =
+          data.user;
 
         await startMessenger();
 
@@ -742,7 +837,9 @@
     function getFriendlyAuthError(error) {
 
       const message =
-        String(error?.message || "").toLowerCase();
+        String(
+          error?.message || ""
+        ).toLowerCase();
 
       if (
         message.includes("invalid login") ||
@@ -757,30 +854,36 @@
         return "Esse e-mail ainda não foi confirmado no Supabase.";
       }
 
-      return error?.message ||
-        "Não foi possível entrar.";
+      return (
+        error?.message ||
+        "Não foi possível entrar."
+      );
     }
 
 
     function showLoginError(message) {
 
-      loginError.textContent = message;
+      loginError.textContent =
+        message;
 
-      loginError.style.display = "block";
+      loginError.style.display =
+        "block";
     }
 
 
     function hideLoginError() {
 
-      loginError.textContent = "";
+      loginError.textContent =
+        "";
 
-      loginError.style.display = "none";
+      loginError.style.display =
+        "none";
     }
 
 
-    /* =========================================================
-       INICIALIZAÇÃO
-       ========================================================= */
+    /* =====================================================
+       SESSÃO
+       ===================================================== */
 
     async function checkSession() {
 
@@ -789,7 +892,9 @@
         const {
           data,
           error
-        } = await supabaseClient.auth.getSession();
+        } =
+          await supabaseClient.auth
+            .getSession();
 
         if (error) {
           throw error;
@@ -815,99 +920,118 @@
     }
 
 
-    supabaseClient.auth.onAuthStateChange(
-      async (event, session) => {
+    supabaseClient.auth
+      .onAuthStateChange(
+        async (event, session) => {
 
-        if (
-          event === "SIGNED_IN" &&
-          session?.user
-        ) {
+          if (
+            event === "SIGNED_IN" &&
+            session?.user
+          ) {
 
-          currentUser = session.user;
-
-        }
-
-        if (event === "SIGNED_OUT") {
-
-          currentUser = null;
-          currentProfile = null;
-
-          if (realtimeChannel) {
-
-            await supabaseClient.removeChannel(
-              realtimeChannel
-            );
-
-            realtimeChannel = null;
+            currentUser =
+              session.user;
 
           }
 
-          messenger.style.display = "none";
-          loginScreen.style.display = "block";
+          if (
+            event === "SIGNED_OUT"
+          ) {
 
-          chat.innerHTML = "";
+            currentUser = null;
+            currentProfile = null;
+            contactProfile = null;
+
+            if (realtimeChannel) {
+
+              await supabaseClient
+                .removeChannel(
+                  realtimeChannel
+                );
+
+              realtimeChannel = null;
+            }
+
+            messenger.style.display =
+              "none";
+
+            loginScreen.style.display =
+              "block";
+
+            chat.innerHTML =
+              "";
+
+          }
 
         }
-
-      }
-    );
+      );
 
 
-    /* =========================================================
+    /* =====================================================
        ABRIR MSN
-       ========================================================= */
+       ===================================================== */
 
     async function startMessenger() {
 
       if (!currentUser) return;
 
-      loginScreen.style.display = "none";
-      messenger.style.display = "block";
+      loginScreen.style.display =
+        "none";
 
-      await loadProfile();
+      messenger.style.display =
+        "block";
+
+      await loadMyProfile();
+      await loadContactProfile();
       await loadMessages();
+
       subscribeToMessages();
 
       input.focus();
     }
 
 
-    /* =========================================================
-       PROFILE
-       ========================================================= */
+    /* =====================================================
+       PERFIL DA PESSOA LOGADA
+       ===================================================== */
 
-    async function loadProfile() {
+    async function loadMyProfile() {
 
       const {
         data,
         error
-      } = await supabaseClient
-        .from("profiles")
-        .select(
-          "id, username, status, personal_message, avatar_url"
-        )
-        .eq("id", currentUser.id)
-        .maybeSingle();
+      } =
+        await supabaseClient
+          .from("profiles")
+          .select(
+            "id, username, status, personal_message, avatar_url"
+          )
+          .eq(
+            "id",
+            currentUser.id
+          )
+          .maybeSingle();
 
       if (error) {
 
         console.error(
-          "Erro ao carregar perfil:",
+          "Erro ao carregar meu perfil:",
           error
         );
 
-        return;
+        updateFallbackMyProfile();
 
+        return;
       }
 
-      currentProfile = data;
+      currentProfile =
+        data;
 
       if (!data) {
 
-        updateDefaultProfile();
+        updateFallbackMyProfile();
 
         return;
-
       }
 
       document.getElementById("myName")
@@ -918,7 +1042,10 @@
       document.getElementById("myStatus")
         .textContent =
           "● " +
-          (data.status || "Online");
+          (
+            data.status ||
+            "Online"
+          );
 
       document.getElementById("myMessage")
         .textContent =
@@ -929,24 +1056,25 @@
       if (data.avatar_url) {
 
         setAvatar(
-          document.getElementById("myAvatar"),
-          data.avatar_url
+          document.getElementById(
+            "myAvatar"
+          ),
+          data.avatar_url,
+          getFallbackAvatar()
         );
 
       } else {
 
-        document.getElementById("myAvatar")
-          .textContent =
-            getFallbackAvatar();
+        document.getElementById(
+          "myAvatar"
+        ).textContent =
+          getFallbackAvatar();
 
       }
-
-      await loadContact();
-
     }
 
 
-    function updateDefaultProfile() {
+    function updateFallbackMyProfile() {
 
       document.getElementById("myName")
         .textContent =
@@ -958,23 +1086,19 @@
 
       document.getElementById("myMessage")
         .textContent =
-          '"Esperando minha raposinha..."';
+          '"Esperando meu amor..."';
 
       document.getElementById("myAvatar")
         .textContent =
           getFallbackAvatar();
-
     }
 
 
     function getFallbackName() {
 
-      if (!currentUser) {
-        return "Bruxinha";
-      }
-
       const email =
-        currentUser.email?.toLowerCase();
+        currentUser?.email
+          ?.toLowerCase();
 
       if (
         email ===
@@ -989,12 +1113,9 @@
 
     function getFallbackAvatar() {
 
-      if (!currentUser) {
-        return "☾";
-      }
-
       const email =
-        currentUser.email?.toLowerCase();
+        currentUser?.email
+          ?.toLowerCase();
 
       if (
         email ===
@@ -1007,159 +1128,191 @@
     }
 
 
-    async function loadContact() {
+    /* =====================================================
+       PERFIL DO AMOR
+       ===================================================== */
 
-      const otherEmail =
-        currentUser.email?.toLowerCase() ===
+    async function loadContactProfile() {
+
+      const myEmail =
+        currentUser?.email
+          ?.toLowerCase();
+
+      const contactUsername =
+        myEmail ===
         "belinhahcardozoalm@gmail.com"
-          ? "andressa.verissimo.g@icloud.com"
-          : "belinhahcardozoalm@gmail.com";
+          ? "Raposinha"
+          : "Bruxinha";
+
+      const fallbackAvatar =
+        contactUsername === "Raposinha"
+          ? "🦊"
+          : "☾";
 
       const {
         data,
         error
-      } = await supabaseClient
-        .from("profiles")
-        .select(
-          "id, username, status, personal_message, avatar_url"
-        )
-        .eq(
-          "id",
-          await getOtherUserId(otherEmail)
-        )
-        .maybeSingle();
+      } =
+        await supabaseClient
+          .from("profiles")
+          .select(
+            "id, username, status, personal_message, avatar_url"
+          )
+          .eq(
+            "username",
+            contactUsername
+          )
+          .maybeSingle();
 
       if (error) {
 
-        console.warn(
-          "Não foi possível carregar o contato:",
+        console.error(
+          "Erro ao carregar perfil do contato:",
           error
         );
 
-        return;
+        showFallbackContact(
+          contactUsername,
+          fallbackAvatar
+        );
 
+        return;
       }
+
+      contactProfile =
+        data;
 
       if (!data) {
 
-        document.getElementById("contactName")
-          .textContent =
-            otherEmail ===
-            "andressa.verissimo.g@icloud.com"
-              ? "Raposinha"
-              : "Bruxinha";
-
-        document.getElementById("contactStatus")
-          .textContent =
-            "● Offline";
+        showFallbackContact(
+          contactUsername,
+          fallbackAvatar
+        );
 
         return;
-
       }
 
-      document.getElementById("contactName")
-        .textContent =
-          data.username ||
-          (
-            otherEmail ===
-            "andressa.verissimo.g@icloud.com"
-              ? "Raposinha"
-              : "Bruxinha"
-          );
+      document.getElementById(
+        "contactName"
+      ).textContent =
+        data.username ||
+        contactUsername;
 
-      document.getElementById("contactStatus")
-        .textContent =
-          "● " +
-          (data.status || "Online");
+      document.getElementById(
+        "contactStatus"
+      ).textContent =
+        "● " +
+        (
+          data.status ||
+          "Online"
+        );
 
       if (data.avatar_url) {
 
         setAvatar(
-          document.getElementById("contactAvatar"),
-          data.avatar_url
+          document.getElementById(
+            "contactAvatar"
+          ),
+          data.avatar_url,
+          fallbackAvatar
         );
 
       } else {
 
-        document.getElementById("contactAvatar")
-          .textContent =
-            otherEmail ===
-            "andressa.verissimo.g@icloud.com"
-              ? "🦊"
-              : "☾";
-
+        document.getElementById(
+          "contactAvatar"
+        ).textContent =
+          fallbackAvatar;
       }
-
     }
 
 
-    async function getOtherUserId(email) {
+    function showFallbackContact(
+      username,
+      avatar
+    ) {
 
-      const {
-        data
-      } = await supabaseClient
-        .from("profiles")
-        .select("id")
-        .eq("id", currentUser.id)
-        .maybeSingle();
+      document.getElementById(
+        "contactName"
+      ).textContent =
+        username;
 
-      /*
-        A tabela profiles usa o id do usuário.
-        O cliente não consegue consultar auth.users
-        diretamente por segurança.
+      document.getElementById(
+        "contactStatus"
+      ).textContent =
+        "● Online";
 
-        O contato continuará com o fallback visual
-        caso ainda não exista uma linha correspondente.
-      */
-
-      return data?.id || null;
+      document.getElementById(
+        "contactAvatar"
+      ).textContent =
+        avatar;
     }
 
 
-    function setAvatar(element, url) {
+    /* =====================================================
+       AVATAR
+       ===================================================== */
 
-      element.innerHTML = "";
+    function setAvatar(
+      element,
+      url,
+      fallback
+    ) {
+
+      element.innerHTML =
+        "";
 
       const img =
-        document.createElement("img");
+        document.createElement(
+          "img"
+        );
 
-      img.src = url;
+      img.src =
+        url;
 
-      img.alt = "Avatar";
+      img.alt =
+        "Avatar";
 
-      img.onerror = () => {
+      img.onerror =
+        () => {
 
-        element.textContent =
-          getFallbackAvatar();
+          element.innerHTML =
+            "";
 
-      };
+          element.textContent =
+            fallback;
+        };
 
-      element.appendChild(img);
+      element.appendChild(
+        img
+      );
     }
 
 
-    /* =========================================================
-       MESSAGES
-       ========================================================= */
+    /* =====================================================
+       MENSAGENS
+       ===================================================== */
 
     async function loadMessages() {
 
-      chat.innerHTML = "";
+      chat.innerHTML =
+        "";
 
       const {
         data,
         error
-      } = await supabaseClient
-        .from("messages")
-        .select(
-          "id, sender, message, created_at"
-        )
-        .order(
-          "created_at",
-          {
-            ascending: true
-          }
-        );
+      } =
+        await supabaseClient
+          .from("messages")
+          .select(
+            "id, sender, message, created_at"
+          )
+          .order(
+            "created_at",
+            {
+              ascending: true
+            }
+          );
 
       if (error) {
 
@@ -1173,51 +1326,78 @@
         );
 
         return;
-
       }
 
-      if (!data || data.length === 0) {
+      if (
+        !data ||
+        data.length === 0
+      ) {
 
         addSystemMessage(
-          "Nenhuma mensagem ainda. Mande um oi! 💜"
+          "Nenhuma mensagem ainda. Mande um oi, meu amor! 💜"
         );
 
         return;
-
       }
 
       data.forEach(
-        renderMessage
+        row => renderMessage(
+          row,
+          false
+        )
       );
 
       scrollChat();
-
     }
 
 
-    function renderMessage(row) {
+    function renderMessage(
+      row,
+      isRealtime
+    ) {
 
       if (!row) return;
+
+      /*
+       Evita duplicação caso a mensagem
+       tenha acabado de ser enviada por nós
+       e também chegue pelo Realtime.
+      */
+
+      if (
+        document.querySelector(
+          `[data-message-id="${row.id}"]`
+        )
+      ) {
+        return;
+      }
 
       const mine =
         row.sender?.toLowerCase() ===
         currentUser?.email?.toLowerCase();
 
       const message =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
       message.className =
         mine
           ? "message mine"
           : "message";
 
+      message.dataset.messageId =
+        row.id;
+
       const senderName =
-        getNameFromEmail(row.sender);
+        getNameFromEmail(
+          row.sender
+        );
 
       const time =
-        row.created_at
-          ? formatTime(row.created_at)
-          : "";
+        formatTime(
+          row.created_at
+        );
 
       message.innerHTML = `
         <div class="sender">
@@ -1232,37 +1412,17 @@
         </div>
       `;
 
-      chat.appendChild(message);
+      chat.appendChild(
+        message
+      );
 
       scrollChat();
-
     }
 
 
-    function addSystemMessage(text) {
-
-      const message =
-        document.createElement("div");
-
-      message.className =
-        "message";
-
-      message.innerHTML = `
-        <div class="sender">
-          MSN Messenger
-        </div>
-
-        <div class="text">
-          ${escapeHTML(text)}
-        </div>
-      `;
-
-      chat.appendChild(message);
-
-    }
-
-
-    function getNameFromEmail(email) {
+    function getNameFromEmail(
+      email
+    ) {
 
       if (!email) {
         return "Usuário";
@@ -1289,30 +1449,57 @@
     }
 
 
-    function formatTime(dateString) {
+    function addSystemMessage(
+      text
+    ) {
+
+      const message =
+        document.createElement(
+          "div"
+        );
+
+      message.className =
+        "system-message";
+
+      message.textContent =
+        text;
+
+      chat.appendChild(
+        message
+      );
+    }
+
+
+    function formatTime(
+      dateString
+    ) {
+
+      if (!dateString) {
+        return "";
+      }
 
       try {
 
-        return new Date(dateString)
-          .toLocaleTimeString(
-            "pt-BR",
-            {
-              hour: "2-digit",
-              minute: "2-digit"
-            }
-          );
+        return new Date(
+          dateString
+        ).toLocaleTimeString(
+          "pt-BR",
+          {
+            hour: "2-digit",
+            minute: "2-digit"
+          }
+        );
 
       } catch {
 
         return "";
-
       }
     }
 
 
-    /* =========================================================
-       ENVIAR MENSAGEM
-       ========================================================= */
+    /* =====================================================
+       ENVIAR
+       ===================================================== */
 
     async function sendMessage() {
 
@@ -1323,32 +1510,52 @@
 
       if (!currentUser) {
 
-        showLoginError(
-          "Você precisa estar conectado."
+        alert(
+          "Você precisa estar conectada."
         );
 
         return;
-
       }
 
-      input.disabled = true;
+      input.disabled =
+        true;
 
       try {
 
         const {
+          data,
           error
-        } = await supabaseClient
-          .from("messages")
-          .insert({
-            sender: currentUser.email,
-            message: text
-          });
+        } =
+          await supabaseClient
+            .from("messages")
+            .insert({
+              sender:
+                currentUser.email,
+              message:
+                text
+            })
+            .select(
+              "id, sender, message, created_at"
+            )
+            .single();
 
         if (error) {
           throw error;
         }
 
-        input.value = "";
+        /*
+          Em algumas configurações o Realtime
+          pode não devolver imediatamente para
+          o próprio cliente. Renderizamos aqui.
+        */
+
+        renderMessage(
+          data,
+          false
+        );
+
+        input.value =
+          "";
 
       } catch (error) {
 
@@ -1363,30 +1570,34 @@
 
       } finally {
 
-        input.disabled = false;
-        input.focus();
+        input.disabled =
+          false;
 
+        input.focus();
       }
     }
 
 
-    /* =========================================================
+    /* =====================================================
        REALTIME
-       ========================================================= */
+       ===================================================== */
 
     function subscribeToMessages() {
 
       if (realtimeChannel) {
 
-        supabaseClient.removeChannel(
-          realtimeChannel
-        );
+        supabaseClient
+          .removeChannel(
+            realtimeChannel
+          );
 
       }
 
       realtimeChannel =
         supabaseClient
-          .channel("msn-messages")
+          .channel(
+            "msn-messages"
+          )
           .on(
             "postgres_changes",
             {
@@ -1396,22 +1607,22 @@
             },
             payload => {
 
-              const newMessage =
-                payload.new;
+              if (
+                payload?.new
+              ) {
 
-              if (!newMessage) return;
-
-              renderMessage(
-                newMessage
-              );
-
+                renderMessage(
+                  payload.new,
+                  true
+                );
+              }
             }
           )
           .subscribe(
             status => {
 
               console.log(
-                "Realtime:",
+                "MSN Realtime:",
                 status
               );
 
@@ -1420,22 +1631,24 @@
     }
 
 
-    /* =========================================================
+    /* =====================================================
        EMOJIS
-       ========================================================= */
+       ===================================================== */
 
-    function addEmoji(emoji) {
+    function addEmoji(
+      emoji
+    ) {
 
-      input.value += emoji;
+      input.value +=
+        emoji;
 
       input.focus();
-
     }
 
 
-    /* =========================================================
+    /* =====================================================
        NUDGE
-       ========================================================= */
+       ===================================================== */
 
     function nudge() {
 
@@ -1459,35 +1672,24 @@
         },
         1000
       );
-
     }
 
 
-    /* =========================================================
+    /* =====================================================
        LOGOUT
-       ========================================================= */
+       ===================================================== */
 
     async function logout() {
 
-      try {
-
-        await supabaseClient.auth.signOut();
-
-      } catch (error) {
-
-        console.error(
-          "Erro ao sair:",
-          error
-        );
-
-      }
-
+      await supabaseClient
+        .auth
+        .signOut();
     }
 
 
-    /* =========================================================
+    /* =====================================================
        UTILITÁRIOS
-       ========================================================= */
+       ===================================================== */
 
     function scrollChat() {
 
@@ -1499,26 +1701,30 @@
 
         }
       );
-
     }
 
 
-    function escapeHTML(text) {
+    function escapeHTML(
+      text
+    ) {
 
       const div =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
       div.textContent =
-        String(text ?? "");
+        String(
+          text ?? ""
+        );
 
       return div.innerHTML;
-
     }
 
 
-    /* =========================================================
-       ENTER NO LOGIN
-       ========================================================= */
+    /* =====================================================
+       ENTER
+       ===================================================== */
 
     passwordInput.addEventListener(
       "keydown",
@@ -1529,16 +1735,30 @@
         ) {
 
           login();
-
         }
-
       }
     );
 
 
-    /* =========================================================
-       START
-       ========================================================= */
+    input.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Enter"
+        ) {
+
+          event.preventDefault();
+
+          sendMessage();
+        }
+      }
+    );
+
+
+    /* =====================================================
+       INICIAR
+       ===================================================== */
 
     checkSession();
 
