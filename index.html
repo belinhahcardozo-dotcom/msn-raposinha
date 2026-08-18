@@ -1909,6 +1909,51 @@ body{
 }
 </style>
 
+
+<style id="msn-constant-chat-scrollbar">
+/* Barra de rolagem SEMPRE visível dentro do histórico do chat. */
+html,
+body{
+  overflow:hidden !important;
+}
+
+#messenger .chat{
+  overflow-y:scroll !important;
+  overflow-x:hidden !important;
+  scrollbar-gutter:stable !important;
+  overscroll-behavior:contain !important;
+}
+
+/* Chrome / Edge */
+#messenger .chat::-webkit-scrollbar{
+  width:14px !important;
+  display:block !important;
+}
+#messenger .chat::-webkit-scrollbar-track{
+  display:block !important;
+  background:#e7edf1 !important;
+  border-left:1px solid #b5c5ce !important;
+}
+#messenger .chat::-webkit-scrollbar-thumb{
+  display:block !important;
+  min-height:36px !important;
+  background:linear-gradient(
+    90deg,
+    #dceaf1 0%,
+    #a9c3d2 48%,
+    #86aabd 100%
+  ) !important;
+  border:1px solid #7795a5 !important;
+  border-radius:2px !important;
+}
+
+/* Firefox */
+#messenger .chat{
+  scrollbar-width:auto !important;
+  scrollbar-color:#9db8c8 #e7edf1 !important;
+}
+</style>
+
 </head>
 
 <body>
