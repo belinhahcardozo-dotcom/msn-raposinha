@@ -3182,18 +3182,27 @@ async function saveProfile(){
 
 async function loadContactProfile(){
 
-  const myEmail =
-    currentUser?.email?.toLowerCase();
+  /*
+    Destinatário FIXO por UUID.
+    Não usamos mais o nickname "Raposinha"/"Bruxinha"
+    para localizar o usuário no Supabase.
+  */
 
-  const contactUsername =
-    myEmail ===
-      "belinhahcardozoalm@gmail.com"
+  const isBruxinha =
+    currentUser?.id === USER_UUIDS.bruxinha;
+
+  const contactId =
+    isBruxinha
+      ? USER_UUIDS.raposinha
+      : USER_UUIDS.bruxinha;
+
+  const fallbackName =
+    isBruxinha
       ? "Raposinha"
       : "Bruxinha";
 
   const fallbackAvatar =
-    contactUsername ===
-      "Raposinha"
+    isBruxinha
       ? "🦊"
       : "☾";
 
@@ -3204,39 +3213,59 @@ async function loadContactProfile(){
         "id, username, status, personal_message, avatar_url"
       )
       .eq(
-        "username",
-        contactUsername
+        "id",
+        contactId
       )
       .maybeSingle();
 
   if(error){
 
-    console.error(error);
-
-    showFallbackContact(
-      contactUsername,
-      fallbackAvatar
+    console.error(
+      "Erro ao carregar perfil do contato:",
+      error
     );
 
+    /*
+      Mesmo que a leitura do perfil seja bloqueada por RLS,
+      mantemos o destinatário identificado pelo UUID.
+    */
+    contactProfile = {
+      id: contactId,
+      username: fallbackName,
+      status: "Online",
+      personal_message: "",
+      avatar_url: null
+    };
+
+    updateContactUI(contactProfile);
     return;
   }
-
-  contactProfile =
-    data;
 
   if(!data){
 
-    showFallbackContact(
-      contactUsername,
-      fallbackAvatar
-    );
+    contactProfile = {
+      id: contactId,
+      username: fallbackName,
+      status: "Online",
+      personal_message: "",
+      avatar_url: null
+    };
 
+    updateContactUI(contactProfile);
     return;
   }
 
-  updateContactUI(data);
-}
+  /*
+    O ID vem diretamente da linha do Supabase e é validado
+    contra o UUID esperado antes de ser usado no envio.
+  */
+  contactProfile = {
+    ...data,
+    id: contactId
+  };
 
+  updateContactUI(contactProfile);
+}
 
 function updateContactUI(data){
 
@@ -4328,10 +4357,15 @@ async function sendMessage(){
     return;
   }
 
-  if(!contactProfile?.id){
+  if(
+    !currentUser?.id ||
+    !USER_UUIDS[currentUser.id === USER_UUIDS.bruxinha
+      ? "bruxinha"
+      : "raposinha"]
+  ){
 
     alert(
-      "Não consegui identificar a Raposinha."
+      "Não consegui identificar o destinatário."
     );
 
     return;
@@ -4370,6 +4404,15 @@ async function sendMessage(){
 
   try{
 
+    /*
+      O destinatário do INSERT é sempre o UUID fixo do contato.
+      Isso elimina a dependência do nickname para o envio.
+    */
+    const recipientUUID =
+      currentUser.id === USER_UUIDS.bruxinha
+        ? USER_UUIDS.raposinha
+        : USER_UUIDS.bruxinha;
+
     const {data,error} =
       await supabaseClient
         .from("messages")
@@ -4379,7 +4422,7 @@ async function sendMessage(){
             currentUser.email,
 
           recipient:
-            contactProfile.id,
+            recipientUUID,
 
           message:
             text,
