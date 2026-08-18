@@ -3,37 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#1766a5">
+<meta name="theme-color" content="#07569b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-<title>MSN Messenger — Bruxinha & Raposinha</title>
+<title>MSN no Ar — Bruxinha & Raposinha</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
+/* =========================================================
+   MSN NO AR — RETRO WINDOWS / MSN MESSENGER
+========================================================= */
 
-html,body{
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
   margin:0;
   min-height:100%;
 }
 
 body{
   min-height:100vh;
-  padding:15px;
+  padding:18px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-family:Tahoma,Arial,sans-serif;
-  background:
-    linear-gradient(rgba(255,255,255,.38),rgba(255,255,255,.38)),
-    #d9e8f5;
+  font-family:Tahoma,Verdana,Arial,sans-serif;
   color:#222;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(255,255,255,.9),transparent 28%),
+    linear-gradient(#cfe6f8 0%,#a8cce8 48%,#c4dced 100%);
 }
 
-button,input,select{
-  font-family:Tahoma,Arial,sans-serif;
+/* pequenos pixels decorativos no fundo */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.18;
+  background-image:
+    linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px),
+    linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px);
+  background-size:8px 8px;
+}
+
+button,
+input,
+select{
+  font-family:Tahoma,Verdana,Arial,sans-serif;
 }
 
 button{
@@ -45,256 +67,375 @@ button:disabled{
   cursor:not-allowed;
 }
 
-/* =====================================================
-   BASE
-===================================================== */
+/* =========================================================
+   JANELA PRINCIPAL
+========================================================= */
 
 #loginScreen,
 #messenger{
+  position:relative;
   width:100%;
-  max-width:980px;
-  background:#f1f1f1;
-  border:1px solid #55738c;
-  border-radius:8px 8px 4px 4px;
-  box-shadow:0 5px 25px rgba(0,0,0,.35);
+  max-width:1000px;
+  background:#ece9d8;
+  border:1px solid #003c74;
+  border-radius:7px 7px 3px 3px;
+  box-shadow:
+    0 0 0 1px #7ca8cc,
+    0 0 0 2px #d8e8f5,
+    0 12px 35px rgba(0,0,0,.38);
   overflow:hidden;
 }
 
 #messenger{
   display:none;
-  position:relative;
-  min-height:720px;
+  min-height:730px;
 }
+
+/* =========================================================
+   BARRA DE TÍTULO
+========================================================= */
 
 .titlebar,
 .login-title,
 .editor-title,
 .settings-title,
 .chat-titlebar{
-  background:linear-gradient(#5fa7e2,#1766a5);
-  color:white;
-  text-shadow:1px 1px 1px #24506e;
+  color:#fff;
+  text-shadow:
+    1px 1px 0 #174b78,
+    0 -1px 0 rgba(255,255,255,.2);
   font-weight:bold;
+  background:
+    linear-gradient(
+      to bottom,
+      #69b7ee 0%,
+      #3d91d0 22%,
+      #1266a8 52%,
+      #075394 100%
+    );
+  border-bottom:1px solid #003c73;
 }
 
 .titlebar{
-  height:34px;
+  height:35px;
   display:flex;
   align-items:center;
-  padding:0 9px;
-  font-size:13px;
+  padding:0 7px;
+  font-size:12px;
+  box-shadow:inset 0 1px rgba(255,255,255,.35);
 }
 
 .login-title{
   height:38px;
   display:flex;
   align-items:center;
-  padding:0 12px;
+  padding:0 10px;
   font-size:13px;
 }
 
 .editor-title,
 .settings-title{
-  height:31px;
+  height:30px;
   display:flex;
   align-items:center;
-  padding:0 9px;
-  font-size:12px;
+  padding:0 8px;
+  font-size:11px;
 }
 
-.window-buttons{
-  margin-left:auto;
-  display:flex;
-  gap:3px;
-}
-
-.window-button{
-  width:22px;
-  height:20px;
-  background:rgba(255,255,255,.2);
-  border:1px solid rgba(255,255,255,.5);
-  color:white;
-  text-align:center;
-  line-height:18px;
-  border-radius:2px;
-  cursor:pointer;
-}
+/* =========================================================
+   LOGO MSN
+========================================================= */
 
 .msn-logo{
-  width:22px;
-  height:22px;
-  margin-right:7px;
   position:relative;
+  width:24px;
+  height:24px;
+  margin-right:7px;
   flex-shrink:0;
+  filter:drop-shadow(1px 1px 1px rgba(0,0,0,.3));
 }
 
 .msn-logo .head{
   position:absolute;
   width:8px;
   height:8px;
-  border-radius:50%;
+  left:8px;
   top:1px;
-  left:7px;
+  border-radius:50%;
   background:#fff;
-  border:1px solid #d8d8d8;
+  border:1px solid #d7d7d7;
+}
+
+.msn-logo .body{
+  position:absolute;
+  width:5px;
+  height:10px;
+  left:9px;
+  top:8px;
+  border-radius:5px;
+  background:#666;
 }
 
 .msn-logo .wing-left,
 .msn-logo .wing-right{
   position:absolute;
-  width:10px;
-  height:8px;
   top:8px;
-  background:#8fd14f;
-  border:1px solid rgba(0,0,0,.15);
+  width:11px;
+  height:8px;
+  background:#8ed24c;
+  border:1px solid #5c9c2f;
 }
 
 .msn-logo .wing-left{
-  left:1px;
-  border-radius:8px 2px 8px 2px;
-  transform:rotate(-20deg);
+  left:0;
+  border-radius:9px 2px 9px 2px;
+  transform:rotate(-22deg);
 }
 
 .msn-logo .wing-right{
-  right:1px;
-  border-radius:2px 8px 2px 8px;
-  transform:rotate(20deg);
+  right:0;
+  border-radius:2px 9px 2px 9px;
+  transform:rotate(22deg);
 }
 
-.msn-logo .body{
-  position:absolute;
-  width:4px;
-  height:10px;
-  left:9px;
-  top:7px;
-  border-radius:4px;
-  background:#777;
+/* =========================================================
+   BOTÕES DE JANELA
+========================================================= */
+
+.window-buttons{
+  margin-left:auto;
+  display:flex;
+  gap:2px;
 }
 
-/* =====================================================
+.window-button{
+  width:23px;
+  height:20px;
+  padding:0;
+  color:#fff;
+  font-weight:bold;
+  font-size:12px;
+  line-height:17px;
+  border:1px solid #d3e8fa;
+  border-radius:2px;
+  background:
+    linear-gradient(#7fc2ef,#1766a5);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.45);
+  text-align:center;
+}
+
+.window-button:hover{
+  background:
+    linear-gradient(#a8d8f5,#3288c5);
+}
+
+/* =========================================================
    LOGIN
-===================================================== */
+========================================================= */
 
 .login-content{
-  padding:30px 22px;
+  position:relative;
+  padding:34px 25px 30px;
   text-align:center;
-  background:linear-gradient(#fff,#e7eef4);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.9),
+      rgba(225,238,248,.95)
+    );
+}
+
+.login-content::before{
+  content:"MSN";
+  position:absolute;
+  right:15px;
+  top:10px;
+  font-size:42px;
+  font-weight:bold;
+  color:rgba(35,105,158,.07);
+  letter-spacing:-5px;
 }
 
 .login-wing{
-  font-size:64px;
-  margin-bottom:8px;
-  filter:drop-shadow(0 2px 2px rgba(0,0,0,.15));
+  font-size:68px;
+  line-height:1;
+  margin-bottom:10px;
+  filter:
+    drop-shadow(2px 2px 0 #fff)
+    drop-shadow(0 3px 4px rgba(0,0,0,.2));
 }
 
 .login-title-text{
   color:#174f7c;
-  font-size:19px;
+  font-size:20px;
   font-weight:bold;
-  margin-bottom:4px;
+  margin-bottom:5px;
 }
 
 .login-subtitle{
   color:#666;
   font-size:11px;
-  margin-bottom:20px;
+  margin-bottom:21px;
 }
 
 .login-content input{
   display:block;
   width:100%;
-  max-width:380px;
+  max-width:390px;
+  height:36px;
   margin:0 auto 9px;
-  height:37px;
-  border:1px solid #999;
-  border-radius:3px;
-  padding:6px 9px;
+  padding:5px 9px;
+  border:1px solid #7d7d7d;
+  border-radius:2px;
+  background:#fff;
+  box-shadow:
+    inset 1px 1px 2px rgba(0,0,0,.15);
   font-size:12px;
+}
+
+.login-content input:focus,
+.editor-input:focus,
+.editor-select:focus,
+#messageInput:focus,
+.gif-input:focus{
+  outline:none;
+  border-color:#397ca9;
+  box-shadow:
+    0 0 0 1px #a9d6f2,
+    inset 1px 1px 2px rgba(0,0,0,.1);
+}
+
+.login-button,
+.save-button{
+  height:34px;
+  border:1px solid #39729b;
+  border-radius:3px;
+  background:
+    linear-gradient(#f7fcff,#c1e2f4 50%,#9dcce7);
+  color:#174f72;
+  font-size:11px;
+  font-weight:bold;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.9),
+    0 1px 1px rgba(0,0,0,.15);
 }
 
 .login-button{
   width:100%;
-  max-width:380px;
-  height:35px;
-  border:1px solid #47799d;
-  border-radius:3px;
-  background:linear-gradient(#e9f7ff,#a9d7f1);
-  color:#174f72;
-  font-size:12px;
-  font-weight:bold;
+  max-width:390px;
+}
+
+.login-button:hover,
+.save-button:hover{
+  background:
+    linear-gradient(#fff,#d6effd 50%,#b0d9ee);
 }
 
 #loginError{
   display:none;
   width:100%;
-  max-width:380px;
+  max-width:390px;
   margin:12px auto 0;
-  padding:7px;
-  background:#ffe8e8;
-  border:1px solid #e0aaaa;
+  padding:8px;
+  background:#fff0f0;
+  border:1px solid #d89a9a;
   color:#a33;
   font-size:10px;
   text-align:left;
-  border-radius:3px;
 }
 
 .login-footer,
 .footer{
   text-align:center;
-  color:#777;
+  color:#666;
   font-size:9px;
-  padding:7px;
-  background:#eee;
+  padding:6px;
+  background:
+    linear-gradient(#f8f8f8,#ddd);
+  border-top:1px solid #bbb;
 }
 
-/* =====================================================
-   APP LAYOUT
-===================================================== */
+/* =========================================================
+   APP
+========================================================= */
 
 .app-body{
   display:grid;
-  grid-template-columns:260px minmax(0,1fr);
-  min-height:650px;
+  grid-template-columns:275px minmax(0,1fr);
+  min-height:655px;
   background:#fff;
 }
 
-/* =====================================================
-   SIDEBAR
-===================================================== */
+/* =========================================================
+   SIDEBAR MSN
+========================================================= */
 
 .sidebar{
-  background:linear-gradient(#f8fbfd,#e8f0f5);
-  border-right:1px solid #aebdca;
+  position:relative;
+  min-width:0;
   display:flex;
   flex-direction:column;
-  min-width:0;
+  background:
+    linear-gradient(
+      to right,
+      #f8fbfd,
+      #e5edf3
+    );
+  border-right:2px solid #a8bdcd;
+  box-shadow:inset -1px 0 #fff;
 }
 
 .profile{
-  background:linear-gradient(#fff,#e7eef4);
-  padding:13px;
+  position:relative;
   display:flex;
   align-items:center;
-  border-bottom:1px solid #b5c4d0;
+  padding:14px 11px 12px;
+  background:
+    linear-gradient(#fff,#e8f2f8);
+  border-bottom:1px solid #a7bbc9;
+  box-shadow:inset 0 1px #fff;
+}
+
+.profile::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:2px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #8dbbd9,
+      transparent
+    );
 }
 
 .avatar{
-  width:60px;
-  height:60px;
-  border:2px solid #9ab3c7;
-  background:#eee;
+  position:relative;
+  width:62px;
+  height:62px;
+  margin-right:10px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:33px;
-  margin-right:10px;
-  overflow:hidden;
   flex-shrink:0;
+  overflow:hidden;
+  background:#f4f4f4;
+  border:2px solid #7d9db4;
+  box-shadow:
+    inset 1px 1px #fff,
+    inset -1px -1px #b8b8b8,
+    2px 2px 3px rgba(0,0,0,.16);
+  font-size:34px;
 }
 
 .avatar img,
 .contact-avatar img,
-.editor-avatar img{
+.editor-avatar img,
+.chat-title-avatar img{
   width:100%;
   height:100%;
   object-fit:cover;
@@ -306,8 +447,8 @@ button:disabled{
 }
 
 .name{
-  font-size:15px;
-  color:#174f7c;
+  color:#0d4d7c;
+  font-size:14px;
   font-weight:bold;
   white-space:nowrap;
   overflow:hidden;
@@ -315,65 +456,88 @@ button:disabled{
 }
 
 .status{
-  font-size:11px;
-  margin-top:4px;
+  margin-top:5px;
+  font-size:10px;
 }
 
 .personal-message{
-  color:#555;
-  font-size:10px;
   margin-top:6px;
+  color:#666;
+  font-size:9px;
   font-style:italic;
+  line-height:1.25;
   word-break:break-word;
 }
 
 .edit-button{
   width:27px;
-  height:27px;
+  height:25px;
   padding:0;
-  margin-left:5px;
-  border:1px solid #8aa5b9;
-  background:linear-gradient(#fff,#d9eaf5);
+  margin-left:4px;
+  border:1px solid #8ca6b9;
+  background:
+    linear-gradient(#fff,#d9e9f3);
   color:#245c7d;
-  font-size:13px;
-  flex-shrink:0;
+  font-size:12px;
+  box-shadow:inset 0 1px #fff;
 }
 
 .contacts-heading{
   padding:9px 10px 5px;
+  color:#4e6472;
   font-size:10px;
-  color:#666;
   font-weight:bold;
+  text-transform:uppercase;
+  border-bottom:1px solid #d1dce3;
+  background:
+    linear-gradient(#f5f9fb,#e2ebf1);
 }
 
+.contacts-heading::before{
+  content:"▾ ";
+  color:#477b9e;
+}
+
+/* =========================================================
+   CONTATO
+========================================================= */
+
 .contact{
-  margin:0 8px 8px;
+  position:relative;
+  margin:0;
   display:flex;
   align-items:center;
-  padding:8px;
-  background:linear-gradient(#fff,#eaf4fb);
-  border:1px solid #b9d1e2;
-  border-radius:3px;
+  padding:8px 9px;
   cursor:pointer;
-  transition:.12s;
+  border-bottom:1px solid #cbd8e0;
+  background:
+    linear-gradient(#fff,#edf5f9);
 }
 
 .contact:hover{
-  background:linear-gradient(#fff,#dceefa);
+  background:
+    linear-gradient(#fff,#dceefa);
+}
+
+.contact:active{
+  background:#c9e3f4;
 }
 
 .contact-avatar{
-  width:42px;
-  height:42px;
-  background:#f2e8dc;
-  border:1px solid #aaa;
+  width:45px;
+  height:45px;
+  margin-right:9px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:23px;
-  margin-right:8px;
-  overflow:hidden;
   flex-shrink:0;
+  overflow:hidden;
+  background:#f2e8dc;
+  border:1px solid #8da5b5;
+  box-shadow:
+    inset 1px 1px #fff,
+    1px 1px 2px rgba(0,0,0,.15);
+  font-size:25px;
 }
 
 .contact-info{
@@ -383,19 +547,19 @@ button:disabled{
 
 .contact-name{
   color:#14527d;
-  font-weight:bold;
   font-size:12px;
+  font-weight:bold;
 }
 
 .online{
-  font-size:9px;
   margin-top:3px;
+  font-size:9px;
 }
 
 .contact-message{
+  margin-top:4px;
   color:#777;
   font-size:9px;
-  margin-top:3px;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -403,29 +567,34 @@ button:disabled{
 
 .contact-unread{
   display:none;
-  min-width:19px;
-  height:19px;
+  min-width:20px;
+  height:18px;
   padding:0 5px;
-  background:#d92d55;
-  color:white;
-  border-radius:10px;
+  margin-left:4px;
+  color:#fff;
+  background:#b72745;
+  border:1px solid #7f142d;
+  border-radius:2px;
   font-size:9px;
   font-weight:bold;
+  line-height:16px;
   text-align:center;
-  line-height:19px;
 }
 
 .sidebar-bottom{
   margin-top:auto;
-  padding:9px;
-  color:#777;
-  font-size:9px;
+  padding:9px 6px;
+  color:#71818a;
+  font-size:8px;
   text-align:center;
+  border-top:1px solid #c1d0d9;
+  background:
+    linear-gradient(#edf4f7,#d9e4ea);
 }
 
-/* =====================================================
-   CHAT AREA
-===================================================== */
+/* =========================================================
+   CHAT
+========================================================= */
 
 .main-chat{
   min-width:0;
@@ -435,31 +604,29 @@ button:disabled{
 }
 
 .chat-titlebar{
-  min-height:53px;
+  min-height:57px;
   display:flex;
   align-items:center;
   padding:7px 10px;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.4);
 }
 
 .chat-title-avatar{
-  width:38px;
-  height:38px;
-  border-radius:3px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.7);
-  background:#eee;
+  width:41px;
+  height:41px;
+  margin-right:9px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:22px;
-  margin-right:8px;
   flex-shrink:0;
-}
-
-.chat-title-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  overflow:hidden;
+  background:#eee;
+  border:1px solid #d9edf9;
+  box-shadow:
+    inset 1px 1px rgba(255,255,255,.7),
+    1px 1px 2px rgba(0,0,0,.25);
+  font-size:23px;
 }
 
 .chat-title-info{
@@ -467,107 +634,153 @@ button:disabled{
 }
 
 .chat-title-name{
-  font-size:13px;
+  font-size:14px;
 }
 
 .chat-title-status{
+  margin-top:3px;
   font-size:9px;
-  margin-top:2px;
   font-weight:normal;
 }
 
 .chat-title-actions{
   margin-left:auto;
   display:flex;
-  gap:4px;
+  gap:3px;
 }
 
 .chat-action{
   width:27px;
-  height:25px;
-  border:1px solid rgba(255,255,255,.55);
-  background:rgba(255,255,255,.16);
-  color:white;
-  border-radius:3px;
-  font-size:12px;
+  height:24px;
+  padding:0;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.7);
+  background:
+    linear-gradient(#76bbed,#2275b0);
+  border-radius:2px;
+  box-shadow:inset 0 1px rgba(255,255,255,.4);
 }
+
+.chat-action:hover{
+  background:
+    linear-gradient(#a5d8f4,#3989c4);
+}
+
+/* =========================================================
+   ÁREA DA CONVERSA
+========================================================= */
 
 .chat{
   flex:1;
   min-height:350px;
   overflow-y:auto;
-  padding:12px;
-  background:
-    linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)),
-    #fff;
+  padding:13px 14px;
   font-size:12px;
+  background:
+    linear-gradient(
+      rgba(255,255,255,.95),
+      rgba(247,251,253,.96)
+    ),
+    #fff;
+  border-bottom:1px solid #aebec9;
+}
+
+/* barra de rolagem retrô */
+.chat::-webkit-scrollbar{
+  width:14px;
+}
+
+.chat::-webkit-scrollbar-track{
+  background:#e6e6e6;
+  border-left:1px solid #c3c3c3;
+}
+
+.chat::-webkit-scrollbar-thumb{
+  background:
+    linear-gradient(90deg,#d9e4ea,#b7cbd8);
+  border:1px solid #8da2b0;
 }
 
 .message{
-  margin-bottom:11px;
-  animation:messageIn .15s ease-out;
+  margin-bottom:12px;
+  animation:messageIn .16s ease-out;
 }
 
 @keyframes messageIn{
-  from{opacity:0;transform:translateY(3px)}
-  to{opacity:1;transform:translateY(0)}
+  from{
+    opacity:0;
+    transform:translateY(3px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .message .sender{
-  font-weight:bold;
   color:#165c91;
+  font-size:11px;
+  font-weight:bold;
 }
 
 .message.mine .sender{
-  color:#7b3fa1;
+  color:#74418d;
 }
 
 .message .text{
   display:inline-block;
-  max-width:85%;
-  margin-top:3px;
-  padding:5px 7px;
+  max-width:88%;
+  margin-top:2px;
+  padding:4px 7px;
   color:#222;
+  line-height:1.45;
   word-wrap:break-word;
   white-space:pre-wrap;
-  background:#f4f8fb;
-  border:1px solid #d7e2ea;
-  border-radius:3px;
-  line-height:1.4;
+  background:#fff;
+  border:1px solid #d1d9de;
+  border-radius:2px;
+  box-shadow:
+    1px 1px 0 rgba(0,0,0,.04);
 }
 
 .message.mine .text{
-  background:#faf3ff;
-  border-color:#e3d1ee;
+  background:#faf7fc;
+  border-color:#dacbe1;
 }
 
 .message-time{
+  margin-left:5px;
   color:#999;
   font-size:8px;
-  margin-left:5px;
   font-weight:normal;
 }
 
 .message-state{
-  color:#888;
-  font-size:8px;
   margin-left:5px;
+  color:#777;
+  font-size:8px;
+  font-weight:normal;
 }
 
 .system-message{
+  margin:10px 0;
+  padding:5px;
   color:#777;
+  font-size:9px;
   font-style:italic;
-  font-size:10px;
   text-align:center;
-  margin:9px 0;
+  border-top:1px dotted #c8c8c8;
+  border-bottom:1px dotted #c8c8c8;
 }
 
-/* =====================================================
-   TEXT EFFECTS
-===================================================== */
+/* =========================================================
+   EFEITOS
+========================================================= */
 
 .effect-glow{
-  text-shadow:0 0 4px currentColor,0 0 9px currentColor;
+  text-shadow:
+    0 0 4px currentColor,
+    0 0 9px currentColor;
   animation:glowPulse 1.5s ease-in-out infinite alternate;
 }
 
@@ -587,15 +800,16 @@ button:disabled{
 }
 
 .effect-rainbow{
-  background:linear-gradient(
-    90deg,
-    #e53935,
-    #e08a00,
-    #248617,
-    #165c91,
-    #7b3fa1,
-    #c62c55
-  );
+  background:
+    linear-gradient(
+      90deg,
+      #e53935,
+      #e08a00,
+      #248617,
+      #165c91,
+      #7b3fa1,
+      #c62c55
+    );
   background-size:300% 100%;
   -webkit-background-clip:text;
   background-clip:text;
@@ -604,7 +818,7 @@ button:disabled{
 }
 
 @keyframes rainbow{
-  from{background-position:0% 50%}
+  from{background-position:0 50%}
   to{background-position:300% 50%}
 }
 
@@ -618,7 +832,12 @@ button:disabled{
 
 @keyframes sparkle{
   from{opacity:.75}
-  to{opacity:1;text-shadow:0 0 5px #fff,0 0 12px currentColor}
+  to{
+    opacity:1;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 12px currentColor;
+  }
 }
 
 .effect-shake{
@@ -644,8 +863,14 @@ button:disabled{
 }
 
 @keyframes heartFloat{
-  from{opacity:.45;transform:translateY(2px)}
-  to{opacity:1;transform:translateY(-3px)}
+  from{
+    opacity:.45;
+    transform:translateY(2px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(-3px);
+  }
 }
 
 .effect-magic{
@@ -660,80 +885,110 @@ button:disabled{
 }
 
 @keyframes magicTwinkle{
-  from{opacity:.3;transform:scale(.8)}
-  to{opacity:1;transform:scale(1.2)}
+  from{
+    opacity:.3;
+    transform:scale(.8);
+  }
+  to{
+    opacity:1;
+    transform:scale(1.2);
+  }
 }
 
-/* =====================================================
+/* =========================================================
    GIF
-===================================================== */
+========================================================= */
 
 .chat-gif{
   display:block;
   max-width:min(300px,80vw);
   max-height:250px;
   margin-top:5px;
-  border:1px solid #ccd8df;
-  border-radius:4px;
+  border:1px solid #b7c8d2;
+  box-shadow:1px 1px 2px rgba(0,0,0,.12);
 }
 
-/* =====================================================
-   INPUT / TOOLBAR
-===================================================== */
+/* =========================================================
+   TOOLBAR
+========================================================= */
 
 .toolbar{
   display:flex;
-  gap:4px;
-  padding:5px 8px;
-  background:#eee;
-  border-top:1px solid #ccc;
   flex-wrap:wrap;
+  gap:2px;
+  padding:5px 7px;
+  background:
+    linear-gradient(#f8f8f8,#dcdcdc);
+  border-top:1px solid #fff;
+  border-bottom:1px solid #a7a7a7;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.8);
 }
 
 .toolbar button{
-  height:27px;
-  padding:0 8px;
-  font-size:12px;
-  border-radius:3px;
-  border:1px solid #47799d;
-  background:linear-gradient(#fff,#dbeefa);
+  min-width:28px;
+  height:26px;
+  padding:0 7px;
   color:#174f72;
+  border:1px solid #999;
+  border-radius:2px;
+  background:
+    linear-gradient(#fff,#eeeeee 45%,#d4d4d4);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.9);
+  font-size:11px;
 }
 
+.toolbar button:hover{
+  background:
+    linear-gradient(#fff,#e8f6ff 45%,#c6e1ef);
+  border-color:#638ca7;
+}
+
+.toolbar button:active,
 .toolbar button.active{
-  background:#c9e4f6;
-  box-shadow:inset 0 1px 2px rgba(0,0,0,.15);
+  background:
+    linear-gradient(#c7e4f5,#e5f5fd);
+  box-shadow:
+    inset 1px 1px 2px rgba(0,0,0,.18);
 }
 
 .toolbar .nudge{
-  background:linear-gradient(#fff4d6,#f0c765);
-  border-color:#b28b30;
   color:#694f0b;
+  border-color:#a88637;
+  background:
+    linear-gradient(#fff8dc,#f1d27a 50%,#dfb94e);
 }
+
+/* =========================================================
+   PAINÉIS DE FORMATAÇÃO
+========================================================= */
 
 .format-panel,
 .effect-panel{
   display:none;
-  background:#f7f7f7;
-  border-top:1px solid #bbb;
-  padding:7px 8px;
-  gap:5px;
   flex-wrap:wrap;
+  gap:4px;
+  padding:6px 7px;
+  background:#f3f3f3;
+  border-top:1px solid #aaa;
+  border-bottom:1px solid #ccc;
 }
 
 .format-panel button,
 .effect-panel button{
   min-width:29px;
-  height:27px;
+  height:26px;
+  padding:0 7px;
   border:1px solid #999;
-  background:white;
-  border-radius:3px;
-  cursor:pointer;
+  border-radius:2px;
+  background:linear-gradient(#fff,#ddd);
+  font-size:10px;
 }
 
-.effect-panel button{
-  font-size:10px;
-  color:#444;
+.format-panel button.active{
+  background:#c4e3f5;
+  box-shadow:inset 1px 1px 2px rgba(0,0,0,.2);
 }
 
 .color-dot{
@@ -743,63 +998,129 @@ button:disabled{
   border-radius:50%!important;
 }
 
+/* =========================================================
+   INPUT
+========================================================= */
+
 .input-area{
-  background:linear-gradient(#f7f7f7,#dedede);
-  border-top:1px solid #aaa;
-  padding:8px;
   display:flex;
   gap:5px;
+  padding:7px;
+  background:
+    linear-gradient(#f3f3f3,#d8d8d8);
+  border-top:1px solid #fff;
 }
 
 #messageInput{
   flex:1;
   min-width:0;
   height:34px;
-  border:1px solid #999;
-  border-radius:2px;
   padding:5px 8px;
+  border:1px solid #888;
+  border-radius:2px;
+  background:#fff;
+  box-shadow:
+    inset 1px 1px 2px rgba(0,0,0,.12);
   font-size:12px;
 }
 
 .send-button{
+  min-width:75px;
+  height:34px;
   padding:0 12px;
+  color:#174f72;
+  border:1px solid #39729b;
+  border-radius:3px;
+  background:
+    linear-gradient(#f7fcff,#c1e2f4 50%,#9dcce7);
   font-size:11px;
   font-weight:bold;
-  border:1px solid #47799d;
-  border-radius:3px;
-  background:linear-gradient(#e9f7ff,#a9d7f1);
-  color:#174f72;
 }
 
-/* =====================================================
-   MODALS
-===================================================== */
+/* =========================================================
+   PAINEL GIF
+========================================================= */
+
+.panel{
+  display:none;
+  position:absolute;
+  z-index:80;
+  top:45px;
+  right:12px;
+  width:290px;
+  background:#eee;
+  border:1px solid #456a82;
+  box-shadow:
+    4px 5px 15px rgba(0,0,0,.35);
+}
+
+.panel-content{
+  padding:10px;
+  background:#f5f5f5;
+}
+
+.gif-help{
+  margin-bottom:7px;
+  color:#666;
+  font-size:9px;
+  line-height:1.4;
+}
+
+.gif-input{
+  width:100%;
+  height:31px;
+  padding:5px 7px;
+  border:1px solid #999;
+  font-size:10px;
+}
+
+.gif-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:4px;
+  margin-top:7px;
+}
+
+.gif-actions button{
+  height:27px;
+  padding:0 9px;
+  border:1px solid #47799d;
+  background:linear-gradient(#fff,#cde6f4);
+  color:#174f72;
+  border-radius:2px;
+  font-size:10px;
+}
+
+/* =========================================================
+   MODAIS
+========================================================= */
 
 .modal-overlay{
   display:none;
   position:absolute;
   z-index:100;
   inset:0;
-  background:rgba(0,0,0,.25);
+  padding:45px 12px 12px;
   align-items:flex-start;
   justify-content:center;
-  padding:45px 12px 12px;
+  background:rgba(0,35,60,.28);
 }
 
 .modal{
   width:100%;
-  max-width:400px;
-  background:#f4f4f4;
-  border:1px solid #55738c;
-  border-radius:5px;
-  box-shadow:0 5px 20px rgba(0,0,0,.4);
+  max-width:410px;
   overflow:hidden;
+  background:#ece9d8;
+  border:1px solid #355d78;
+  box-shadow:
+    5px 6px 18px rgba(0,0,0,.4);
 }
 
 .editor-content,
 .settings-content{
   padding:12px;
-  background:linear-gradient(#fff,#edf3f7);
+  background:
+    linear-gradient(#fff,#edf3f7);
 }
 
 .editor-avatar-area{
@@ -809,28 +1130,28 @@ button:disabled{
 }
 
 .editor-avatar{
-  width:58px;
-  height:58px;
-  border:2px solid #9ab3c7;
-  background:#eee;
+  width:60px;
+  height:60px;
+  margin-right:10px;
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
+  background:#eee;
+  border:2px solid #7d9db4;
+  box-shadow:inset 1px 1px #fff;
   font-size:30px;
-  margin-right:10px;
-  flex-shrink:0;
 }
 
 .photo-button{
-  border:1px solid #47799d;
-  background:linear-gradient(#e9f7ff,#a9d7f1);
-  color:#174f72;
-  border-radius:3px;
+  display:inline-block;
   padding:7px 9px;
+  color:#174f72;
+  border:1px solid #47799d;
+  border-radius:2px;
+  background:linear-gradient(#fff,#cde7f5);
   font-size:10px;
   font-weight:bold;
-  cursor:pointer;
 }
 
 #avatarFile{
@@ -839,24 +1160,25 @@ button:disabled{
 
 .editor-label{
   display:block;
+  margin:7px 0 3px;
   color:#555;
   font-size:10px;
   font-weight:bold;
-  margin:7px 0 3px;
 }
 
 .editor-input,
 .editor-select{
   width:100%;
   height:31px;
-  border:1px solid #999;
-  border-radius:3px;
   padding:4px 7px;
+  border:1px solid #999;
+  border-radius:2px;
+  background:#fff;
   font-size:11px;
-  background:white;
 }
 
-.editor-actions{
+.editor-actions,
+.settings-footer{
   display:flex;
   justify-content:flex-end;
   gap:5px;
@@ -866,29 +1188,23 @@ button:disabled{
 .save-button,
 .cancel-button{
   height:29px;
-  padding:0 10px;
+  padding:0 11px;
+  border-radius:2px;
   font-size:10px;
   font-weight:bold;
-  border-radius:3px;
-}
-
-.save-button{
-  border:1px solid #47799d;
-  background:linear-gradient(#e9f7ff,#a9d7f1);
-  color:#174f72;
 }
 
 .cancel-button{
+  color:#555;
   border:1px solid #999;
   background:linear-gradient(#fff,#ddd);
-  color:#555;
 }
 
 #profileSaveStatus{
   display:none;
   margin-top:7px;
-  font-size:9px;
   color:#248617;
+  font-size:9px;
 }
 
 .setting-row{
@@ -897,7 +1213,7 @@ button:disabled{
   justify-content:space-between;
   gap:10px;
   padding:9px 2px;
-  border-bottom:1px solid #d8d8d8;
+  border-bottom:1px solid #d1d1d1;
   font-size:11px;
 }
 
@@ -915,9 +1231,9 @@ button:disabled{
 }
 
 .setting-description{
+  margin-top:2px;
   color:#777;
   font-size:9px;
-  margin-top:2px;
 }
 
 .setting-row input[type="checkbox"]{
@@ -926,115 +1242,56 @@ button:disabled{
 }
 
 .setting-row select{
-  height:29px;
+  height:28px;
   border:1px solid #999;
-  border-radius:3px;
-  font-size:10px;
-  background:white;
-}
-
-.settings-footer{
-  display:flex;
-  justify-content:flex-end;
-  gap:5px;
-  margin-top:12px;
-}
-
-/* =====================================================
-   PANELS
-===================================================== */
-
-.panel{
-  display:none;
-  position:absolute;
-  z-index:80;
-  top:44px;
-  right:12px;
-  width:280px;
-  background:#f4f4f4;
-  border:1px solid #55738c;
-  border-radius:5px;
-  box-shadow:0 5px 20px rgba(0,0,0,.35);
-  overflow:hidden;
-}
-
-.panel-content{
-  padding:10px;
-  background:#fff;
-}
-
-.gif-help{
-  color:#666;
-  font-size:9px;
-  line-height:1.4;
-  margin-bottom:7px;
-}
-
-.gif-input{
-  width:100%;
-  height:31px;
-  border:1px solid #999;
-  border-radius:3px;
-  padding:5px 7px;
   font-size:10px;
 }
 
-.gif-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:5px;
-  margin-top:7px;
-}
-
-.gif-actions button{
-  height:27px;
-  border:1px solid #47799d;
-  background:linear-gradient(#e9f7ff,#a9d7f1);
-  color:#174f72;
-  border-radius:3px;
-  font-size:10px;
-}
-
-/* =====================================================
-   NOTIFICATION / NUDGE
-===================================================== */
+/* =========================================================
+   NOTIFICAÇÃO / NUDGE
+========================================================= */
 
 .unread-badge{
   display:none;
   position:absolute;
-  right:45px;
-  top:7px;
-  min-width:19px;
-  height:19px;
+  z-index:150;
+  top:8px;
+  right:47px;
+  min-width:20px;
+  height:18px;
   padding:0 5px;
-  background:#d92d55;
-  color:white;
-  border-radius:10px;
+  color:#fff;
+  background:#b72745;
+  border:1px solid #7d1830;
+  border-radius:2px;
   font-size:9px;
   font-weight:bold;
+  line-height:16px;
   text-align:center;
-  line-height:19px;
-  box-shadow:0 1px 3px rgba(0,0,0,.3);
-  z-index:150;
+  box-shadow:1px 2px 3px rgba(0,0,0,.25);
 }
 
 .nudge-notice{
+  display:none;
   position:absolute;
   z-index:200;
   left:50%;
   top:45%;
   transform:translate(-50%,-50%);
-  display:none;
-  padding:9px 13px;
-  background:#fffbe0;
-  border:1px solid #d2b83d;
-  border-radius:4px;
+  padding:10px 15px;
   color:#604f08;
+  background:#fffbe0;
+  border:1px solid #c9aa27;
+  box-shadow:
+    3px 4px 10px rgba(0,0,0,.3);
   font-size:11px;
   font-weight:bold;
-  box-shadow:0 3px 12px rgba(0,0,0,.3);
   white-space:nowrap;
 }
+
+/* =========================================================
+   TREMER
+========================================================= */
 
 @keyframes shake{
   0%{transform:translate(0,0) rotate(0)}
@@ -1050,18 +1307,36 @@ button:disabled{
   animation:shake .45s ease-in-out 2;
 }
 
-/* =====================================================
-   STATUS DOTS
-===================================================== */
+/* =========================================================
+   STATUS
+========================================================= */
 
 .status-online{color:#278313!important}
 .status-away{color:#c99500!important}
 .status-busy{color:#c52222!important}
 .status-offline{color:#777!important}
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+/* =========================================================
+   DETALHES MSN
+========================================================= */
+
+.main-chat::after{
+  content:"";
+  pointer-events:none;
+  position:absolute;
+  width:70px;
+  height:70px;
+  right:10px;
+  bottom:45px;
+  opacity:.035;
+  background:
+    radial-gradient(circle,#1670ae 1px,transparent 1px);
+  background-size:6px 6px;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:700px){
 
@@ -1084,13 +1359,13 @@ button:disabled{
 
   .app-body{
     grid-template-columns:1fr;
-    min-height:calc(100vh - 34px);
+    min-height:calc(100vh - 35px);
   }
 
   .sidebar{
     position:absolute;
     z-index:30;
-    inset:34px 0 0 0;
+    inset:35px 0 0 0;
     display:none;
     border-right:0;
   }
@@ -1100,7 +1375,7 @@ button:disabled{
   }
 
   .main-chat{
-    min-height:calc(100vh - 34px);
+    min-height:calc(100vh - 35px);
   }
 
   .chat{
@@ -1121,6 +1396,10 @@ button:disabled{
     left:8px;
     width:auto;
   }
+
+  .main-chat::after{
+    display:none;
+  }
 }
 
 @media(min-width:701px){
@@ -1131,16 +1410,20 @@ button:disabled{
 
 @media(max-width:430px){
 
+  .login-content{
+    padding:30px 18px;
+  }
+
   .titlebar{
-    height:34px;
+    height:35px;
   }
 
   .chat-titlebar{
-    min-height:49px;
+    min-height:52px;
   }
 
   .chat{
-    padding:9px;
+    padding:10px;
   }
 
   .message .text{
@@ -1148,17 +1431,18 @@ button:disabled{
   }
 
   .toolbar{
-    gap:3px;
     padding:4px;
+    gap:2px;
   }
 
   .toolbar button{
     padding:0 6px;
-    font-size:11px;
+    font-size:10px;
   }
 
   .send-button{
-    padding:0 9px;
+    min-width:65px;
+    padding:0 8px;
   }
 
   .input-area{
@@ -1194,11 +1478,11 @@ button:disabled{
     <div class="login-wing">🪽</div>
 
     <div class="login-title-text">
-      Entrar no MSN
+      MSN no Ar
     </div>
 
     <div class="login-subtitle">
-      Entre para conversar com seu amor 💜
+      Bruxinha & Raposinha • entre para conversar com seu amor 💜
     </div>
 
     <input
@@ -1228,7 +1512,7 @@ button:disabled{
   </div>
 
   <div class="login-footer">
-    MSN Messenger • Bruxinha & Raposinha
+    MSN Messenger • Bruxinha & Raposinha 💜
   </div>
 
 </div>
@@ -1249,7 +1533,7 @@ button:disabled{
       <div class="body"></div>
     </div>
 
-    MSN Messenger
+    MSN no Ar — Bruxinha & Raposinha
 
     <div class="window-buttons">
 
@@ -1275,24 +1559,19 @@ button:disabled{
 
   </div>
 
-
   <div
     class="unread-badge"
     id="unreadBadge"
   >0</div>
-
 
   <div
     class="nudge-notice"
     id="nudgeNotice"
   ></div>
 
-
   <div class="app-body">
 
-    <!-- =================================================
-         SIDEBAR
-    ================================================== -->
+    <!-- SIDEBAR -->
 
     <aside class="sidebar" id="sidebar">
 
@@ -1330,17 +1609,13 @@ button:disabled{
           class="edit-button"
           onclick="openProfileEditor()"
           title="Editar meu perfil"
-        >
-          ⚙️
-        </button>
+        >⚙</button>
 
       </div>
-
 
       <div class="contacts-heading">
-        ONLINE — 1
+        CONTATOS
       </div>
-
 
       <div
         class="contact"
@@ -1383,17 +1658,15 @@ button:disabled{
 
       </div>
 
-
       <div class="sidebar-bottom">
-        MSN Messenger • Bruxinha & Raposinha 💜
+        MSN no Ar<br>
+        Bruxinha ♡ Raposinha
       </div>
 
     </aside>
 
 
-    <!-- =================================================
-         CHAT
-    ================================================== -->
+    <!-- CHAT -->
 
     <main class="main-chat">
 
@@ -1447,78 +1720,65 @@ button:disabled{
       ></div>
 
 
-      <!-- =================================================
-           FORMATAÇÃO
-      ================================================== -->
+      <!-- FORMATAÇÃO -->
 
       <div
         class="format-panel"
         id="formatPanel"
       >
 
-        <button
-          onclick="toggleFormat('bold')"
-          title="Negrito"
-        ><b>B</b></button>
+        <button onclick="toggleFormat('bold')">
+          <b>B</b>
+        </button>
 
-        <button
-          onclick="toggleFormat('italic')"
-          title="Itálico"
-        ><i>I</i></button>
+        <button onclick="toggleFormat('italic')">
+          <i>I</i>
+        </button>
 
-        <button
-          onclick="toggleFormat('underline')"
-          title="Sublinhado"
-        ><u>U</u></button>
+        <button onclick="toggleFormat('underline')">
+          <u>U</u>
+        </button>
 
         <button
           class="color-dot"
           style="background:#111"
           onclick="setTextColor('#111')"
-          title="Preto"
         ></button>
 
         <button
           class="color-dot"
           style="background:#7b3fa1"
           onclick="setTextColor('#7b3fa1')"
-          title="Roxo"
         ></button>
 
         <button
           class="color-dot"
           style="background:#165c91"
           onclick="setTextColor('#165c91')"
-          title="Azul"
         ></button>
 
         <button
           class="color-dot"
           style="background:#c62c55"
           onclick="setTextColor('#c62c55')"
-          title="Rosa"
         ></button>
 
         <button
           class="color-dot"
           style="background:#248617"
           onclick="setTextColor('#248617')"
-          title="Verde"
         ></button>
 
         <button
           class="color-dot"
           style="background:#e08a00"
           onclick="setTextColor('#e08a00')"
-          title="Dourado"
         ></button>
 
       </div>
 
 
-      <!-- =================================================
-           EFEITOS
-      ================================================== -->
+      <!-- EFEITOS -->
 
       <div
         class="effect-panel"
@@ -1556,9 +1816,7 @@ button:disabled{
       </div>
 
 
-      <!-- =================================================
-           GIF PANEL
-      ================================================== -->
+      <!-- GIF -->
 
       <div
         class="panel"
@@ -1599,9 +1857,7 @@ button:disabled{
       </div>
 
 
-      <!-- =================================================
-           TOOLBAR
-      ================================================== -->
+      <!-- TOOLBAR -->
 
       <div class="toolbar">
 
@@ -1609,9 +1865,7 @@ button:disabled{
           id="formatButton"
           onclick="toggleFormatPanel()"
           title="Formatação"
-        >
-          A
-        </button>
+        >A</button>
 
         <button onclick="addEmoji('😊')">😊</button>
         <button onclick="addEmoji('😂')">😂</button>
@@ -1623,30 +1877,22 @@ button:disabled{
         <button
           onclick="toggleEffectPanel()"
           title="Efeitos"
-        >
-          ✨
-        </button>
+        >✨</button>
 
         <button
           onclick="toggleGifPanel()"
           title="GIF"
-        >
-          GIF
-        </button>
+        >GIF</button>
 
         <button
           class="nudge"
           onclick="sendNudge()"
-        >
-          📳 Nudge
-        </button>
+        >📳 Nudge</button>
 
       </div>
 
 
-      <!-- =================================================
-           ENVIO
-      ================================================== -->
+      <!-- INPUT -->
 
       <div class="input-area">
 
@@ -1660,14 +1906,12 @@ button:disabled{
         <button
           class="send-button"
           onclick="sendMessage()"
-        >
-          Enviar
-        </button>
+        >Enviar</button>
 
       </div>
 
       <div class="footer">
-        MSN Messenger • Isabella & Raposinha
+        MSN Messenger • Bruxinha ♡ Raposinha
       </div>
 
     </main>
@@ -1676,7 +1920,7 @@ button:disabled{
 
 
   <!-- =====================================================
-       PROFILE MODAL
+       PERFIL
   ====================================================== -->
 
   <div
@@ -1719,7 +1963,6 @@ button:disabled{
 
         </div>
 
-
         <label class="editor-label">
           Nome
         </label>
@@ -1729,7 +1972,6 @@ button:disabled{
           class="editor-input"
           maxlength="40"
         >
-
 
         <label class="editor-label">
           Status
@@ -1758,7 +2000,6 @@ button:disabled{
 
         </select>
 
-
         <label class="editor-label">
           Mensagem pessoal
         </label>
@@ -1769,28 +2010,22 @@ button:disabled{
           maxlength="120"
         >
 
-
         <div id="profileSaveStatus">
           Perfil salvo! 💜
         </div>
-
 
         <div class="editor-actions">
 
           <button
             class="cancel-button"
             onclick="closeProfileEditor()"
-          >
-            Cancelar
-          </button>
+          >Cancelar</button>
 
           <button
             class="save-button"
             id="saveProfileButton"
             onclick="saveProfile()"
-          >
-            Salvar
-          </button>
+          >Salvar</button>
 
         </div>
 
@@ -1802,7 +2037,7 @@ button:disabled{
 
 
   <!-- =====================================================
-       SETTINGS MODAL
+       CONFIGURAÇÕES
   ====================================================== -->
 
   <div
@@ -1839,7 +2074,6 @@ button:disabled{
 
         </div>
 
-
         <div class="setting-row">
 
           <div class="setting-info">
@@ -1861,7 +2095,6 @@ button:disabled{
 
         </div>
 
-
         <div class="setting-row">
 
           <div class="setting-info">
@@ -1882,7 +2115,6 @@ button:disabled{
           >
 
         </div>
-
 
         <div class="setting-row">
 
@@ -1916,23 +2148,18 @@ button:disabled{
 
         </div>
 
-
         <div class="settings-footer">
 
           <button
             class="cancel-button"
             onclick="closeSettings()"
-          >
-            Fechar
-          </button>
+          >Fechar</button>
 
           <button
             class="save-button"
             id="saveSettingsButton"
             onclick="saveSettings()"
-          >
-            Salvar
-          </button>
+          >Salvar</button>
 
         </div>
 
@@ -1946,9 +2173,9 @@ button:disabled{
 
 
 <script>
-/* =====================================================
+/* =========================================================
    SUPABASE
-===================================================== */
+========================================================= */
 
 const SUPABASE_URL =
   "https://ojoecmioovwmirdvedzr.supabase.co";
@@ -1965,9 +2192,9 @@ const supabaseClient =
   );
 
 
-/* =====================================================
+/* =========================================================
    ELEMENTOS
-===================================================== */
+========================================================= */
 
 const loginScreen =
   document.getElementById("loginScreen");
@@ -1997,9 +2224,9 @@ const sidebar =
   document.getElementById("sidebar");
 
 
-/* =====================================================
+/* =========================================================
    ESTADO
-===================================================== */
+========================================================= */
 
 let currentUser = null;
 let currentProfile = null;
@@ -2011,7 +2238,6 @@ let presenceChannel = null;
 let selectedAvatarFile = null;
 
 let unreadCount = 0;
-let pageIsVisible = !document.hidden;
 
 let conversationOpen = true;
 
@@ -2036,13 +2262,14 @@ let messageFormatting = {
   italic:false,
   underline:false,
   color:"#111",
-  effect:null
+  effect:null,
+  ranges:[]
 };
 
 
-/* =====================================================
+/* =========================================================
    LOGIN
-===================================================== */
+========================================================= */
 
 async function login(){
 
@@ -2064,7 +2291,8 @@ async function login(){
   }
 
   loginButton.disabled = true;
-  loginButton.textContent = "Entrando...";
+  loginButton.textContent =
+    "Entrando...";
 
   try{
 
@@ -2092,7 +2320,8 @@ async function login(){
   }finally{
 
     loginButton.disabled = false;
-    loginButton.textContent = "Entrar";
+    loginButton.textContent =
+      "Entrar";
   }
 }
 
@@ -2107,14 +2336,12 @@ function getFriendlyAuthError(error){
     message.includes("invalid login") ||
     message.includes("invalid credentials")
   ){
-
     return "E-mail ou senha incorretos.";
   }
 
   if(
     message.includes("email not confirmed")
   ){
-
     return "Esse e-mail ainda não foi confirmado no Supabase.";
   }
 
@@ -2145,9 +2372,49 @@ function hideLoginError(){
 }
 
 
-/* =====================================================
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logout(){
+
+  try{
+
+    if(realtimeChannel){
+
+      await supabaseClient
+        .removeChannel(
+          realtimeChannel
+        );
+
+      realtimeChannel = null;
+    }
+
+    if(presenceChannel){
+
+      await supabaseClient
+        .removeChannel(
+          presenceChannel
+        );
+
+      presenceChannel = null;
+    }
+
+    await supabaseClient.auth.signOut();
+
+  }catch(error){
+
+    console.error(
+      "Erro ao sair:",
+      error
+    );
+  }
+}
+
+
+/* =========================================================
    SESSÃO
-===================================================== */
+========================================================= */
 
 async function checkSession(){
 
@@ -2197,7 +2464,9 @@ supabaseClient.auth.onAuthStateChange(
       if(realtimeChannel){
 
         await supabaseClient
-          .removeChannel(realtimeChannel);
+          .removeChannel(
+            realtimeChannel
+          );
 
         realtimeChannel = null;
       }
@@ -2205,7 +2474,9 @@ supabaseClient.auth.onAuthStateChange(
       if(presenceChannel){
 
         await supabaseClient
-          .removeChannel(presenceChannel);
+          .removeChannel(
+            presenceChannel
+          );
 
         presenceChannel = null;
       }
@@ -2222,9 +2493,9 @@ supabaseClient.auth.onAuthStateChange(
 );
 
 
-/* =====================================================
+/* =========================================================
    START
-===================================================== */
+========================================================= */
 
 async function startMessenger(){
 
@@ -2258,9 +2529,9 @@ async function startMessenger(){
 }
 
 
-/* =====================================================
+/* =========================================================
    PERFIL
-===================================================== */
+========================================================= */
 
 async function loadMyProfile(){
 
@@ -2270,7 +2541,10 @@ async function loadMyProfile(){
       .select(
         "id, username, status, personal_message, avatar_url"
       )
-      .eq("id",currentUser.id)
+      .eq(
+        "id",
+        currentUser.id
+      )
       .maybeSingle();
 
   if(error){
@@ -2396,21 +2670,6 @@ function applyStatusClass(
 }
 
 
-function getStatusColor(status){
-
-  if(status === "Ausente")
-    return "#c99500";
-
-  if(status === "Ocupado")
-    return "#c52222";
-
-  if(status === "Invisível")
-    return "#777";
-
-  return "#278313";
-}
-
-
 function updateFallbackMyProfile(){
 
   document.getElementById("myName")
@@ -2421,9 +2680,10 @@ function updateFallbackMyProfile(){
     .textContent =
       "● Online";
 
-  document.getElementById("myStatus")
-    .style.color =
-      "#278313";
+  applyStatusClass(
+    document.getElementById("myStatus"),
+    "Online"
+  );
 
   document.getElementById("myMessage")
     .textContent =
@@ -2444,7 +2704,6 @@ function getFallbackName(){
     email ===
     "andressa.verissimo.g@icloud.com"
   ){
-
     return "Raposinha";
   }
 
@@ -2461,7 +2720,6 @@ function getFallbackAvatar(){
     email ===
     "andressa.verissimo.g@icloud.com"
   ){
-
     return "🦊";
   }
 
@@ -2469,9 +2727,9 @@ function getFallbackAvatar(){
 }
 
 
-/* =====================================================
-   PERFIL EDITOR
-===================================================== */
+/* =========================================================
+   EDITOR DE PERFIL
+========================================================= */
 
 function openProfileEditor(){
 
@@ -2587,9 +2845,7 @@ function previewAvatar(event){
     document.createElement("img");
 
   img.src = url;
-
-  img.alt =
-    "Nova foto";
+  img.alt = "Nova foto";
 
   editorAvatar.appendChild(img);
 }
@@ -2605,8 +2861,8 @@ async function uploadAvatar(file){
       file.name.split(".").pop() ||
       "jpg"
     )
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g,"");
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g,"");
 
   const filePath =
     currentUser.id +
@@ -2761,9 +3017,9 @@ async function saveProfile(){
 }
 
 
-/* =====================================================
+/* =========================================================
    CONTATO
-===================================================== */
+========================================================= */
 
 async function loadContactProfile(){
 
@@ -2959,7 +3215,6 @@ function showFallbackContact(
     );
 
   element.innerHTML = "";
-
   element.textContent =
     avatar;
 
@@ -2993,7 +3248,6 @@ function setAvatar(
     document.createElement("img");
 
   img.src = url;
-
   img.alt = "Avatar";
 
   img.onerror = ()=>{
@@ -3008,9 +3262,9 @@ function setAvatar(
 }
 
 
-/* =====================================================
+/* =========================================================
    PRESENCE
-===================================================== */
+========================================================= */
 
 function startPresence(){
 
@@ -3039,23 +3293,17 @@ function startPresence(){
       )
       .on(
         "presence",
-        {
-          event:"sync"
-        },
+        {event:"sync"},
         updatePresenceList
       )
       .on(
         "presence",
-        {
-          event:"join"
-        },
+        {event:"join"},
         updatePresenceList
       )
       .on(
         "presence",
-        {
-          event:"leave"
-        },
+        {event:"leave"},
         updatePresenceList
       )
       .subscribe(
@@ -3064,6 +3312,7 @@ function startPresence(){
           if(status === "SUBSCRIBED"){
 
             await presenceChannel.track({
+
               user_id:
                 currentUser.id,
 
@@ -3075,6 +3324,7 @@ function startPresence(){
 
               last_seen:
                 new Date().toISOString()
+
             });
           }
         }
@@ -3145,22 +3395,21 @@ async function updatePresence(){
 }
 
 
-/* =====================================================
+/* =========================================================
    STATUS AUTOMÁTICO
-===================================================== */
+========================================================= */
 
 function setupActivityTracking(){
 
-  const events = [
+  [
     "mousemove",
     "mousedown",
     "keydown",
     "touchstart",
     "scroll"
-  ];
-
-  events.forEach(
+  ].forEach(
     eventName=>{
+
       document.addEventListener(
         eventName,
         registerActivity,
@@ -3233,9 +3482,9 @@ function checkAutomaticAway(){
 }
 
 
-/* =====================================================
+/* =========================================================
    MENSAGENS
-===================================================== */
+========================================================= */
 
 async function loadMessages(){
 
@@ -3302,7 +3551,6 @@ function renderMessage(
       `[data-message-id="${row.id}"]`
     )
   ){
-
     return;
   }
 
@@ -3311,7 +3559,6 @@ function renderMessage(
   ){
 
     if(isRealtime){
-
       handleIncomingNudge(row);
     }
 
@@ -3345,11 +3592,27 @@ function renderMessage(
       row.created_at
     );
 
-  const text =
+  let text =
     renderFormattedText(
       row.message || "",
       row.formatting || {}
     );
+
+  if(
+    row.formatting?.type === "gif" &&
+    row.formatting?.gif_url
+  ){
+
+    text += `
+      <img
+        class="chat-gif"
+        src="${escapeAttributeURL(row.formatting.gif_url)}"
+        alt="GIF"
+        loading="lazy"
+        onerror="this.style.display='none'"
+      >
+    `;
+  }
 
   const state =
     mine
@@ -3372,6 +3635,7 @@ function renderMessage(
           : ""
       }
     </div>
+
     <div class="text">
       ${text}
     </div>
@@ -3419,7 +3683,6 @@ function getNameFromEmail(
     normalized ===
     "belinhahcardozoalm@gmail.com"
   ){
-
     return "☾ Bruxinha";
   }
 
@@ -3427,7 +3690,6 @@ function getNameFromEmail(
     normalized ===
     "andressa.verissimo.g@icloud.com"
   ){
-
     return "🦊 Raposinha";
   }
 
@@ -3480,9 +3742,9 @@ function formatTime(
 }
 
 
-/* =====================================================
-   LER MENSAGENS
-===================================================== */
+/* =========================================================
+   LEITURA
+========================================================= */
 
 async function markMessageAsRead(
   row
@@ -3493,7 +3755,6 @@ async function markMessageAsRead(
     row.read_at ||
     row.sender === currentUser?.email
   ){
-
     return;
   }
 
@@ -3533,7 +3794,6 @@ async function markMessageAsRead(
       );
 
     if(element){
-
       element.classList.add(
         "message-read"
       );
@@ -3555,7 +3815,6 @@ async function markVisibleMessagesAsRead(){
     !currentUser ||
     !conversationOpen
   ){
-
     return;
   }
 
@@ -3602,9 +3861,9 @@ async function markVisibleMessagesAsRead(){
 }
 
 
-/* =====================================================
+/* =========================================================
    FORMATAÇÃO
-===================================================== */
+========================================================= */
 
 function toggleFormatPanel(){
 
@@ -3695,9 +3954,7 @@ function applyEffect(
   const end =
     input.selectionEnd;
 
-  if(
-    start === end
-  ){
+  if(start === end){
 
     messageFormatting.effect =
       effect;
@@ -3709,19 +3966,11 @@ function applyEffect(
     return;
   }
 
-  /*
-    Guarda o trecho selecionado
-    para renderizar o efeito
-    depois que a mensagem chegar.
-  */
-
   if(!messageFormatting.ranges){
-
     messageFormatting.ranges = [];
   }
 
   messageFormatting.ranges.push({
-
     start,
     end,
     effect
@@ -3748,27 +3997,22 @@ function renderFormattedText(
 ){
 
   const safe =
-    escapeHTML(
-      text
-    );
+    escapeHTML(text);
 
   let output =
     safe;
 
   if(formatting.bold){
-
     output =
       `<strong>${output}</strong>`;
   }
 
   if(formatting.italic){
-
     output =
       `<em>${output}</em>`;
   }
 
   if(formatting.underline){
-
     output =
       `<u>${output}</u>`;
   }
@@ -3792,21 +4036,11 @@ function renderFormattedText(
       `<span style="color:${formatting.color}">${output}</span>`;
   }
 
-  /*
-    Efeito da mensagem inteira.
-  */
-
   if(formatting.effect){
 
     output =
-      `<span class="effect-${escapeAttribute(formatting.effect)}">${output}</span>`;
+      `<span class="effect-${safeEffect(formatting.effect)}">${output}</span>`;
   }
-
-  /*
-    Efeitos aplicados a trechos.
-    Como o texto foi escapado antes,
-    usamos os índices originais.
-  */
 
   if(
     Array.isArray(
@@ -3847,7 +4081,6 @@ function renderEffectRanges(
       );
 
   if(!ranges.length){
-
     return escapeHTML(text);
   }
 
@@ -3876,13 +4109,8 @@ function renderEffectRanges(
           )
         );
 
-      const effect =
-        safeEffect(
-          range.effect
-        );
-
       output +=
-        `<span class="effect-${effect}">${selected}</span>`;
+        `<span class="effect-${safeEffect(range.effect)}">${selected}</span>`;
 
       cursor =
         range.end;
@@ -3920,19 +4148,9 @@ function safeEffect(
 }
 
 
-function escapeAttribute(
-  value
-){
-
-  return safeEffect(
-    value
-  );
-}
-
-
-/* =====================================================
-   ENVIAR TEXTO
-===================================================== */
+/* =========================================================
+   ENVIAR MENSAGEM
+========================================================= */
 
 async function sendMessage(){
 
@@ -3951,9 +4169,7 @@ async function sendMessage(){
     return;
   }
 
-  if(
-    !contactProfile?.id
-  ){
+  if(!contactProfile?.id){
 
     alert(
       "Não consegui identificar a Raposinha."
@@ -3966,6 +4182,7 @@ async function sendMessage(){
     true;
 
   const formatting = {
+
     bold:
       !!messageFormatting.bold,
 
@@ -3989,6 +4206,7 @@ async function sendMessage(){
       )
         ? messageFormatting.ranges
         : []
+
   };
 
   try{
@@ -4015,8 +4233,7 @@ async function sendMessage(){
         )
         .single();
 
-    if(error)
-      throw error;
+    if(error) throw error;
 
     renderMessage(
       data,
@@ -4063,15 +4280,16 @@ function resetFormatting(){
     color:"#111",
     effect:null,
     ranges:[]
+
   };
 
   updateFormatButtonState();
 }
 
 
-/* =====================================================
+/* =========================================================
    GIF
-===================================================== */
+========================================================= */
 
 function toggleGifPanel(){
 
@@ -4132,7 +4350,6 @@ async function sendGif(){
     !currentUser ||
     !contactProfile?.id
   ){
-
     return;
   }
 
@@ -4165,8 +4382,7 @@ async function sendGif(){
         )
         .single();
 
-    if(error)
-      throw error;
+    if(error) throw error;
 
     renderMessage(
       data,
@@ -4193,9 +4409,32 @@ async function sendGif(){
 }
 
 
-/* =====================================================
+function escapeAttributeURL(
+  url
+){
+
+  const value =
+    String(url || "");
+
+  if(
+    !/^https?:\/\//i.test(
+      value
+    )
+  ){
+    return "";
+  }
+
+  return value
+    .replace(/&/g,"&amp;")
+    .replace(/"/g,"&quot;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+}
+
+
+/* =========================================================
    REALTIME
-===================================================== */
+========================================================= */
 
 function subscribeToMessages(){
 
@@ -4265,11 +4504,6 @@ function processRealtimeMessage(
   if(!row)
     return;
 
-  /*
-    Ignora mensagens que não
-    pertencem a esta conversa.
-  */
-
   const sender =
     String(row.sender || "")
       .toLowerCase();
@@ -4312,7 +4546,6 @@ function processRealtimeMessage(
     row.recipient &&
     !belongsToConversation
   ){
-
     return;
   }
 
@@ -4373,16 +4606,15 @@ function updateRenderedMessage(
 }
 
 
-/* =====================================================
+/* =========================================================
    NOTIFICAÇÕES
-===================================================== */
+========================================================= */
 
 async function requestNotificationPermission(){
 
   if(
     !("Notification" in window)
   ){
-
     return;
   }
 
@@ -4418,12 +4650,6 @@ function registerIncomingMessage(
   const messageText =
     row.message || "";
 
-  /*
-    Se a conversa está aberta e
-    visível, não tratamos como
-    nova notificação.
-  */
-
   const shouldNotify =
     !conversationOpen ||
     document.hidden;
@@ -4443,9 +4669,7 @@ function registerIncomingMessage(
       playMessageSound();
     }
 
-    if(
-      settings.notifications_enabled
-    ){
+    if(settings.notifications_enabled){
 
       showBrowserNotification(
         sender,
@@ -4472,7 +4696,6 @@ function showBrowserNotification(
     Notification.permission !==
       "granted"
   ){
-
     return;
   }
 
@@ -4592,11 +4815,9 @@ async function clearUnread(){
   updateContactUnread();
 
   document.title =
-    "MSN Messenger — Bruxinha & Raposinha";
+    "MSN no Ar — Bruxinha & Raposinha";
 
-  if(
-    conversationOpen
-  ){
+  if(conversationOpen){
 
     await markVisibleMessagesAsRead();
   }
@@ -4613,9 +4834,6 @@ function updatePageTitle(){
 document.addEventListener(
   "visibilitychange",
   ()=>{
-
-    pageIsVisible =
-      !document.hidden;
 
     if(!document.hidden){
 
@@ -4638,12 +4856,11 @@ window.addEventListener(
 );
 
 
-/* =====================================================
+/* =========================================================
    SOM
-===================================================== */
+========================================================= */
 
-let audioContext =
-  null;
+let audioContext = null;
 
 
 function getAudioContext(){
@@ -4799,21 +5016,17 @@ function playNudgeSound(){
 }
 
 
-/* =====================================================
+/* =========================================================
    NUDGE
-===================================================== */
+========================================================= */
 
 async function sendNudge(){
 
   if(!currentUser)
     return;
 
-  if(
-    !settings.nudge_enabled
-  ){
-
+  if(!settings.nudge_enabled)
     return;
-  }
 
   const senderName =
     getFallbackName();
@@ -4912,7 +5125,6 @@ function handleIncomingNudge(
   if(
     !settings.nudge_enabled
   ){
-
     return;
   }
 
@@ -4934,9 +5146,9 @@ function handleIncomingNudge(
 }
 
 
-/* =====================================================
+/* =========================================================
    SETTINGS
-===================================================== */
+========================================================= */
 
 async function loadSettings(){
 
@@ -4981,6 +5193,7 @@ async function loadSettings(){
       notification_style:
         data.notification_style ||
         "classic"
+
     };
 
   }else{
@@ -5084,6 +5297,7 @@ async function saveSettings(){
 
     updated_at:
       new Date().toISOString()
+
   };
 
   button.disabled =
@@ -5146,9 +5360,9 @@ async function saveSettings(){
 }
 
 
-/* =====================================================
+/* =========================================================
    CONVERSA
-===================================================== */
+========================================================= */
 
 function openConversation(){
 
@@ -5177,11 +5391,6 @@ function minimizeConversation(){
   conversationOpen =
     false;
 
-  /*
-    No celular, minimizamos
-    visualmente para a lista.
-  */
-
   if(
     window.innerWidth <= 700
   ){
@@ -5206,9 +5415,9 @@ function toggleSidebar(){
 }
 
 
-/* =====================================================
+/* =========================================================
    EMOJIS
-===================================================== */
+========================================================= */
 
 function addEmoji(
   emoji
@@ -5239,9 +5448,9 @@ function addEmoji(
 }
 
 
-/* =====================================================
+/* =========================================================
    UTILITÁRIOS
-===================================================== */
+========================================================= */
 
 function scrollChat(){
 
@@ -5272,9 +5481,9 @@ function escapeHTML(
 }
 
 
-/* =====================================================
+/* =========================================================
    ENTER
-===================================================== */
+========================================================= */
 
 passwordInput.addEventListener(
   "keydown",
@@ -5307,9 +5516,9 @@ input.addEventListener(
 );
 
 
-/* =====================================================
-   FECHAR MODAIS CLICANDO FORA
-===================================================== */
+/* =========================================================
+   FECHAR MODAIS
+========================================================= */
 
 document.getElementById(
   "profileModal"
@@ -5349,9 +5558,9 @@ document.getElementById(
 );
 
 
-/* =====================================================
+/* =========================================================
    INIT
-===================================================== */
+========================================================= */
 
 checkSession();
 
