@@ -20,6 +20,17 @@
   box-sizing:border-box;
 }
 
+:root{
+  --msn-accent:#07569b;
+  --msn-accent-light:#69b7ee;
+  --msn-accent-mid:#3d91d0;
+  --msn-accent-dark:#075394;
+  --msn-border:#003c74;
+  --msn-soft:#e8f2f8;
+  --msn-chat:#f8fbfd;
+  --msn-window-glow:rgba(105,183,238,.55);
+}
+
 html,
 body{
   margin:0;
@@ -77,10 +88,10 @@ button:disabled{
   width:100%;
   max-width:1000px;
   background:#ece9d8;
-  border:1px solid #003c74;
+  border:1px solid var(--msn-border);
   border-radius:7px 7px 3px 3px;
   box-shadow:
-    0 0 0 1px #7ca8cc,
+    0 0 0 1px var(--msn-accent-mid),
     0 0 0 2px #d8e8f5,
     0 12px 35px rgba(0,0,0,.38);
   overflow:hidden;
@@ -108,12 +119,12 @@ button:disabled{
   background:
     linear-gradient(
       to bottom,
-      #69b7ee 0%,
-      #3d91d0 22%,
+      var(--msn-accent-light) 0%,
+      var(--msn-accent-mid) 22%,
       #1266a8 52%,
-      #075394 100%
+      var(--msn-accent-dark) 100%
     );
-  border-bottom:1px solid #003c73;
+  border-bottom:1px solid var(--msn-border);
 }
 
 .titlebar{
@@ -229,6 +240,10 @@ button:disabled{
   background:
     linear-gradient(#a8d8f5,#3288c5);
 }
+
+/* =========================================================
+   TEMA DA JANELA — MSN 2008
+========================================================= */
 
 /* =========================================================
    LOGIN
@@ -1002,6 +1017,35 @@ button:disabled{
    INPUT
 ========================================================= */
 
+.typing-indicator{
+  display:none;
+  min-height:20px;
+  padding:3px 9px 0;
+  color:#557080;
+  background:#f1f5f7;
+  border-top:1px solid #c7d4dc;
+  font-size:9px;
+  font-style:italic;
+}
+
+.typing-indicator.visible{
+  display:block;
+}
+
+.typing-dots::after{
+  content:"";
+  display:inline-block;
+  width:16px;
+  animation:typingDots 1.2s steps(4,end) infinite;
+}
+
+@keyframes typingDots{
+  0%{content:""}
+  25%{content:"."}
+  50%{content:".."}
+  75%,100%{content:"..."}
+}
+
 .input-area{
   display:flex;
   gap:5px;
@@ -1335,6 +1379,150 @@ button:disabled{
 }
 
 /* =========================================================
+   MSN 2008 — ACABAMENTO / TEMA PERSONALIZÁVEL
+========================================================= */
+
+#messenger{
+  box-shadow:
+    0 0 0 1px var(--msn-accent-mid),
+    0 0 0 2px #d8e8f5,
+    0 0 18px var(--msn-window-glow),
+    0 12px 35px rgba(0,0,0,.38);
+}
+
+.titlebar{
+  background:
+    linear-gradient(
+      to bottom,
+      var(--msn-accent-light) 0%,
+      var(--msn-accent-mid) 22%,
+      var(--msn-accent) 58%,
+      var(--msn-accent-dark) 100%
+    );
+}
+
+.chat-titlebar{
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--msn-accent-light) 90%, white),
+      var(--msn-accent-mid) 35%,
+      var(--msn-accent-dark) 100%
+    );
+}
+
+/* brilho característico das janelas do MSN 2008 */
+.titlebar::after,
+.chat-titlebar::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:1px;
+  pointer-events:none;
+  background:rgba(255,255,255,.65);
+}
+
+.titlebar,
+.chat-titlebar{
+  position:relative;
+}
+
+.message .sender{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-weight:bold;
+  text-shadow:0 1px 0 rgba(255,255,255,.75);
+}
+
+.message .sender .nickname{
+  display:inline-block;
+  font-weight:bold;
+}
+
+.message .sender.nickname-bruxinha{
+  color:#6d3bb1;
+}
+
+.message .sender.nickname-raposinha{
+  color:#d13d79;
+}
+
+.message.mine .sender.nickname-bruxinha{
+  color:#6d3bb1;
+}
+
+.message.mine .sender.nickname-raposinha{
+  color:#d13d79;
+}
+
+/* imagem/GIF nunca herda efeitos do texto */
+.message .gif-message{
+  display:block;
+  margin-top:4px;
+  max-width:min(360px,80vw);
+  max-height:280px;
+  border:1px solid #9db2c0;
+  background:#fff;
+  box-shadow:1px 1px 2px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.8);
+}
+
+.message .gif-error{
+  display:inline-block;
+  margin-top:4px;
+  padding:5px 7px;
+  color:#7a4b00;
+  background:#fff8dc;
+  border:1px solid #d7b85b;
+  font-size:9px;
+}
+
+.theme-preview{
+  width:62px;
+  height:30px;
+  border:1px solid #7894a7;
+  border-radius:2px;
+  box-shadow:inset 0 1px rgba(255,255,255,.7);
+}
+
+.theme-controls{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.theme-controls input[type=color]{
+  width:38px;
+  height:28px;
+  padding:1px;
+  border:1px solid #8a9ba7;
+  background:#fff;
+}
+
+.theme-presets{
+  display:flex;
+  gap:4px;
+  flex-wrap:wrap;
+  margin-top:5px;
+}
+
+.theme-preset{
+  width:21px;
+  height:21px;
+  padding:0;
+  border:1px solid #777;
+  border-radius:2px;
+  box-shadow:inset 0 1px rgba(255,255,255,.7);
+}
+
+.theme-preset.active{
+  outline:2px solid #333;
+  outline-offset:1px;
+}
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
@@ -1449,71 +1637,59 @@ button:disabled{
     padding:6px;
   }
 }
+.nickname-bruxinha{color:#8b3db2;font-weight:700;}
+.nickname-raposinha{color:#e33f91;font-weight:700;}
 </style>
 
-<style id="msn2008-skin">
-/* ===== MSN Messenger 2008 VISUAL SKIN — visual only ===== */
-:root{
-  --msn-main:#07569b;
-  --msn-light:#8ed2f3;
-  --msn-mid:#318fca;
-  --msn-dark:#064a82;
-  --msn-border:#3d789d;
-  --msn-glow:rgba(75,166,222,.52);
-}
+<style id="msn2008-visual-only">
+/* =========================================================
+   MSN MESSENGER 2008 — PELE VISUAL
+   NÃO ALTERA LOGIN, SUPABASE OU LÓGICA DE MENSAGENS
+========================================================= */
 
 #loginScreen,#messenger{
   border:1px solid var(--msn-border) !important;
   border-radius:7px 7px 3px 3px !important;
   box-shadow:
-    0 0 0 1px rgba(255,255,255,.92),
-    0 0 0 2px var(--msn-light),
-    0 0 20px var(--msn-glow),
-    0 14px 36px rgba(0,0,0,.35) !important;
+    0 0 0 1px rgba(255,255,255,.95),
+    0 0 0 2px var(--msn-accent-light),
+    0 0 18px var(--msn-window-glow),
+    0 13px 36px rgba(0,0,0,.36) !important;
 }
 
 .titlebar,.login-title,.chat-titlebar,.editor-title,.settings-title{
   background:
     linear-gradient(to bottom,
-      var(--msn-light) 0%,
-      #66b7e5 18%,
-      var(--msn-mid) 48%,
-      var(--msn-main) 68%,
-      var(--msn-dark) 100%) !important;
-  border-bottom:1px solid var(--msn-dark) !important;
+      var(--msn-accent-light) 0%,
+      var(--msn-accent-mid) 30%,
+      var(--msn-accent) 62%,
+      var(--msn-accent-dark) 100%) !important;
+  border-bottom-color:var(--msn-border) !important;
   box-shadow:
     inset 0 1px rgba(255,255,255,.72),
-    inset 0 -1px rgba(0,0,0,.18);
-}
-
-.titlebar::after,.login-title::after,.chat-titlebar::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  height:1px;
-  background:rgba(255,255,255,.7);
-  pointer-events:none;
+    inset 0 -1px rgba(0,0,0,.18) !important;
 }
 
 .window-button,.chat-action{
   background:
-    linear-gradient(to bottom,var(--msn-light),var(--msn-main)) !important;
+    linear-gradient(to bottom,
+      var(--msn-accent-light),
+      var(--msn-accent)) !important;
   border-color:rgba(255,255,255,.78) !important;
-  box-shadow:inset 0 1px rgba(255,255,255,.6),0 1px 2px rgba(0,0,0,.2);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.65),
+    0 1px 2px rgba(0,0,0,.18) !important;
 }
 
 .window-button:hover,.chat-action:hover{
   background:
-    linear-gradient(to bottom,#fff,var(--msn-mid)) !important;
+    linear-gradient(to bottom,#fff,var(--msn-accent-mid)) !important;
 }
 
 .sidebar{
   background:
-    linear-gradient(90deg,#fbfdff 0%,#edf6fb 72%,#dbeaf3 100%) !important;
-  border-right:1px solid #91b1c4 !important;
-  box-shadow:inset -1px 0 #fff;
+    linear-gradient(to right,#fbfdff,#edf6fb 72%,#dcebf4) !important;
+  border-right-color:#91afc1 !important;
 }
 
 .profile,.contact{
@@ -1523,89 +1699,91 @@ button:disabled{
 
 .contact:hover{
   background:
-    linear-gradient(#fff,#d8edf9) !important;
+    linear-gradient(#fff,#d9edf9) !important;
 }
 
 .contacts-heading{
   background:
-    linear-gradient(#f8fcff,#dbeaf3) !important;
-  border-color:#aac4d3 !important;
+    linear-gradient(#f8fcff,#dcecf4) !important;
 }
 
 .toolbar,.format-panel,.effect-panel{
   background:
-    linear-gradient(#fff,#eef2f4 48%,#d1d9dd) !important;
+    linear-gradient(#fff,#eef2f4 48%,#d0d9de) !important;
 }
 
 .toolbar button,.format-panel button,.effect-panel button{
-  border-color:#899ba6 !important;
   background:
-    linear-gradient(#fff,#f3f3f3 46%,#d2d2d2) !important;
-  box-shadow:inset 0 1px #fff,0 1px 1px rgba(0,0,0,.1);
+    linear-gradient(#fff,#f4f4f4 46%,#d1d1d1) !important;
+  border-color:#899aa5 !important;
+  box-shadow:inset 0 1px #fff,0 1px 1px rgba(0,0,0,.1) !important;
 }
 
 .toolbar button:hover,.format-panel button:hover,.effect-panel button:hover{
-  border-color:var(--msn-border) !important;
   background:
-    linear-gradient(#fff,#eaf8ff 48%,#c3e1f1) !important;
+    linear-gradient(#fff,#eaf8ff 48%,#c2e1f1) !important;
+  border-color:var(--msn-border) !important;
 }
 
-.login-button,.save-button{
+.toolbar button.active,.format-panel button.active{
   background:
-    linear-gradient(#fff,#e7f6fd 45%,#a9d6ec) !important;
+    linear-gradient(#c8e8fa,#eaf7fd) !important;
+  border-color:#5c91af !important;
+}
+
+.send-button,.login-button,.save-button{
+  background:
+    linear-gradient(#fff,#e6f5fc 45%,#a7d4ea) !important;
   border-color:var(--msn-border) !important;
   color:#174f72 !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.9),
+    0 1px 1px rgba(0,0,0,.15) !important;
 }
 
-.login-button:hover,.save-button:hover{
+.send-button:hover,.login-button:hover,.save-button:hover{
   background:
-    linear-gradient(#fff,#f0fbff 45%,#b9e1f3) !important;
+    linear-gradient(#fff,#effaff 45%,#b9e0f2) !important;
 }
 
 #messageInput{
-  border-color:#9eb3c0 !important;
-  box-shadow:inset 1px 1px 2px rgba(0,0,0,.1),inset 0 1px #fff !important;
+  border-color:#9db2bf !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(0,0,0,.1),
+    inset 0 1px #fff !important;
 }
 
-/* moldura interna típica de janelas antigas */
+/* Moldura interna/chanfro característico de janelas antigas */
 .app-body{
-  border-top:1px solid rgba(255,255,255,.75);
+  border-top:1px solid #fff;
 }
 
 .chat{
   background:
-    linear-gradient(rgba(255,255,255,.96),rgba(246,251,254,.98)) !important;
+    linear-gradient(#fff,#f6fafc) !important;
 }
 
-/* controles de personalização */
-.msn-theme-box{
-  margin-top:8px;
-  padding:8px;
-  border:1px solid #9fb4c1;
-  background:linear-gradient(#fafdff,#e3edf2);
-  box-shadow:inset 0 1px #fff;
-  font-size:10px;
+/* Preserva e deixa mais legíveis as cores de nicknames */
+.message .sender.nickname-bruxinha,
+.message.mine .sender.nickname-bruxinha{
+  color:#6d3bb1 !important;
 }
-.msn-theme-box strong{color:#315c75}
-.msn-theme-row{
-  display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:6px;
+.message .sender.nickname-raposinha,
+.message.mine .sender.nickname-raposinha{
+  color:#d13d79 !important;
 }
-.msn-theme-color{
-  width:34px;height:24px;padding:1px;
-  border:1px solid #8096a3;background:#fff;
-}
-.msn-theme-swatch{
-  width:24px;height:22px;padding:0;
-  border:1px solid #78909c;border-radius:2px;
-  box-shadow:inset 0 1px rgba(255,255,255,.65);
-}
-.msn-theme-swatch:hover{outline:1px solid #3d789d}
 
-@media(max-width:700px){
-  #loginScreen,#messenger{
-    border-radius:0 !important;
-    box-shadow:none !important;
-  }
+/* Painel de personalização com acabamento MSN */
+.theme-preview{
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.8),
+    0 1px 2px rgba(0,0,0,.12) !important;
+}
+
+.theme-preset{
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.8),
+    0 1px 2px rgba(0,0,0,.12) !important;
 }
 </style>
 
@@ -2051,6 +2229,11 @@ button:disabled{
       </div>
 
 
+      <!-- DIGITAÇÃO -->
+      <div id="typingIndicator" class="typing-indicator">
+        <span id="typingName">Raposinha</span> está digitando<span class="typing-dots"></span>
+      </div>
+
       <!-- INPUT -->
 
       <div class="input-area">
@@ -2307,6 +2490,35 @@ button:disabled{
 
         </div>
 
+        <div class="setting-row">
+
+          <div class="setting-info">
+
+            <div class="setting-title">
+              🎨 Cor da janela
+            </div>
+
+            <div class="setting-description">
+              Personalize a cor principal do MSN 2008. A alteração fica salva neste aparelho.
+            </div>
+
+            <div class="theme-presets" id="themePresets">
+              <button class="theme-preset" title="Azul clássico" style="background:#07569b" onclick="setWindowTheme('#07569b')"></button>
+              <button class="theme-preset" title="Roxo" style="background:#6845a8" onclick="setWindowTheme('#6845a8')"></button>
+              <button class="theme-preset" title="Rosa" style="background:#b33f70" onclick="setWindowTheme('#b33f70')"></button>
+              <button class="theme-preset" title="Verde" style="background:#39854a" onclick="setWindowTheme('#39854a')"></button>
+              <button class="theme-preset" title="Dourado" style="background:#9a6a16" onclick="setWindowTheme('#9a6a16')"></button>
+              <button class="theme-preset" title="Ciano" style="background:#187d91" onclick="setWindowTheme('#187d91')"></button>
+            </div>
+
+          </div>
+
+          <div class="theme-controls">
+            <input id="windowColor" type="color" value="#07569b" onchange="setWindowTheme(this.value)">
+          </div>
+
+        </div>
+
         <div class="settings-footer">
 
           <button
@@ -2332,6 +2544,75 @@ button:disabled{
 
 
 <script>
+function hexToRgb(hex){
+  const clean = String(hex || "").replace("#", "");
+  if(!/^[0-9a-fA-F]{6}$/.test(clean)) return null;
+  return {
+    r:parseInt(clean.slice(0,2),16),
+    g:parseInt(clean.slice(2,4),16),
+    b:parseInt(clean.slice(4,6),16)
+  };
+}
+
+function mixHex(a,b,amount){
+  const A = hexToRgb(a);
+  const B = hexToRgb(b);
+  if(!A || !B) return a;
+  const t = Math.max(0,Math.min(1,amount));
+  const channel = key => Math.round(A[key] + (B[key]-A[key])*t);
+  return `#${[channel("r"),channel("g"),channel("b")]
+    .map(v=>v.toString(16).padStart(2,"0"))
+    .join("")}`;
+}
+
+function applyWindowTheme(hex){
+  const base = hexToRgb(hex);
+  if(!base) return;
+
+  const root = document.documentElement;
+  const light = mixHex(hex,"#ffffff",.58);
+  const mid = mixHex(hex,"#ffffff",.18);
+  const dark = mixHex(hex,"#000000",.22);
+  const border = mixHex(hex,"#000000",.38);
+
+  root.style.setProperty("--msn-accent",hex);
+  root.style.setProperty("--msn-accent-light",light);
+  root.style.setProperty("--msn-accent-mid",mid);
+  root.style.setProperty("--msn-accent-dark",dark);
+  root.style.setProperty("--msn-border",border);
+  root.style.setProperty("--msn-window-glow",`rgba(${base.r},${base.g},${base.b},.42)`);
+
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content",hex);
+
+  const inputColor = document.getElementById("windowColor");
+  if(inputColor) inputColor.value = hex;
+
+  document.querySelectorAll(".theme-preset").forEach(button=>{
+    const buttonColor = String(button.style.backgroundColor || "").toLowerCase();
+    const normalized = hex.toLowerCase();
+    button.classList.toggle(
+      "active",
+      buttonColor === normalized || button.getAttribute("style")?.toLowerCase().includes(normalized)
+    );
+  });
+
+  localStorage.setItem("msn_window_theme",hex);
+}
+
+function setWindowTheme(hex){
+  applyWindowTheme(String(hex || DEFAULT_WINDOW_THEME).toLowerCase());
+}
+
+function loadWindowTheme(){
+  const saved = localStorage.getItem("msn_window_theme");
+  applyWindowTheme(
+    /^#[0-9a-f]{6}$/i.test(saved || "")
+      ? saved
+      : DEFAULT_WINDOW_THEME
+  );
+}
+
+
 /* =========================================================
    SUPABASE
 ========================================================= */
@@ -2343,6 +2624,24 @@ const SUPABASE_KEY =
   "sb_publishable_1_QzlhlMc2HS_aNkzbJqRg_SgtJzfS3";
 
 const AVATAR_BUCKET = "avatars";
+
+// Identidades fixas do casal no Supabase. O chat usa estes UUIDs para
+// descobrir o destinatário; o nome "Raposinha" nunca é usado como chave.
+const USER_UUIDS = {
+  raposinha: "0fcac17c-d3e4-41aa-94a6-1f4fd296571e",
+  bruxinha: "09bf95ed-21f0-4a71-8020-6b3dc6559070"
+};
+
+const USER_EMAILS = {
+  raposinha: "andressa.verissimo.g@icloud.com",
+  bruxinha: "belinhahcardozoalm@gmail.com"
+};
+
+const DEFAULT_WINDOW_THEME = "#07569b";
+
+/* UUIDs oficiais das duas contas */
+const RAPOSINHA_UUID = "0fcac17c-d3e4-41aa-94a6-1f4fd296571e";
+const BRUXINHA_UUID = "09bf95ed-21f0-4a71-8020-6b3dc6559070";
 
 const supabaseClient =
   window.supabase.createClient(
@@ -2408,6 +2707,9 @@ let awayTimer = null;
 let myPresenceStatus = "online";
 
 let contactPresence = false;
+let typingTimer = null;
+let remoteTypingTimer = null;
+let remoteTyping = false;
 
 let settings = {
   notifications_enabled:true,
@@ -3182,21 +3484,18 @@ async function saveProfile(){
 
 async function loadContactProfile(){
 
-  /*
-    Destinatário FIXO por UUID.
-    Não usamos mais o nickname "Raposinha"/"Bruxinha"
-    para localizar o usuário no Supabase.
-  */
+  const myId =
+    String(currentUser?.id || "");
 
   const isBruxinha =
-    currentUser?.id === USER_UUIDS.bruxinha;
+    myId === USER_UUIDS.bruxinha;
 
   const contactId =
     isBruxinha
       ? USER_UUIDS.raposinha
       : USER_UUIDS.bruxinha;
 
-  const fallbackName =
+  const contactUsername =
     isBruxinha
       ? "Raposinha"
       : "Bruxinha";
@@ -3206,6 +3505,8 @@ async function loadContactProfile(){
       ? "🦊"
       : "☾";
 
+  // A identificação do contato é feita pelo UUID real do Supabase.
+  // Isso evita depender de username, que pode mudar e pode ser bloqueado por RLS.
   const {data,error} =
     await supabaseClient
       .from("profiles")
@@ -3221,44 +3522,33 @@ async function loadContactProfile(){
   if(error){
 
     console.error(
-      "Erro ao carregar perfil do contato:",
+      "Erro ao localizar contato pelo UUID:",
       error
     );
 
-    /*
-      Mesmo que a leitura do perfil seja bloqueada por RLS,
-      mantemos o destinatário identificado pelo UUID.
-    */
-    contactProfile = {
-      id: contactId,
-      username: fallbackName,
-      status: "Online",
-      personal_message: "",
-      avatar_url: null
-    };
+    showFallbackContact(
+      contactUsername,
+      fallbackAvatar
+    );
 
-    updateContactUI(contactProfile);
     return;
   }
 
   if(!data){
 
-    contactProfile = {
-      id: contactId,
-      username: fallbackName,
-      status: "Online",
-      personal_message: "",
-      avatar_url: null
-    };
+    console.error(
+      "Perfil do contato não retornou para o UUID:",
+      contactId
+    );
 
-    updateContactUI(contactProfile);
+    showFallbackContact(
+      contactUsername,
+      fallbackAvatar
+    );
+
     return;
   }
 
-  /*
-    O ID vem diretamente da linha do Supabase e é validado
-    contra o UUID esperado antes de ser usado no envio.
-  */
   contactProfile = {
     ...data,
     id: contactId
@@ -3266,6 +3556,7 @@ async function loadContactProfile(){
 
   updateContactUI(contactProfile);
 }
+
 
 function updateContactUI(data){
 
@@ -3384,8 +3675,18 @@ function updateContactPresenceUI(){
 
 function showFallbackContact(
   username,
-  avatar
+  avatar,
+  id
 ){
+
+  contactProfile = {
+    id: id || null,
+    username,
+    status: "Online",
+    personal_message: "",
+    avatar_url: null
+  };
+
 
   document.getElementById(
     "contactName"
@@ -3494,6 +3795,15 @@ function startPresence(){
         {event:"leave"},
         updatePresenceList
       )
+      .on(
+        "broadcast",
+        {event:"typing"},
+        payload=>{
+          const data = payload?.payload || {};
+          if(String(data.user_id || "") !== String(contactProfile?.id || "")) return;
+          setRemoteTyping(!!data.typing);
+        }
+      )
       .subscribe(
         async status=>{
 
@@ -3582,6 +3892,64 @@ async function updatePresence(){
   }
 }
 
+
+/* =========================================================
+   DIGITAÇÃO — BROADCAST, SEM GRAVAR NO BANCO
+========================================================= */
+
+function setRemoteTyping(isTyping){
+
+  remoteTyping = !!isTyping;
+
+  const indicator = document.getElementById("typingIndicator");
+  const name = document.getElementById("typingName");
+
+  if(!indicator || !name) return;
+
+  name.textContent = contactProfile?.username ||
+    (contactProfile?.id === USER_UUIDS.raposinha ? "Raposinha" : "Bruxinha");
+
+  indicator.classList.toggle("visible", remoteTyping);
+
+  if(remoteTyping){
+    clearTimeout(remoteTypingTimer);
+    remoteTypingTimer = setTimeout(()=>setRemoteTyping(false), 2500);
+  }
+}
+
+async function broadcastTyping(isTyping){
+
+  if(!presenceChannel || !currentUser?.id) return;
+
+  try{
+    await presenceChannel.send({
+      type:"broadcast",
+      event:"typing",
+      payload:{
+        user_id:currentUser.id,
+        typing:!!isTyping
+      }
+    });
+  }catch(error){
+    console.debug("Typing broadcast:", error);
+  }
+}
+
+function handleTypingInput(){
+
+  clearTimeout(typingTimer);
+
+  if(!input.value){
+    broadcastTyping(false);
+    return;
+  }
+
+  broadcastTyping(true);
+
+  typingTimer = setTimeout(()=>{
+    broadcastTyping(false);
+  }, 1800);
+}
 
 /* =========================================================
    STATUS AUTOMÁTICO
@@ -3684,6 +4052,9 @@ async function loadMessages(){
       .select(
         "id, sender, recipient, message, formatting, created_at, read_at"
       )
+      .or(
+        `and(sender.eq.${currentUser.id},recipient.eq.${contactProfile?.id}),and(sender.eq.${contactProfile?.id},recipient.eq.${currentUser.id})`
+      )
       .order(
         "created_at",
         {ascending:true}
@@ -3754,10 +4125,20 @@ function renderMessage(
   }
 
   const mine =
-    String(row.sender || "")
-      .toLowerCase() ===
-    String(currentUser?.email || "")
-      .toLowerCase();
+    String(row.sender || "") ===
+    String(currentUser?.id || "");
+
+  const senderName =
+    getNameFromEmail(row.sender);
+
+  const senderId = String(row.sender || "");
+
+  const senderRole =
+    senderId === USER_UUIDS.raposinha
+      ? "raposinha"
+      : senderId === USER_UUIDS.bruxinha
+        ? "bruxinha"
+        : "generic";
 
   const message =
     document.createElement("div");
@@ -3770,36 +4151,41 @@ function renderMessage(
   message.dataset.messageId =
     row.id;
 
-  const senderName =
-    getNameFromEmail(
-      row.sender
-    );
-
   const time =
-    formatTime(
-      row.created_at
-    );
+    formatTime(row.created_at);
 
-  let text =
-    renderFormattedText(
-      row.message || "",
-      row.formatting || {}
-    );
-
-  if(
+  const isGif =
     row.formatting?.type === "gif" &&
-    row.formatting?.gif_url
-  ){
+    /^https?:\/\//i.test(
+      String(row.formatting?.gif_url || "")
+    );
 
-    text += `
+  let contentHTML = "";
+
+  if(isGif){
+
+    const gifUrl =
+      escapeAttributeURL(row.formatting.gif_url);
+
+    contentHTML = `
       <img
-        class="chat-gif"
-        src="${escapeAttributeURL(row.formatting.gif_url)}"
-        alt="GIF"
+        class="gif-message"
+        src="${gifUrl}"
+        alt="GIF enviado"
         loading="lazy"
-        onerror="this.style.display='none'"
+        referrerpolicy="no-referrer"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'"
       >
+      <span class="gif-error" style="display:none">GIF indisponível ou endereço não é uma imagem direta.</span>
     `;
+
+  }else{
+
+    contentHTML =
+      renderFormattedText(
+        row.message || "",
+        row.formatting || {}
+      );
   }
 
   const state =
@@ -3812,8 +4198,8 @@ function renderMessage(
       : "";
 
   message.innerHTML = `
-    <div class="sender">
-      ${escapeHTML(senderName)}
+    <div class="sender nickname-${senderRole}">
+      <span class="nickname">${escapeHTML(senderName)}</span>
       <span class="message-time">
         ${escapeHTML(time)}
       </span>
@@ -3825,63 +4211,37 @@ function renderMessage(
     </div>
 
     <div class="text">
-      ${text}
+      ${contentHTML}
     </div>
   `;
 
-  chat.appendChild(
-    message
-  );
+  chat.appendChild(message);
 
-  if(
-    isRealtime &&
-    !mine
-  ){
-
-    registerIncomingMessage(
-      row
-    );
+  if(isRealtime && !mine){
+    registerIncomingMessage(row);
   }
 
-  if(
-    !mine &&
-    conversationOpen
-  ){
-
-    markMessageAsRead(
-      row
-    );
+  if(!mine && conversationOpen){
+    markMessageAsRead(row);
   }
 
   scrollChat();
 }
 
 
-function getNameFromEmail(
-  email
-){
+function getNameFromEmail(value){
 
-  if(!email)
-    return "Usuário";
+  const id = String(value || "");
 
-  const normalized =
-    email.toLowerCase();
+  if(id === BRUXINHA_UUID) return "☾ Bruxinha";
+  if(id === RAPOSINHA_UUID) return "🦊 Raposinha";
 
-  if(
-    normalized ===
-    "belinhahcardozoalm@gmail.com"
-  ){
-    return "☾ Bruxinha";
-  }
+  const normalized = id.toLowerCase();
 
-  if(
-    normalized ===
-    "andressa.verissimo.g@icloud.com"
-  ){
-    return "🦊 Raposinha";
-  }
+  if(normalized === "belinhahcardozoalm@gmail.com") return "☾ Bruxinha";
+  if(normalized === "andressa.verissimo.g@icloud.com") return "🦊 Raposinha";
 
-  return email;
+  return value || "Usuário";
 }
 
 
@@ -3941,7 +4301,7 @@ async function markMessageAsRead(
   if(
     !row ||
     row.read_at ||
-    row.sender === currentUser?.email
+    String(row.sender) === String(currentUser?.id)
   ){
     return;
   }
@@ -4016,9 +4376,13 @@ async function markVisibleMessagesAsRead(){
         "read_at",
         null
       )
-      .neq(
+      .eq(
+        "recipient",
+        currentUser.id
+      )
+      .eq(
         "sender",
-        currentUser.email
+        contactProfile?.id || ""
       )
       .order(
         "created_at",
@@ -4184,26 +4548,8 @@ function renderFormattedText(
   formatting
 ){
 
-  const safe =
-    escapeHTML(text);
-
-  let output =
-    safe;
-
-  if(formatting.bold){
-    output =
-      `<strong>${output}</strong>`;
-  }
-
-  if(formatting.italic){
-    output =
-      `<em>${output}</em>`;
-  }
-
-  if(formatting.underline){
-    output =
-      `<u>${output}</u>`;
-  }
+  const value = String(text || "");
+  const f = formatting || {};
 
   const allowedColors = [
     "#111",
@@ -4214,34 +4560,110 @@ function renderFormattedText(
     "#e08a00"
   ];
 
-  if(
-    allowedColors.includes(
-      formatting.color
-    )
-  ){
+  const baseStyle = [];
 
-    output =
-      `<span style="color:${formatting.color}">${output}</span>`;
+  if(f.bold) baseStyle.push("font-weight:bold");
+  if(f.italic) baseStyle.push("font-style:italic");
+  if(f.underline) baseStyle.push("text-decoration:underline");
+
+  const color =
+    allowedColors.includes(f.color)
+      ? f.color
+      : null;
+
+  const baseClass =
+    f.effect
+      ? `effect-${safeEffect(f.effect)}`
+      : "";
+
+  const ranges = Array.isArray(f.ranges)
+    ? f.ranges
+        .filter(range =>
+          Number.isInteger(range.start) &&
+          Number.isInteger(range.end) &&
+          range.start >= 0 &&
+          range.end > range.start &&
+          range.end <= value.length &&
+          allowedEffects().includes(range.effect)
+        )
+        .sort((a,b)=>a.start-b.start)
+    : [];
+
+  // Sem ranges, preservamos exatamente a formatação global.
+  if(!ranges.length){
+    let output = escapeHTML(value);
+
+    if(baseStyle.length || color){
+      output = `<span${color ? ` style="color:${color};${baseStyle.join(";")}"` : ` style="${baseStyle.join(";")}"`}>${output}</span>`;
+    }
+
+    if(baseClass){
+      output = `<span class="${baseClass}">${output}</span>`;
+    }
+
+    return output;
   }
 
-  if(formatting.effect){
+  // Com ranges, aplicamos a formatação global por trecho e o efeito local
+  // apenas no intervalo selecionado. Assim B/I/U/cor não desaparecem.
+  let output = "";
+  let cursor = 0;
 
-    output =
-      `<span class="effect-${safeEffect(formatting.effect)}">${output}</span>`;
+  ranges.forEach(range => {
+
+    if(range.start < cursor) return;
+
+    const before = value.substring(cursor, range.start);
+    const selected = value.substring(range.start, range.end);
+
+    output += formatBaseSegment(before, baseStyle, color, baseClass);
+
+    output += `<span class="effect-${safeEffect(range.effect)}">${escapeHTML(selected)}</span>`;
+
+    cursor = range.end;
+  });
+
+  output += formatBaseSegment(
+    value.substring(cursor),
+    baseStyle,
+    color,
+    baseClass
+  );
+
+  return output;
+}
+
+
+function allowedEffects(){
+  return [
+    "glow",
+    "sparkle",
+    "rainbow",
+    "pulse",
+    "heart",
+    "magic",
+    "shake"
+  ];
+}
+
+
+function formatBaseSegment(
+  value,
+  baseStyle,
+  color,
+  baseClass
+){
+
+  if(!value) return "";
+
+  let output = escapeHTML(value);
+
+  if(baseStyle.length || color){
+    output = `<span${color ? ` style="color:${color};${baseStyle.join(";")}"` : ` style="${baseStyle.join(";")}"`}>${output}</span>`;
   }
 
-  if(
-    Array.isArray(
-      formatting.ranges
-    ) &&
-    formatting.ranges.length
-  ){
-
-    output =
-      renderEffectRanges(
-        text,
-        formatting
-      );
+  if(baseClass){
+    output = `<span class="${baseClass}">${output}</span>`;
   }
 
   return output;
@@ -4318,19 +4740,7 @@ function safeEffect(
   effect
 ){
 
-  const allowed = [
-    "glow",
-    "sparkle",
-    "rainbow",
-    "pulse",
-    "heart",
-    "magic",
-    "shake"
-  ];
-
-  return allowed.includes(
-    effect
-  )
+  return allowedEffects().includes(effect)
     ? effect
     : "glow";
 }
@@ -4341,6 +4751,9 @@ function safeEffect(
 ========================================================= */
 
 async function sendMessage(){
+
+  clearTimeout(typingTimer);
+  broadcastTyping(false);
 
   const text =
     input.value.trim();
@@ -4357,15 +4770,10 @@ async function sendMessage(){
     return;
   }
 
-  if(
-    !currentUser?.id ||
-    !USER_UUIDS[currentUser.id === USER_UUIDS.bruxinha
-      ? "bruxinha"
-      : "raposinha"]
-  ){
+  if(!contactProfile?.id){
 
     alert(
-      "Não consegui identificar o destinatário."
+      "Não consegui localizar o contato pelo UUID do Supabase."
     );
 
     return;
@@ -4404,25 +4812,16 @@ async function sendMessage(){
 
   try{
 
-    /*
-      O destinatário do INSERT é sempre o UUID fixo do contato.
-      Isso elimina a dependência do nickname para o envio.
-    */
-    const recipientUUID =
-      currentUser.id === USER_UUIDS.bruxinha
-        ? USER_UUIDS.raposinha
-        : USER_UUIDS.bruxinha;
-
     const {data,error} =
       await supabaseClient
         .from("messages")
         .insert({
 
           sender:
-            currentUser.email,
+            currentUser.id,
 
           recipient:
-            recipientUUID,
+            contactProfile.id,
 
           message:
             text,
@@ -4568,7 +4967,7 @@ async function sendGif(){
         .insert({
 
           sender:
-            currentUser.email,
+            currentUser.id,
 
           recipient:
             contactProfile.id,
@@ -4699,73 +5098,27 @@ function subscribeToMessages(){
 }
 
 
-function processRealtimeMessage(
-  row
-){
+function processRealtimeMessage(row){
 
-  if(!row)
-    return;
+  if(!row || !currentUser?.id) return;
 
-  const sender =
-    String(row.sender || "")
-      .toLowerCase();
-
-  const recipient =
-    String(row.recipient || "");
-
-  const myEmail =
-    String(
-      currentUser?.email || ""
-    ).toLowerCase();
-
-  const myId =
-    String(
-      currentUser?.id || ""
-    );
+  const sender = String(row.sender || "");
+  const recipient = String(row.recipient || "");
+  const myId = String(currentUser.id);
+  const contactId = String(contactProfile?.id || (myId === BRUXINHA_UUID ? RAPOSINHA_UUID : BRUXINHA_UUID));
 
   const belongsToConversation =
-    (
-      sender === myEmail &&
-      recipient === myId
-    ) ||
-    (
-      recipient === myId
-    ) ||
-    (
-      sender === myEmail
-    ) ||
-    (
-      contactProfile?.id &&
-      (
-        recipient ===
-          String(contactProfile.id) ||
-        sender ===
-          String(contactProfile.id)
-      )
-    );
+    (sender === myId && recipient === contactId) ||
+    (sender === contactId && recipient === myId);
 
-  if(
-    row.recipient &&
-    !belongsToConversation
-  ){
+  if(!belongsToConversation) return;
+
+  if(row.formatting?.type === "nudge"){
+    handleIncomingNudge(row);
     return;
   }
 
-  if(
-    row.formatting?.type === "nudge"
-  ){
-
-    handleIncomingNudge(
-      row
-    );
-
-    return;
-  }
-
-  renderMessage(
-    row,
-    true
-  );
+  renderMessage(row, true);
 }
 
 
@@ -4785,10 +5138,7 @@ function updateRenderedMessage(
     return;
 
   const mine =
-    String(row.sender || "")
-      .toLowerCase() ===
-    String(currentUser?.email || "")
-      .toLowerCase();
+    String(row.sender || "") === String(currentUser?.id || "");
 
   if(!mine)
     return;
@@ -5248,7 +5598,7 @@ async function sendNudge(){
       .insert({
 
         sender:
-          currentUser.email,
+          currentUser.id,
 
         recipient:
           contactProfile?.id || null,
@@ -5448,6 +5798,17 @@ function openSettings(){
     "notificationStyle"
   ).value =
     settings.notification_style;
+
+  const savedTheme =
+    localStorage.getItem("msn_window_theme") ||
+    DEFAULT_WINDOW_THEME;
+
+  const colorInput =
+    document.getElementById("windowColor");
+
+  if(colorInput){
+    colorInput.value = savedTheme;
+  }
 
   document.getElementById(
     "settingsModal"
@@ -5702,6 +6063,19 @@ passwordInput.addEventListener(
 
 
 input.addEventListener(
+  "input",
+  handleTypingInput
+);
+
+input.addEventListener(
+  "blur",
+  ()=>{
+    clearTimeout(typingTimer);
+    broadcastTyping(false);
+  }
+);
+
+input.addEventListener(
   "keydown",
   event=>{
 
@@ -5764,66 +6138,21 @@ document.getElementById(
    INIT
 ========================================================= */
 
+loadWindowTheme();
 checkSession();
 
 </script>
 
 
-<script id="msn2008-theme-controller">
-/* ===== MSN 2008 theme controller: CSS/localStorage only ===== */
+<script id="msn2008-theme-enhancement">
 (function(){
-  const KEY="msn2008_window_color";
-
-  function rgb(hex){
-    hex=String(hex||"#07569b").replace("#","");
-    if(hex.length===3) hex=hex.split("").map(x=>x+x).join("");
-    const n=parseInt(hex,16);
-    return [(n>>16)&255,(n>>8)&255,n&255];
-  }
-  function hex(a){
-    return "#"+a.map(v=>{
-      v=Math.max(0,Math.min(255,Math.round(v)));
-      return v.toString(16).padStart(2,"0");
-    }).join("");
-  }
-  function mix(a,b,p){
-    const x=rgb(a),y=rgb(b);
-    return hex(x.map((v,i)=>v+(y[i]-v)*p));
-  }
-  function apply(color){
-    color=color||"#07569b";
-    const r=rgb(color);
+  function refreshMSNVisual(){
     const root=document.documentElement;
-    root.style.setProperty("--msn-main",color);
-    root.style.setProperty("--msn-light",mix(color,"#ffffff",.66));
-    root.style.setProperty("--msn-mid",mix(color,"#ffffff",.28));
-    root.style.setProperty("--msn-dark",mix(color,"#000000",.34));
-    root.style.setProperty("--msn-border",mix(color,"#000000",.20));
-    root.style.setProperty("--msn-glow",`rgba(${r[0]},${r[1]},${r[2]},.52)`);
-    try{localStorage.setItem(KEY,color)}catch(e){}
+    const accent=getComputedStyle(root).getPropertyValue("--msn-accent").trim();
+    if(!accent) return;
+    root.style.setProperty("--msn-title-highlight",accent);
   }
-
-  window.applyMSN2008Color=apply;
-
-  document.addEventListener("DOMContentLoaded",function(){
-    let saved="#07569b";
-    try{saved=localStorage.getItem(KEY)||saved}catch(e){}
-    apply(saved);
-
-    const input=document.getElementById("windowColor");
-    if(input){
-      input.value=saved;
-      input.addEventListener("input",function(){apply(this.value)});
-      input.addEventListener("change",function(){apply(this.value)});
-    }
-
-    document.querySelectorAll(".theme-preset").forEach(function(btn){
-      btn.addEventListener("click",function(){
-        const value=this.getAttribute("data-theme")||this.style.backgroundColor;
-        if(value) apply(value);
-      });
-    });
-  });
+  document.addEventListener("DOMContentLoaded",refreshMSNVisual);
 })();
 </script>
 
